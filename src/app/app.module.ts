@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 //import {MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule} from '@angular/material'
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './user.service';
 import { LoginComponent } from './Components/login/login.component';
+import { NavbarComponent } from './Components/navbar/navbar.component';
+
+import {AuthGuard} from './Guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -23,17 +28,21 @@ import { LoginComponent } from './Components/login/login.component';
     AddComponent,
     GetComponent,
     UpdateComponent,
-    LoginComponent
+    LoginComponent,
+    NavbarComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlashMessagesModule.forRoot()
+    
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

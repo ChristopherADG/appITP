@@ -28,8 +28,8 @@ export class UpdateComponent implements OnInit {
         this.updateForm.get('name').setValue(this.user.name);
         this.updateForm.get('last_name').setValue(this.user.last_name);
         this.updateForm.get('email').setValue(this.user.email);
-        this.updateForm.get('password').setValue(this.user.password);
-        this.updateForm.get('passwordConf').setValue(this.user.password);
+        this.updateForm.get('password').setValue('');
+        this.updateForm.get('passwordConf').setValue('');
         this.updateForm.get('role').setValue(this.user.role);
       })
     })

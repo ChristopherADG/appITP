@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,15 +10,38 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  authToken : any;
+
+  loadToken(){
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
+
+  loggedIn(){
+    return localStorage.getItem('id_token') !==  null;
+  }
+
   getUsers(){
-    return this.http.get(`${this.uri}/users`);
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/users`,{headers: header});
   }
 
   getUserById(id){
-    return this.http.get(`${this.uri}/users/${id}`);
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/users/${id}`,{headers: header});
   }
 
   addUser(name,lastname,email,password, role){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
     const user = {
       name: name,
       last_name: lastname,
@@ -26,10 +49,14 @@ export class UserService {
       password: password,
       role: role
     }
-    return this.http.post(`${this.uri}/users/add`, user);
+    return this.http.post(`${this.uri}/users/add`, user,{headers: header});
   }
 
   updateUser(id, name,lastname,email,password, role){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
     const user = {
       name: name,
       last_name: lastname,
@@ -37,10 +64,14 @@ export class UserService {
       password: password,
       role: role
     }
-    return this.http.post(`${this.uri}/users/update/${id}`, user);
+    return this.http.post(`${this.uri}/users/update/${id}`, user,{headers: header});
   }
 
   deleteUser(id){
-    return this.http.get(`${this.uri}/users/delete/${id}`);
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/users/delete/${id}`,{headers: header});
   }
 }
