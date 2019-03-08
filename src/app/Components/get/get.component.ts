@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../../User';
 import {UserService} from '../../user.service';

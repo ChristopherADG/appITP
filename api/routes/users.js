@@ -113,7 +113,7 @@ router.route('/login').post((req, res)=>{
         }
         if(!user){
             
-            res.json({success: false, msg: 'User not found'});
+            res.json({success: false, msg: 'Invalid email or password'});
         }else{
             User.comparePassword(password, user.password, (err, isMatch)=>{
                 if(err){
@@ -137,7 +137,7 @@ router.route('/login').post((req, res)=>{
                         }
                     })
                 } else {
-                    return res.json({success: false, msg: "Wrong password"});
+                    return res.json({success: false, msg: "Invalid email or password"});
                 }
             })
         }

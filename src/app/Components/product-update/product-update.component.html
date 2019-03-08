@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Update Product</div>
+      <div class="card-body">
+        <form (submit)="updateProduct(name.value,arrayUnit(),category.value, description.value)" action="javascript:void(0);">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                  <label  class="font-weight-bold" for="name">Name</label> 
+                <div class="form-label-group">
+                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
+                  
+                </div>
+              </div>
+              <div class="offset-md-1 col-md-5">
+                <label class="font-weight-bold">Category</label>
+                <div class="form-label-group">
+                   <div class="row">
+                      <select class="form-control" id="category" #category>
+                        <option>Fruits</option>
+                        <option>Vegetables</option>
+                        <option>Meat and Surrogates</option>
+                        <option>Fats and Oils</option>
+                        <option>Bread and Cereals</option>
+                        <option>Liquids</option> 
+                      </select>
+                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="font-weight-bold">Units</label><br>
+            <div class="form-label-group">
+              <div class="row">
+                  <div class="col-md-4" *ngFor="let unit of units">
+                      <input type="checkbox" name={{unit.name}} id={{unit.name}}> {{unit.name}} 
+                  </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="form-group">
+              <label class="font-weight-bold" for="exampleFormControlTextarea1">Description</label>
+              <textarea class="form-control" id="textArea" rows="3" #description></textarea>
+          </div>
+          <br>
+          <button class="btn btn-primary btn-block" type="submit">Save</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" routerLink="/products">Back</button>
+      </div>
+    </div>
+  </div>

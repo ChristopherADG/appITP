@@ -3,7 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddComponent } from './Components/add/add.component';
 import { GetComponent } from './Components/get/get.component';
 import { UpdateComponent } from './Components/update/update.component';
-import { LoginComponent } from "./Components/login/login.component"
+import { LoginComponent } from "./Components/login/login.component";
+import { ProductAddComponent } from "./Components/product-add/product-add.component";
+import { ProductGetComponent} from './Components/product-get/product-get.component';
+import {ProductUpdateComponent} from './Components/product-update/product-update.component'
 import {AuthGuard} from './Guards/auth.guard';
 
 const routes: Routes = [
@@ -11,6 +14,9 @@ const routes: Routes = [
   {path: 'edit/:id', component: UpdateComponent, canActivate:[AuthGuard]},
   {path: 'create', component: AddComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent},
+  {path: 'createProduct', component: ProductAddComponent},
+  {path: 'products', component: ProductGetComponent},
+  {path: 'editProduct/:id', component: ProductUpdateComponent}
 ];
 
 @NgModule({

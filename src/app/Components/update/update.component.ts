@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {UserService} from '../../user.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
-import {User} from '../../User';
+
 
 @Component({
   selector: 'app-update',
@@ -24,7 +24,6 @@ export class UpdateComponent implements OnInit {
       this.id = params.id;
       this.userService.getUserById(this.id).subscribe(res=>{
         this.user = res;
-        console.log("listo")
         this.updateForm.get('name').setValue(this.user.name);
         this.updateForm.get('last_name').setValue(this.user.last_name);
         this.updateForm.get('email').setValue(this.user.email);
