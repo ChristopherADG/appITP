@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<ul *ngIf="authService.loggedIn()" id="slidebar" class="sidebar navbar-nav toggled" >
+<ul *ngIf="authService.loggedIn()" id="slidebar" class="sidebar navbar-nav toggled" style="min-height:100% !important">
   <li class="nav-item active">
     <a class="nav-link" routerLink="/">
       <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -16,7 +16,14 @@
         <a class="dropdown-item" routerLink="users">Users table</a>
         <div class="dropdown-divider"></div>
         <h6 class="dropdown-header">Products:</h6>
+        <a class="dropdown-item" routerLink="units">Units Table</a>
         <a class="dropdown-item" routerLink="products">Products Table</a>
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">Providers:</h6>
+        <a class="dropdown-item" routerLink="providers">Providers Table</a>
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">Dinning Rooms:</h6>
+        <a class="dropdown-item" routerLink="dinningRooms">Dinning Rooms Table</a>
       </div>
   </li>
 </ul>

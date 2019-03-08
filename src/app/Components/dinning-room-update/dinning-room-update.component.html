@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Update Dinning Room</div>
+      <div class="card-body">
+        <form action="javascript:void(0); " (submit)="updateDinningRoom(street.value,chefManager.value, phone.value, name.value, pc.value,number.value,ext_number.value,colony.value)">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                  <label></label>
+                <div class="form-label-group">
+                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
+                  <label for="name">Name</label> 
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label>Manager Chef</label>
+                <div class="form-label-group">
+                    <select class="form-control" id="chefManager" #chefManager>
+                      <option *ngFor="let chef of chefs">{{chef.name}} {{chef.last_name}}</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="phone" class="form-control" placeholder="+526141234567" required="required" #phone>
+              <label for="phone">Phone</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" id="street" class="form-control" placeholder="Pimentel" required="required" #street>
+              <label for="street">Street</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="number" class="form-control" placeholder="B3" required="required" #number>
+                  <label for="number">Int. Number</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="ext_number" class="form-control" placeholder="4905" required="required" #ext_number>
+                  <label for="ext_number">Ext. Number</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="colony" class="form-control" placeholder="Granjas" required="required" #colony>
+                  <label for="colony">Colony</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="pc" class="form-control" placeholder="31100" required="required" #pc>
+                  <label for="pc">Zip Code</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Save</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" routerLink="/dinningRooms">Back</button>
+      </div>
+    </div>
+  </div>

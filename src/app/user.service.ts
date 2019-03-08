@@ -29,6 +29,14 @@ export class UserService {
     return this.http.get(`${this.uri}/users`,{headers: header});
   }
 
+  getChefs(){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/users/chefs`,{headers: header});
+  }
+
   getUserById(id){
     this.loadToken();
     let header = new HttpHeaders({

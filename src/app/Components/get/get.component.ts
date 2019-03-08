@@ -12,7 +12,6 @@ declare var $;
 export class GetComponent implements OnInit {
 
   users : User[];
-  disColumns = ["name", "lastName", "email", "password", "actions"];
 
   dataTable: any;
 

@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Create Unit</div>
+      <div class="card-body">
+        <form (submit)="addUnit(name.value)" action="javascript:void(0);">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-12">
+                  <label></label>
+                <div class="form-label-group">
+                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
+                  <label for="name">Name</label> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <button class="btn btn-primary btn-block" type="submit">Create Unit</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" routerLink="/units">Back</button>
+      </div>
+    </div>
+  </div>

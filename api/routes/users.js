@@ -19,6 +19,15 @@ routerProtected.route('/').get((req, res)=>{
         }
     })
 });
+routerProtected.route('/chefs').get((req, res)=>{
+    User.find({'role': 'Chef'}, (err, users)=>{
+        if(err){
+            console.log(err);
+        }else{
+            res.json(users);
+        }
+    })
+})
 
 //Specific User
 routerProtected.route('/:id').get((req, res)=>{
