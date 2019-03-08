@@ -21,8 +21,28 @@ export class ProductService {
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    return this.http.get(`${this.uri}/products/units`,{headers: header});
+    return this.http.get(`${this.uri}/units`,{headers: header});
   }
+
+  addUnit(name){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    const unit = {
+      name: name
+    }
+    return this.http.post(`${this.uri}/units/add`, unit,{headers: header});
+  }
+
+  deleteUnit(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/units/delete/${id}`,{headers: header});
+  }
+
 
   getProducts(){
     this.loadToken();

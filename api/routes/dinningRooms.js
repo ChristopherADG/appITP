@@ -34,9 +34,9 @@ routerProtected.route('/:id').get((req, res)=>{
 routerProtected.route('/add').post((req, res)=>{
             let dinningRoom = new DinningRoom({
                 street: req.body.street,
-                contact: req.body.contact,
+                chefManager: req.body.chefManager,
                 phone: req.body.phone,
-                email: req.body.email,
+                name: req.body.name,
                 pc: req.body.pc,
                 number: req.body.number,
                 ext_number:req.body.ext_number,
@@ -59,9 +59,9 @@ routerProtected.route('/update/:id').post((req, res)=>{
             return next(new Error('Could not load document'));
         }else{
             dinningRoom.street = req.body.street;
-            dinningRoom.contact = req.body.contact;
+            dinningRoom.chefManager = req.body.chefManager;
             dinningRoom.phone = req.body.phone;
-            dinningRoom.email = req.body.email;
+            dinningRoom.name = req.body.name;
             dinningRoom.pc = req.body.pc;
             dinningRoom.number = req.body.number;
             dinningRoom.ext_number = req.body.ext_number;

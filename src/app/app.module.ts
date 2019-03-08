@@ -26,6 +26,15 @@ import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { ProductGetComponent } from './Components/product-get/product-get.component';
 import { ProductAddComponent } from './Components/product-add/product-add.component';
 import { ProductUpdateComponent } from './Components/product-update/product-update.component';
+import { ProviderGetComponent } from './Components/provider-get/provider-get.component';
+import { ProviderAddComponent } from './Components/provider-add/provider-add.component';
+import { ProviderUpdateComponent } from './Components/provider-update/provider-update.component';
+import { DinningRoomGetComponent } from './Components/dinning-room-get/dinning-room-get.component';
+import { DinningRoomAddComponent } from './Components/dinning-room-add/dinning-room-add.component';
+import { DinningRoomUpdateComponent } from './Components/dinning-room-update/dinning-room-update.component';
+import { UnitGetComponent } from './Components/unit-get/unit-get.component';
+import { UnitAddComponent } from './Components/unit-add/unit-add.component';
+import { UnitUpdateComponent } from './Components/unit-update/unit-update.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +47,16 @@ import { ProductUpdateComponent } from './Components/product-update/product-upda
     SidebarComponent,
     ProductGetComponent,
     ProductAddComponent,
-    ProductUpdateComponent
+    ProductUpdateComponent,
+    ProviderGetComponent,
+    ProviderAddComponent,
+    ProviderUpdateComponent,
+    DinningRoomGetComponent,
+    DinningRoomAddComponent,
+    DinningRoomUpdateComponent,
+    UnitGetComponent,
+    UnitAddComponent,
+    UnitUpdateComponent
   ],
   imports: [
     CommonModule,

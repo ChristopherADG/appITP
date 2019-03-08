@@ -1,4 +1,4 @@
-import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
 import {Unit} from '../../Models/Unit';
 import {ProductService} from '../../Services/product.service';

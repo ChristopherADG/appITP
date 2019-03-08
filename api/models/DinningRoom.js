@@ -4,11 +4,7 @@ const mongoose = require('mongoose'),
 const Schema = mongoose.Schema;
 
 let DinningRoom = new Schema({
-    street: {
-      type: String,
-      require: true
-    },
-    contact: {
+    chefManager: {
         type: String,
         require: true
     },
@@ -16,9 +12,13 @@ let DinningRoom = new Schema({
         type: String,
         require: true
     },
-    email: {
-        type: String,
-        require: true
+    name:{
+      type: String,
+      require: true
+    },
+    street: {
+      type: String,
+      require: true
     },
     pc: {
       type: String,

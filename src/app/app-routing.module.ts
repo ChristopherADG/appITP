@@ -6,7 +6,16 @@ import { UpdateComponent } from './Components/update/update.component';
 import { LoginComponent } from "./Components/login/login.component";
 import { ProductAddComponent } from "./Components/product-add/product-add.component";
 import { ProductGetComponent} from './Components/product-get/product-get.component';
-import {ProductUpdateComponent} from './Components/product-update/product-update.component'
+import {ProductUpdateComponent} from './Components/product-update/product-update.component';
+import { UnitAddComponent } from "./Components/unit-add/unit-add.component";
+import { UnitGetComponent} from './Components/unit-get/unit-get.component';
+import {UnitUpdateComponent} from './Components/unit-update/unit-update.component';
+import { ProviderAddComponent } from "./Components/provider-add/provider-add.component";
+import { ProviderGetComponent} from './Components/provider-get/provider-get.component';
+import {ProviderUpdateComponent} from './Components/provider-update/provider-update.component';
+import { DinningRoomAddComponent } from "./Components/dinning-room-add/dinning-room-add.component";
+import { DinningRoomGetComponent} from './Components/dinning-room-get/dinning-room-get.component';
+import {DinningRoomUpdateComponent} from './Components/dinning-room-update/dinning-room-update.component';
 import {AuthGuard} from './Guards/auth.guard';
 
 const routes: Routes = [
@@ -14,9 +23,18 @@ const routes: Routes = [
   {path: 'edit/:id', component: UpdateComponent, canActivate:[AuthGuard]},
   {path: 'create', component: AddComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'createProduct', component: ProductAddComponent},
-  {path: 'products', component: ProductGetComponent},
-  {path: 'editProduct/:id', component: ProductUpdateComponent}
+  {path: 'createProduct', component: ProductAddComponent, canActivate:[AuthGuard]},
+  {path: 'products', component: ProductGetComponent, canActivate:[AuthGuard]},
+  {path: 'editProduct/:id', component: ProductUpdateComponent, canActivate:[AuthGuard]},
+  {path: 'createProvider', component: ProviderAddComponent, canActivate:[AuthGuard]},
+  {path: 'providers', component: ProviderGetComponent, canActivate:[AuthGuard]},
+  {path: 'editProvider/:id', component: ProviderUpdateComponent, canActivate:[AuthGuard]},
+  {path: 'createDinningRoom', component: DinningRoomAddComponent, canActivate:[AuthGuard]},
+  {path: 'dinningRooms', component: DinningRoomGetComponent, canActivate:[AuthGuard]},
+  {path: 'editDinningRoom/:id', component: DinningRoomUpdateComponent, canActivate:[AuthGuard]},
+  {path: 'createUnit', component: UnitAddComponent, canActivate:[AuthGuard]},
+  {path: 'units', component: UnitGetComponent, canActivate:[AuthGuard]},
+  {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard]}
 ];
 
 @NgModule({

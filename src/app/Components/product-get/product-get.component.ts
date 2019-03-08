@@ -14,7 +14,6 @@ export class ProductGetComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef) { }
 
   products : Product[];
-  disColumns = ["name", "lastName", "email", "password", "actions"];
 
   dataTable: any;
 
