@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Create Provider</div>
+      <div class="card-body">
+        <form action="javascript:void(0);">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="name" class="form-control" placeholder="Provider´s name" required="required" autofocus="autofocus" #name>
+                  <label for="name">Provider´s name</label> 
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="rfc" class="form-control" placeholder="RFC" required="required" #rfc>
+                  <label for="rfc">RFC</label>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+
+          <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="email" class="form-control" placeholder="email@example.com" required="required" #email>
+                    <label for="email">Email address</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="contact" class="form-control" placeholder="Contact" required="required" #contact >
+                    <label for="contact">Contact</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+         <!-- 
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email@example.com" required="required" #email>
+              <label for="inputEmail">Email address</label>
+            </div>
+          </div>
+        -->
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="phone" class="form-control" placeholder="Phone" required="required" #phone>
+                  <label for="phone">Phone</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="pc" class="form-control" placeholder="PC" required="required" #pc >
+                  <label for="pc">PC</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-header">Address Information</div>
+          <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="street" class="form-control" placeholder="Street" required="required" #street>
+                    <label for="street">Street</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-label-group">
+                    <input type="text" id="number" class="form-control" placeholder="Number" required="required" #number>
+                    <label for="number">Number</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <div class="form-label-group">
+                      <input type="text" id="ext_number" class="form-control" placeholder="Exterior Number" required="required" #ext_number>
+                      <label for="ext_number">Exterior number</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-label-group">
+                      <input type="text" id="colony" class="form-control" placeholder="Colony" required="required" #colony>
+                      <label for="colony">Colony</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+          <button class="btn btn-primary btn-block" type="submit" (click)="updateProvider(name.value,contact.value, email.value,phone.value, rfc.value, pc.value,street.value, number.value, ext_number.value,colony.value)">Update Provider</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" routerLink="/providers">Back</button>
+      </div>
+    </div>
+  </div>
+
+  

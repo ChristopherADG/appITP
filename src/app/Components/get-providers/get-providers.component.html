@@ -1,0 +1,64 @@
+<br>
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-table"></i> Providers Table</div>
+  <div class="card-body">
+
+    <button type="button" class="btn btn-primary" routerLink="/create-providers">Create New Provider</button>
+    <br><br>
+    <div class="table-responsive">
+      <table id ="table" class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>RFC</th>
+            <th>PC</th>
+            <th>Street</th>
+            <th>Number</th>
+            <th>Extension Number</th>
+            <th>Colony</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>RFC</th>
+            <th>PC</th>
+            <th>Street</th>
+            <th>Number</th>
+            <th>Extension Number</th>
+            <th>Colony</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor="let provider of providers">
+            <td>{{provider.name}}</td>
+            <td>{{provider.Contact}}</td>
+            <td>{{provider.email}}</td>
+            <td>{{provider.phone}}</td>
+            <td>{{provider.rfc}}</td>
+            <td>{{provider.pc}}</td>
+            <td>{{provider.street}}</td>
+            <td>{{provider.number}}</td>
+            <td>{{provider.ext_number}}</td>
+            <td>{{provider.colony}}</td>
+            <td>
+              <!--CHANGE THE RouterLink!!!!-->
+              <button type="button" class="btn btn-primary action" (click)="editProvider(provider._id)"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-danger action" (click)="deleteProvider(provider._id)"><i class="far fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted"></div>
+</div>

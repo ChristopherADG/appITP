@@ -22,6 +22,11 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 
 import {AuthGuard} from './Guards/auth.guard';
 
+import {ProviderService} from './provider.service';
+import { GetProvidersComponent } from './Components/get-providers/get-providers.component';
+import { AddProvidersComponent } from './Components/add-providers/add-providers.component';
+import { UpdateProvidersComponent } from './Components/update-providers/update-providers.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +34,10 @@ import {AuthGuard} from './Guards/auth.guard';
     GetComponent,
     UpdateComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    GetProvidersComponent,
+    AddProvidersComponent,
+    UpdateProvidersComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +50,7 @@ import {AuthGuard} from './Guards/auth.guard';
     FlashMessagesModule.forRoot()
     
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService, AuthGuard, ProviderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
