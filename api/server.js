@@ -16,6 +16,7 @@ connection.once('open', ()=>{
 const app = express();
 
 const users = require('./routes/users');
+const products = require('./routes/products');
 const providers = require('./routes/providers');
 const dinningRooms = require('./routes/dinningRooms');
 
@@ -29,9 +30,10 @@ app.use(passport.session());
 require('./config/passport')(passport)
 
 app.use('/users', passport.authenticate('jwt', {session:false}), users.protected)
+app.use('/auth', users.unprotected)
+app.use('/products', passport.authenticate('jwt', {session:false}), products.protected)
 app.use('/providers', passport.authenticate('jwt', {session:false}), providers.protected)
 app.use('/dinningRooms', passport.authenticate('jwt', {session:false}), dinningRooms.protected)
-app.use('/auth', users.unprotected)
 
 app.get('/', (req,res)=>{
     res.send('Invalid Endpoint');

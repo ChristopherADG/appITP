@@ -42,7 +42,7 @@ routerProtected.route('/add').post((req, res)=>{
                 ext_number:req.body.ext_number,
                 colony: req.body.colony
             });
-            
+
             dinningRoom.save()
                 .then(dinningRoom =>{
                     res.status(200).json({'dinningRoom': 'Added successfully'});

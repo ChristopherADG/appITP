@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule} from '@angular/forms'
 //import {MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule} from '@angular/material'
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
@@ -17,10 +17,15 @@ import { UpdateComponent } from './Components/update/update.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './user.service';
+import { ProductService } from './Services/product.service';
 import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 
 import {AuthGuard} from './Guards/auth.guard';
+import { SidebarComponent } from './Components/sidebar/sidebar.component';
+import { ProductGetComponent } from './Components/product-get/product-get.component';
+import { ProductAddComponent } from './Components/product-add/product-add.component';
+import { ProductUpdateComponent } from './Components/product-update/product-update.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +34,11 @@ import {AuthGuard} from './Guards/auth.guard';
     GetComponent,
     UpdateComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    SidebarComponent,
+    ProductGetComponent,
+    ProductAddComponent,
+    ProductUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +51,7 @@ import {AuthGuard} from './Guards/auth.guard';
     FlashMessagesModule.forRoot()
     
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService, AuthGuard,ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
