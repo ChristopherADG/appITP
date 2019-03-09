@@ -50,6 +50,14 @@ export class DinningRoomService {
     return this.http.get(`${this.uri}/dinningRooms/${id}`,{headers: header});
   }
 
+  getAvailableDinningRooms(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/dinningRooms/chef/${id}`,{headers: header});
+  }
+
   updateDinningRoom(id, street,chefManager, phone, name, pc,number,ext_number,colony){
     this.loadToken();
     let header = new HttpHeaders({

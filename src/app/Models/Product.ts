@@ -1,6 +1,6 @@
 export interface Product {
     name: String;
     category: String;
-    units: Array<String>;
+    unit: Array<String>;
     description: String;
 }

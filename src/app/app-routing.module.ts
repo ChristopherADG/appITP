@@ -16,6 +16,9 @@ import {ProviderUpdateComponent} from './Components/provider-update/provider-upd
 import { DinningRoomAddComponent } from "./Components/dinning-room-add/dinning-room-add.component";
 import { DinningRoomGetComponent} from './Components/dinning-room-get/dinning-room-get.component';
 import {DinningRoomUpdateComponent} from './Components/dinning-room-update/dinning-room-update.component';
+import { OrderAddComponent } from "./Components/order-add/order-add.component";
+import { OrderGetComponent} from './Components/order-get/order-get.component';
+//import {OrderUpdateComponent} from './Components/order-update/order-update.component';
 import {AuthGuard} from './Guards/auth.guard';
 
 const routes: Routes = [
@@ -34,8 +37,13 @@ const routes: Routes = [
   {path: 'editDinningRoom/:id', component: DinningRoomUpdateComponent, canActivate:[AuthGuard]},
   {path: 'createUnit', component: UnitAddComponent, canActivate:[AuthGuard]},
   {path: 'units', component: UnitGetComponent, canActivate:[AuthGuard]},
-  {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard]}
+  {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard]},
+  {path: 'createOrder', component: OrderAddComponent, canActivate:[AuthGuard]},
+  {path: 'orders', component: OrderGetComponent, canActivate:[AuthGuard]},
+  
 ];
+
+//{path: 'editOrder/:id', component: OrderUpdateComponent, canActivate:[AuthGuard]}
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

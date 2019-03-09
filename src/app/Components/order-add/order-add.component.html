@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Create Order</div>
+      <div class="card-body">
+        <form action="javascript:void(0); " (submit)="addOrder(dinningRoom.value,description.value,getFieldsInfo())">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label>Dinning Room</label>
+                <div class="form-label-group">
+                    <select class="form-control" #dinningRoom>
+                      <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom.name}}</option>
+                    </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="exampleFormControlTextarea1">Description</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description></textarea>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-md-3"><label>Quantity</label></div>
+              <div class="col-md-4"><label>Product</label></div>
+              <div class="col-md-3"><label>Unit</label></div>
+              
+            </div>
+
+
+
+
+            <div class="row" *ngFor="let field of fields" style="padding-bottom: 2%">
+                <div class="col-md-3">
+                    <input type="number" id=number{{field}} style="width: 100% !important">
+                </div>
+                <div class="col-md-4">
+                    <div class="form-label-group">
+                        <select class="form-control" id=product{{field}} (change)="getUnits(product.value,field)" #product>
+                            <option value="" selected disabled hidden>Select Product</option>
+                          <option *ngFor="let product of products">{{product.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-label-group">
+                        <select class="form-control" id=select{{field}}>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" *ngIf="lastItem()" class="btn btn-danger action" (click)="removeField(field)" ><i class="far fa-minus-square"></i></button>
+                </div>
+            </div>
+
+
+
+            <button type="button"class="btn btn-primary action" (click)="addField()" ><i class="far fa-plus-square"></i></button>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Create Order</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" routerLink="/orders">Back</button>
+      </div>
+    </div>
+  </div>

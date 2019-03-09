@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../Services/product.service';
 import {Unit} from '../../Models/Unit';
+declare var $;
 
 @Component({
   selector: 'app-unit-get',
