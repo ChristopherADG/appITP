@@ -6,7 +6,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken')
 const config = require('../config/database');
 const DinningRoom = require('../models/DinningRoom');
-
+const User = require('../models/User')
 
 //All DinningRooms
 routerProtected.route('/').get((req, res)=>{
@@ -18,6 +18,18 @@ routerProtected.route('/').get((req, res)=>{
         }
     })
 });
+routerProtected.route('/chef/:id').get((req, res)=>{
+    User.findById(req.params.id, (err, user)=>{
+        console.log(user)
+        DinningRoom.find({'chefManager': user.name+' '+ user.last_name}, (err, dinningRooms)=>{
+            if(err){
+                console.log(err);
+            }else{
+                res.json(dinningRooms);
+            }
+        })
+    })
+})
 
 //Specific DinningRoom
 routerProtected.route('/:id').get((req, res)=>{

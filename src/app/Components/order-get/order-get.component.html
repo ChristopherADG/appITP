@@ -1,0 +1,44 @@
+<br>
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-table"></i> Orders Table</div>
+  <div class="card-body">
+    <button type="button" class="btn btn-primary" routerLink="/createOrder">Create New Order</button>
+    <br><br>
+    <div class="table-responsive">
+      <table id ="table" class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Dinning Room</th>
+            <th>Chef</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Dinning Room</th>
+            <th>Chef</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{order.dinningRoom.name}}</td>
+            <td>{{order.user.name}} {{order.user.last_name}}</td>
+            <td>{{order.description}}</td>
+            <td>{{order.status}}</td>
+            <td>
+              <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
+              <button type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted"></div>
+</div>

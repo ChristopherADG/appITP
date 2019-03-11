@@ -37,9 +37,10 @@ export class DinningRoomGetComponent implements OnInit {
   }
 
   deleteDinningRoom(id){
-    this.dinningRoomService.deleteDinningRoom(id).subscribe(()=>{
-      this.fetchDinningRooms();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.dinningRoomService.deleteDinningRoom(id).subscribe(()=>{
+        this.fetchDinningRooms();
+      })
+    } 
   }
-
 }

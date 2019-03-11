@@ -4,24 +4,16 @@ const Schema = mongoose.Schema;
 
 let Order = new Schema({
     user: {
-        type: String,
+        type: Object,
         require: true
     },
     dinningRoom: {
-        type: String,
+        type: Object,
         require: true
     },
     description: {
         type: String,
         require: true
-    },
-    quantity: {
-      type: Array,
-      require: true
-    },
-    units: {
-      type: Array,
-      require: true
     },
     products: {
       type: Array,

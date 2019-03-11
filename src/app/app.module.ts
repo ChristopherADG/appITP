@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
-//import {MatToolbarModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, MatIconModule, MatButtonModule, MatCardModule, MatTableModule, MatDividerModule, MatSnackBarModule} from '@angular/material'
+
+import { CookieService } from 'ngx-cookie-service';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -35,6 +36,9 @@ import { DinningRoomUpdateComponent } from './Components/dinning-room-update/din
 import { UnitGetComponent } from './Components/unit-get/unit-get.component';
 import { UnitAddComponent } from './Components/unit-add/unit-add.component';
 import { UnitUpdateComponent } from './Components/unit-update/unit-update.component';
+import { OrderGetComponent } from './Components/order-get/order-get.component';
+import { OrderAddComponent } from './Components/order-add/order-add.component';
+import { OrderUpdateComponent } from './Components/order-update/order-update.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +60,10 @@ import { UnitUpdateComponent } from './Components/unit-update/unit-update.compon
     DinningRoomUpdateComponent,
     UnitGetComponent,
     UnitAddComponent,
-    UnitUpdateComponent
+    UnitUpdateComponent,
+    OrderGetComponent,
+    OrderAddComponent,
+    OrderUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -69,7 +76,7 @@ import { UnitUpdateComponent } from './Components/unit-update/unit-update.compon
     FlashMessagesModule.forRoot()
     
   ],
-  providers: [UserService, AuthGuard,ProductService],
+  providers: [UserService, AuthGuard,ProductService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

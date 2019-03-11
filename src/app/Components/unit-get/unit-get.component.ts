@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../Services/product.service';
 import {Unit} from '../../Models/Unit';
+declare var $;
 
 @Component({
   selector: 'app-unit-get',
@@ -32,9 +33,11 @@ export class UnitGetComponent implements OnInit {
   }
 
   deleteUnit(id){
-    this.productService.deleteUnit(id).subscribe(()=>{
-      this.fetchUnits();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.productService.deleteUnit(id).subscribe(()=>{
+        this.fetchUnits();
+      })
+    }
   }
 
 }

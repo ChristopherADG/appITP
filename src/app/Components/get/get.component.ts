@@ -41,9 +41,10 @@ export class GetComponent implements OnInit {
   }
 
   deleteUser(id){
-    this.userService.deleteUser(id).subscribe(()=>{
-      this.fetchUsers();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.userService.deleteUser(id).subscribe(()=>{
+        this.fetchUsers();
+      })
+    }
   }
-
 }

@@ -37,8 +37,10 @@ export class ProviderGetComponent implements OnInit {
   }
 
   deleteProvider(id){
-    this.providerService.deleteProvider(id).subscribe(()=>{
-      this.fetchProviders();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.providerService.deleteProvider(id).subscribe(()=>{
+        this.fetchProviders();
+      })
+    }
   }
 }

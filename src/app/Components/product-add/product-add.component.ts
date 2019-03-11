@@ -21,6 +21,7 @@ export class ProductAddComponent implements OnInit {
     this.productService.getUnits()
     .subscribe((data: Unit[])=>{
       this.units = data;
+      console.log(this.units)
     })
   }
 
@@ -29,7 +30,12 @@ export class ProductAddComponent implements OnInit {
     for (let index = 0; index < this.units.length; index++) {
       var temp = document.getElementById(this.units[index].name.toString()) as HTMLInputElement;
       if(temp.checked){
-        arr.push(this.units[index].name.toString())
+        let tempUnit = {
+          id: temp.value,
+          name: this.units[index].name.toString()
+        }
+        console.log(tempUnit)
+        arr.push(tempUnit)
       }
     }
     return arr;

@@ -1,6 +1,7 @@
 export interface Product {
+    _id: String;
     name: String;
     category: String;
-    units: Array<String>;
+    unit: Array<Object>;
     description: String;
 }

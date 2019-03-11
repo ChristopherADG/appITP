@@ -1,9 +1,6 @@
 const express = require('express');
 
 const routerProtected = express.Router();
-const User = require('../models/User');
-const Product = require('../models/Products');
-const Unit = require('../models/Units');
 const Order = require('../models/Order');
 
 //All orders
@@ -36,8 +33,6 @@ routerProtected.route('/add').post((req, res)=>{
       user: req.body.user,
       dinningRoom: req.body.dinningRoom,
       description: req.body.description,
-      quantity: req.body.quantity,
-      units: req.body.unit,
       products: req.body.product,
       status: req.body.status
     });
@@ -59,8 +54,6 @@ routerProtected.route('/update/:id').post((req, res)=>{
             order.user= req.body.user,
             order.dinningRoom= req.body.dinningRoom,
             order.description= req.body.description,
-            order.quantity=req.body.quantity,
-            order.units=req.body.unit,
             order.products=req.body.product,
             order.status=req.body.status
 

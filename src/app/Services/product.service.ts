@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service'
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ProductService {
   uri = 'http://localhost:4000'
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
   authToken: any;
 
   loadToken(){
-    const token = localStorage.getItem('id_token');
+    const token = this.cookieService.get('id_token');
     this.authToken = token;
   }
 

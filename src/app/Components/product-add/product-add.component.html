@@ -33,7 +33,7 @@
             <div class="form-label-group">
               <div class="row">
                   <div class="col-md-4" *ngFor="let unit of units">
-                      <input type="checkbox" name={{unit.name}} id={{unit.name}}> {{unit.name}} 
+                      <input type="checkbox" value="{{unit._id}}" name={{unit.name}} id={{unit.name}}> {{unit.name}} 
                   </div>
               </div>
             </div>
