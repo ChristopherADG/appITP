@@ -2,7 +2,7 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Create Order</div>
       <div class="card-body">
-        <form action="javascript:void(0); " (submit)="addOrder(dinningRoom.value,description.value,getFieldsInfo())">
+        <form action="javascript:void(0); " (submit)="addOrder(dinningRoom,description.value,getFieldsInfo())">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -36,9 +36,9 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-label-group">
-                        <select class="form-control" id=product{{field}} (change)="getUnits(product.value,field)" #product>
+                        <select class="form-control" id="product{{field}}" (change)="getUnits(field)" #product>
                             <option value="" selected disabled hidden>Select Product</option>
-                          <option *ngFor="let product of products">{{product.name}}</option>
+                            <option *ngFor="let product of products">{{product.name}}</option>
                         </select>
                     </div>
                 </div>

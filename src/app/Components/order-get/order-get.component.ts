@@ -39,9 +39,11 @@ export class OrderGetComponent implements OnInit {
   }
 
   deleteOrder(id){
-    this.orderService.deleteDinningRoom(id).subscribe(()=>{
-      this.fetchOrders();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.orderService.deleteDinningRoom(id).subscribe(()=>{
+        this.fetchOrders();
+      })
+    }
   }
 
 }

@@ -8,7 +8,7 @@ let Order = new Schema({
         require: true
     },
     dinningRoom: {
-        type: String,
+        type: Object,
         require: true
     },
     description: {

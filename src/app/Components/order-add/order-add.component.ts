@@ -5,6 +5,7 @@ import {DinningRoomService} from '../../Services/dinning-room.service';
 import {DinningRoom} from '../../Models/DinningRoom'
 import {OrderService} from '../../Services/order.service'
 import {Router} from '@angular/router'
+import {CookieService} from 'ngx-cookie-service'
 
 @Component({
   selector: 'app-order-add',
@@ -13,23 +14,21 @@ import {Router} from '@angular/router'
 })
 export class OrderAddComponent implements OnInit {
 
-  dropdownList = [];
-  selectedItems = [];
-  dropdownSettings = {};
   fields = []
   cont = 0
   products: Product[];
   availableDinningRooms : DinningRoom[]
   availableUnits = []
+  //Todas las unidades de los productos en arreglo
+  
   constructor(private productService: ProductService, private chRef: ChangeDetectorRef
    ,private dinningRoomService: DinningRoomService, private orderService: OrderService,
-   private router: Router) {
+   private router: Router, private cookieService: CookieService) {
 
   }
 
   getDinningRooms(){
-    let user = JSON.parse(localStorage.getItem('user')) ;
-    console.log(user)
+    let user = JSON.parse(this.cookieService.get('user')) ;
     if(user.role == "Admin"){
       this.dinningRoomService.getDinningRooms().subscribe((data: DinningRoom[])=>{
         this.availableDinningRooms = data;
@@ -49,29 +48,17 @@ export class OrderAddComponent implements OnInit {
     }
   }
 
-  getUnits(productName, id){
+  getUnits(id){
     var select = document.getElementById("select"+id) as HTMLSelectElement;
+    var product = document.getElementById("product"+id) as HTMLSelectElement;
+    //Limpiar el select
     while(select.options.length>0){
       select.options.remove(select.options.length-1)
     }
-    let temp;
-    for (let index = 0; index < this.products.length; index++) {
-      if(this.products[index].name == productName){
-        temp = index;
-      }
-    }
-    this.availableUnits[temp].forEach(unit => {
-      select.options.add(new Option(unit))
+    this.availableUnits[product.selectedIndex-1].forEach(unit => {
+      select.options.add(new Option(unit.name,unit.id))
     });
     this.chRef.detectChanges();
-  }
-
-  getProduct(productName){
-    for (let index = 0; index < this.products.length; index++) {
-      if(this.products[index].name == productName){
-        return this.products[index]
-      }
-    }
   }
 
   ngOnInit() {
@@ -98,7 +85,12 @@ export class OrderAddComponent implements OnInit {
   }
 
   addOrder(dinningRoom,description,products){
-    this.orderService.addOrder(dinningRoom,description,products,0).subscribe(()=>{
+    let selectedDR = this.availableDinningRooms[dinningRoom.selectedIndex]
+    let temp = {
+      id : selectedDR._id,
+      name: selectedDR.name
+    }
+    this.orderService.addOrder(temp,description,products,0).subscribe(()=>{
       this.router.navigate(['/orders']);
     })
   }
@@ -106,14 +98,22 @@ export class OrderAddComponent implements OnInit {
   getFieldsInfo(){
     let arr = []
     this.fields.forEach(field => {
-      var select = document.getElementById("select"+field) as HTMLInputElement;
+      var select = document.getElementById("select"+field) as HTMLSelectElement;
       var number = document.getElementById("number"+field) as HTMLInputElement;
-      var product = document.getElementById("product"+field) as HTMLInputElement;
+      var product = document.getElementById("product"+field) as HTMLSelectElement;
 
+      
+      let tempProduct = this.products[product.selectedIndex-1]
+      let tempUnit = tempProduct.unit[select.selectedIndex]
       let temp = {
         quantity: number.value,
-        product: this.getProduct(product.value),
-        unit: select.value
+        product: {
+          id: tempProduct._id,
+          name: tempProduct.name,
+          category: tempProduct.category,
+          description: tempProduct.description
+        },
+        unit: tempUnit
       }
       arr.push(temp)
     });

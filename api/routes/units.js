@@ -2,6 +2,7 @@ const express = require('express');
 
 const routerProtected = express.Router();
 const Unit = require('../models/Units');
+const Product = require('../models/Products')
 
 //All units
 routerProtected.route('/').get((req, res)=>{
@@ -55,6 +56,13 @@ routerProtected.route('/delete/:id').get((req, res)=>{
             res.json(err);
         }else{
             res.json('Removed successfully');
+            Product.find((err, products) =>{
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log(products, unit)
+                }
+            })
         }
     })
 });

@@ -33,9 +33,11 @@ export class UnitGetComponent implements OnInit {
   }
 
   deleteUnit(id){
-    this.productService.deleteUnit(id).subscribe(()=>{
-      this.fetchUnits();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.productService.deleteUnit(id).subscribe(()=>{
+        this.fetchUnits();
+      })
+    }
   }
 
 }

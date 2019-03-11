@@ -27,7 +27,7 @@
         </tfoot>
         <tbody>
           <tr *ngFor="let order of orders">
-            <td>{{order.dinningRoom}}</td>
+            <td>{{order.dinningRoom.name}}</td>
             <td>{{order.user.name}} {{order.user.last_name}}</td>
             <td>{{order.description}}</td>
             <td>{{order.status}}</td>

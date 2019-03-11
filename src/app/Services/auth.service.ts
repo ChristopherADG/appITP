@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient} from '@angular/common/http';
-
+import { CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +8,7 @@ export class AuthService {
   authToken: any;
   user: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   authenticateUser(user){
     let headers = new HttpHeaders();
@@ -19,8 +19,8 @@ export class AuthService {
   }
 
   storeUserData(token, user){
-    localStorage.setItem('id_token',token);
-    localStorage.setItem('user', JSON.stringify(user));
+    this.cookieService.set('id_token',token,(4/24))
+    this.cookieService.set('user', JSON.stringify(user),(4/24))
     this.authToken = token;
     this.user = user;
   }
@@ -28,10 +28,12 @@ export class AuthService {
   logOut(){
     this.authToken = null;
     this.user = null;
-    localStorage.clear();
+    this.cookieService.deleteAll();
   }
 
   loggedIn(){
-    return localStorage.getItem('id_token') !==  null;
+    // console.log(this.cookieService.get('id_token'))
+    return this.cookieService.get('id_token') != '';
   }
+
 }

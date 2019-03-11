@@ -1,4 +1,5 @@
 export interface DinningRoom {
+    _id: string,
     street: String,
     chefManager:  String,
     phone:  String,

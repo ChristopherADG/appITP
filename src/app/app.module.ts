@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms'
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
+import { CookieService } from 'ngx-cookie-service';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -72,11 +73,10 @@ import { OrderUpdateComponent } from './Components/order-update/order-update.com
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-    FlashMessagesModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    FlashMessagesModule.forRoot()
     
   ],
-  providers: [UserService, AuthGuard,ProductService],
+  providers: [UserService, AuthGuard,ProductService,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

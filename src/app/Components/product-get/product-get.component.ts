@@ -39,9 +39,12 @@ export class ProductGetComponent implements OnInit {
   }
 
   deleteProduct(id){
-    this.productService.deleteProduct(id).subscribe(()=>{
-      this.fetchProducts();
-    })
+    if(confirm('Are you sure to delete this record?')){
+      this.productService.deleteProduct(id).subscribe(()=>{
+        this.fetchProducts();
+      })
+    }
+    
   }
 
 

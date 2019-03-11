@@ -40,7 +40,8 @@ const routes: Routes = [
   {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard]},
   {path: 'createOrder', component: OrderAddComponent, canActivate:[AuthGuard]},
   {path: 'orders', component: OrderGetComponent, canActivate:[AuthGuard]},
-  
+  {path: '', component: LoginComponent},
+  {path: '**', component: LoginComponent}
 ];
 
 //{path: 'editOrder/:id', component: OrderUpdateComponent, canActivate:[AuthGuard]}

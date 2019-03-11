@@ -29,7 +29,7 @@ export class ProductUpdateComponent implements OnInit {
         document.getElementById('textArea').innerText = this.product.description
         
         for (let index = 0; index < this.product.unit.length; index++) {
-          let temp = document.getElementById(this.product.unit[index].toString()) as HTMLInputElement
+          let temp = document.getElementById(this.product.unit[index].name) as HTMLInputElement
           temp.checked = true;
         }
         
@@ -41,7 +41,11 @@ export class ProductUpdateComponent implements OnInit {
     for (let index = 0; index < this.units.length; index++) {
       var temp = document.getElementById(this.units[index].name.toString()) as HTMLInputElement;
       if(temp.checked){
-        arr.push(this.units[index].name.toString())
+        let tempUnit = {
+          id: temp.value,
+          name: this.units[index].name.toString()
+        }
+        arr.push(tempUnit)
       }
     }
     return arr;
