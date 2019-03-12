@@ -44,6 +44,33 @@ export class ProductService {
     return this.http.get(`${this.uri}/units/delete/${id}`,{headers: header});
   }
 
+  getCategory(){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/categories`,{headers: header});
+  }
+
+  addCategory(name){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    const unit = {
+      name: name
+    }
+    return this.http.post(`${this.uri}/categories/add`, unit,{headers: header});
+  }
+
+  deleteCategory(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/categories/delete/${id}`,{headers: header});
+  }
+
 
   getProducts(){
     this.loadToken();

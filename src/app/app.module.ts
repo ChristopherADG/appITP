@@ -39,6 +39,10 @@ import { UnitUpdateComponent } from './Components/unit-update/unit-update.compon
 import { OrderGetComponent } from './Components/order-get/order-get.component';
 import { OrderAddComponent } from './Components/order-add/order-add.component';
 import { OrderUpdateComponent } from './Components/order-update/order-update.component';
+import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
+import { CategoriesAddComponent } from './Components/categories-add/categories-add.component';
+import { CategoriesUpdateComponent } from './Components/categories-update/categories-update.component';
+//import { CategoriesUpdateComponent } from './Components/categories-update/categories-update.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,12 @@ import { OrderUpdateComponent } from './Components/order-update/order-update.com
     UnitUpdateComponent,
     OrderGetComponent,
     OrderAddComponent,
-    OrderUpdateComponent
+    OrderUpdateComponent,
+    CategoriesGetComponent,
+    //CategoriesUpdateComponent,
+    CategoriesAddComponent,
+    CategoriesUpdateComponent
+
   ],
   imports: [
     CommonModule,
@@ -71,10 +80,10 @@ import { OrderUpdateComponent } from './Components/order-update/order-update.com
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     FlashMessagesModule.forRoot()
-    
+
   ],
   providers: [UserService, AuthGuard,ProductService,CookieService],
   bootstrap: [AppComponent]

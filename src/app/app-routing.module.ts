@@ -18,11 +18,14 @@ import { DinningRoomGetComponent} from './Components/dinning-room-get/dinning-ro
 import {DinningRoomUpdateComponent} from './Components/dinning-room-update/dinning-room-update.component';
 import { OrderAddComponent } from "./Components/order-add/order-add.component";
 import { OrderGetComponent} from './Components/order-get/order-get.component';
+import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
+import { CategoriesAddComponent } from "./Components/categories-add/categories-add.component";
+//import {CategoriesUpdateComponent} from './Components/categories-update.component';
 //import {OrderUpdateComponent} from './Components/order-update/order-update.component';
 import {AuthGuard} from './Guards/auth.guard';
 
 const routes: Routes = [
-  {path: 'users', component: GetComponent, canActivate:[AuthGuard]}, 
+  {path: 'users', component: GetComponent, canActivate:[AuthGuard]},
   {path: 'edit/:id', component: UpdateComponent, canActivate:[AuthGuard]},
   {path: 'create', component: AddComponent, canActivate:[AuthGuard]},
   {path: 'login', component: LoginComponent},
@@ -40,8 +43,13 @@ const routes: Routes = [
   {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard]},
   {path: 'createOrder', component: OrderAddComponent, canActivate:[AuthGuard]},
   {path: 'orders', component: OrderGetComponent, canActivate:[AuthGuard]},
+  {path: 'categories', component:CategoriesGetComponent, canActivate:[AuthGuard]},
+  {path: 'createCategories', component: CategoriesAddComponent, canActivate:[AuthGuard]},
+  //{path: 'editCategories/:id', component: CategoriesUpdateComponent, canActivate:[AuthGuard]},
   {path: '', component: LoginComponent},
   {path: '**', component: LoginComponent}
+
+
 ];
 
 //{path: 'editOrder/:id', component: OrderUpdateComponent, canActivate:[AuthGuard]}
