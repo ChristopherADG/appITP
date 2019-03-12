@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {ProductService} from '../../Services/product.service'
-import { Unit} from '../../Models/Unit'
+import { Unit} from '../../Models/Unit';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-product-update',
@@ -14,9 +15,12 @@ export class ProductUpdateComponent implements OnInit {
   product: any = {};
   units : Unit[];
 
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute,  private cookieService: CookieService) { }
 
   ngOnInit() {
+    if(this.getRole()!="Admin"){
+      this.router.navigate(['/orders']);
+    }
     this.getUnits();
     this.route.params.subscribe(param =>{
       this.id = param.id;
@@ -27,15 +31,21 @@ export class ProductUpdateComponent implements OnInit {
         let temp2 = document.getElementById('category') as HTMLInputElement
         temp2.value = this.product.category
         document.getElementById('textArea').innerText = this.product.description
-        
+
         for (let index = 0; index < this.product.unit.length; index++) {
           let temp = document.getElementById(this.product.unit[index].name) as HTMLInputElement
           temp.checked = true;
         }
-        
+
       })
     })
   }
+  
+  getRole(){
+    const role = JSON.parse(this.cookieService.get('user')).role;
+    return role;
+  }
+
   arrayUnit(){
     let arr = [];
     for (let index = 0; index < this.units.length; index++) {

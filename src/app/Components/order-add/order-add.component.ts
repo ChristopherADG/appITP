@@ -20,7 +20,7 @@ export class OrderAddComponent implements OnInit {
   availableDinningRooms : DinningRoom[]
   availableUnits = []
   //Todas las unidades de los productos en arreglo
-  
+
   constructor(private productService: ProductService, private chRef: ChangeDetectorRef
    ,private dinningRoomService: DinningRoomService, private orderService: OrderService,
    private router: Router, private cookieService: CookieService) {
@@ -64,7 +64,7 @@ export class OrderAddComponent implements OnInit {
   ngOnInit() {
     this.getProducts();
     this.getDinningRooms()
-    
+
   }
 
   getProducts(){
@@ -94,7 +94,7 @@ export class OrderAddComponent implements OnInit {
       this.router.navigate(['/orders']);
     })
   }
-    
+
   getFieldsInfo(){
     let arr = []
     this.fields.forEach(field => {
@@ -102,7 +102,7 @@ export class OrderAddComponent implements OnInit {
       var number = document.getElementById("number"+field) as HTMLInputElement;
       var product = document.getElementById("product"+field) as HTMLSelectElement;
 
-      
+
       let tempProduct = this.products[product.selectedIndex-1]
       let tempUnit = tempProduct.unit[select.selectedIndex]
       let temp = {

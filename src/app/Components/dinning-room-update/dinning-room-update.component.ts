@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {DinningRoomService} from '../../Services/dinning-room.service';
 import {UserService} from '../../user.service';
-import {User} from '../../User'
+import {User} from '../../User';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-dinning-room-update',
@@ -15,9 +16,12 @@ export class DinningRoomUpdateComponent implements OnInit {
   dinningRoom: any = {};
   chefs : User[];
 
-  constructor(private dinningRoomService: DinningRoomService, private router: Router, private userService : UserService, private route: ActivatedRoute) { }
+  constructor(private dinningRoomService: DinningRoomService, private router: Router, private userService : UserService, private route: ActivatedRoute,  private cookieService: CookieService) { }
 
   ngOnInit() {
+    if(this.getRole()!="Admin"){
+      this.router.navigate(['/orders']);
+    }
     this.getChefs()
 
     this.route.params.subscribe(param =>{
@@ -45,6 +49,11 @@ export class DinningRoomUpdateComponent implements OnInit {
     })
   }
 
+  getRole(){
+    const role = JSON.parse(this.cookieService.get('user')).role;
+    return role;
+  }
+  
   getChefs(){
     this.userService.getChefs().subscribe((data: User[])=>{
       this.chefs = data

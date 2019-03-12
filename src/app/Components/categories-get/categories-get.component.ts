@@ -2,6 +2,8 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../Services/product.service';
 import {Category} from '../../Models/Category';
+import { CookieService } from 'ngx-cookie-service';
+
 declare var $;
 
 @Component({
@@ -15,10 +17,18 @@ export class CategoriesGetComponent implements OnInit {
 
   dataTable: any;
 
-  constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef) { }
+  constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef,  private cookieService: CookieService) { }
 
   ngOnInit() {
+    if(this.getRole()!="Admin"){
+      this.router.navigate(['/orders']);
+    };
     this.fetchUnits()
+  }
+
+  getRole(){
+    const role = JSON.parse(this.cookieService.get('user')).role;
+    return role;
   }
 
   fetchUnits(){

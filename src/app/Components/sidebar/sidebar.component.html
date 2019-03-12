@@ -6,7 +6,7 @@
       <span>Dashboard</span>
     </a>
   </li>
-  <li class="nav-item dropdown">
+  <li class="nav-item dropdown" *ngIf="getRole()=='Admin'">
       <a class="nav-link dropdown-toggle" href="#" id="tablesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span>

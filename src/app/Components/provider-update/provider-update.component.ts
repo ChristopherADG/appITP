@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {ProviderService} from '../../Services/provider.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-provider-update',
@@ -12,9 +13,12 @@ export class ProviderUpdateComponent implements OnInit {
   id:String;
   provider: any = {};
 
-  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private providerService: ProviderService, private router: Router, private route: ActivatedRoute,  private cookieService: CookieService) { }
 
   ngOnInit() {
+    if(this.getRole()!="Admin"){
+      this.router.navigate(['/orders']);
+    }
     this.route.params.subscribe(params =>{
       this.id = params.id;
       this.providerService.getProviderById(this.id).subscribe(res=>{
@@ -41,6 +45,11 @@ export class ProviderUpdateComponent implements OnInit {
         temp10.value =this.provider.pc
       })
     })
+  }
+
+  getRole(){
+    const role = JSON.parse(this.cookieService.get('user')).role;
+    return role;
   }
 
   updateProvider(name,contact,phone,email,rfc,pc,street,number,ext_number,colony){

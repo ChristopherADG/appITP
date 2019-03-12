@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {UserService} from '../../user.service';
 import { FormGroup,  FormBuilder,  Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -15,11 +16,14 @@ export class UpdateComponent implements OnInit {
   user: any = {};
   updateForm: FormGroup;
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder) {
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private fb: FormBuilder,  private cookieService: CookieService) {
     this.createForm();
   }
 
   ngOnInit() {
+    if(this.getRole()!="Admin"){
+      this.router.navigate(['/orders']);
+    }
     this.route.params.subscribe(params =>{
       this.id = params.id;
       this.userService.getUserById(this.id).subscribe(res=>{
@@ -32,6 +36,11 @@ export class UpdateComponent implements OnInit {
         this.updateForm.get('role').setValue(this.user.role);
       })
     })
+  }
+
+  getRole(){
+    const role = JSON.parse(this.cookieService.get('user')).role;
+    return role;
   }
 
   createForm(){

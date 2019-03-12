@@ -2,6 +2,7 @@ import { Component, OnInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Order} from '../../Models/Order'
 import {OrderService} from '../../Services/order.service';
+import { CookieService } from 'ngx-cookie-service';
 declare var $;
 
 @Component({
@@ -15,7 +16,7 @@ export class OrderGetComponent implements OnInit {
 
   dataTable: any;
 
-  constructor(private orderService: OrderService, private router: Router, private chRef: ChangeDetectorRef) { }
+  constructor(private orderService: OrderService, private router: Router, private chRef: ChangeDetectorRef,  private cookieService: CookieService) { }
 
   ngOnInit() {
     this.fetchOrders();
@@ -26,16 +27,16 @@ export class OrderGetComponent implements OnInit {
     .subscribe((data: Order[])=>{
       this.orders = data;
       this.chRef.detectChanges();
-      
+
       const table: any = $('table');
       this.dataTable = table.DataTable()
     })
-    
-    
+
+
   }
 
   editOrder(id){
-    this.router.navigate([`/editOrder/${id}`]); 
+    this.router.navigate([`/editOrder/${id}`]);
   }
 
   deleteOrder(id){

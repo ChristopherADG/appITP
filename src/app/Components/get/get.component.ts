@@ -2,6 +2,8 @@ import { Component, OnInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../../User';
 import {UserService} from '../../user.service';
+import { CookieService } from 'ngx-cookie-service';
+
 declare var $;
 
 @Component({
@@ -15,11 +17,19 @@ export class GetComponent implements OnInit {
 
   dataTable: any;
 
-  constructor(private userService: UserService, private router: Router, private chRef: ChangeDetectorRef) { }
+  constructor(private userService: UserService, private router: Router, private chRef: ChangeDetectorRef,  private cookieService: CookieService) { }
 
   ngOnInit() {
+    if(this.getRole()!="Admin"){
+      this.router.navigate(['/orders']);
+    }
     this.fetchUsers();
-    
+
+  }
+
+  getRole(){
+    const role = JSON.parse(this.cookieService.get('user')).role;
+    return role;
   }
 
   fetchUsers(){
@@ -28,16 +38,16 @@ export class GetComponent implements OnInit {
       this.users = data;
 
       this.chRef.detectChanges();
-      
+
       const table: any = $('table');
       this.dataTable = table.DataTable()
     })
-    
-    
+
+
   }
 
   editUser(id){
-    this.router.navigate([`/edit/${id}`]); 
+    this.router.navigate([`/edit/${id}`]);
   }
 
   deleteUser(id){
