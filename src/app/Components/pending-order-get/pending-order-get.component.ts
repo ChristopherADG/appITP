@@ -6,11 +6,11 @@ import {AuthService} from '../../Services/auth.service'
 declare var $;
 
 @Component({
-  selector: 'app-order-get',
-  templateUrl: './order-get.component.html',
-  styleUrls: ['./order-get.component.css']
+  selector: 'app-pending-order-get',
+  templateUrl: './pending-order-get.component.html',
+  styleUrls: ['./pending-order-get.component.css']
 })
-export class OrderGetComponent implements OnInit {
+export class PendingOrderGetComponent implements OnInit {
 
   orders : Order[];
 
@@ -25,11 +25,10 @@ export class OrderGetComponent implements OnInit {
   }
 
   fetchOrders(){
-    this.orderService.getOrders()
+    this.orderService.getOrdersByStatus(0)
     .subscribe((data: Order[])=>{
       this.orders = data;
       this.chRef.detectChanges();
-      
       const table: any = $('table');
       this.dataTable = table.DataTable()
     })
@@ -41,6 +40,22 @@ export class OrderGetComponent implements OnInit {
 
   editOrder(id){
     this.router.navigate([`/editOrder/${id}`]); 
+  }
+
+  approveOrder(id){
+    if(confirm('Are you sure to approve this order?')){
+      this.orderService.approveOrder(id).subscribe(()=>{
+        this.fetchOrders();
+      })
+    }
+  }
+
+  denyOrder(id){
+    if(confirm('Are you sure to deny this order?')){
+      this.orderService.denyOrder(id).subscribe(()=>{
+        this.fetchOrders();
+      })
+    }
   }
 
   deleteOrder(id){

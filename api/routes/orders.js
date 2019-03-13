@@ -70,6 +70,55 @@ routerProtected.route('/update/:id').post((req, res)=>{
         }
     })
 });
+//get by status Order
+routerProtected.route('/status/:statusid').get((req, res)=>{
+    console.log(req.params.statusid)
+    Order.find({"status": req.params.statusid},(err, orders) =>{
+        if(err){
+            console.log(err);
+        }else{
+            res.json(orders);
+        }
+    })
+});
+
+//approve Order
+routerProtected.route('/approve/:id').post((req, res)=>{
+    Order.findById(req.params.id,(err, order) =>{
+        if(!order){
+            return next(new Error('Could not load document'));
+        }else{
+            order.status=1
+
+            order.save()
+                .then(order =>{
+                    res.json('Update done');
+                })
+                .catch(err =>{
+                    res.status(400).send('Update failed');
+                });
+        }
+    })
+});
+
+//deny Order
+routerProtected.route('/deny/:id').post((req, res)=>{
+    Order.findById(req.params.id,(err, order) =>{
+        if(!order){
+            return next(new Error('Could not load document'));
+        }else{
+            order.status=-1
+
+            order.save()
+                .then(order =>{
+                    res.json('Update done');
+                })
+                .catch(err =>{
+                    res.status(400).send('Update failed');
+                });
+        }
+    })
+});
 
 //Delete User
 routerProtected.route('/delete/:id').get((req, res)=>{

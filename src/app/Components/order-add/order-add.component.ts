@@ -60,27 +60,41 @@ export class OrderAddComponent implements OnInit {
         this.categoryProducts.push([])
         this.fields.push([])
         this.chRef.detectChanges();
-        var category = document.getElementById("category"+index) as HTMLSelectElement;
-        category.options.add(new Option(this.categories[index-1]))
+        var category = document.getElementById("category"+index) as HTMLHeadElement;
+        category.innerText = this.categories[index-1]
+        // category.options.add(new Option(this.categories[index-1]))
         this.getProductsByCategory(this.categories[index-1],index)
       }
     })
+  }
+
+  titleShow(categoryField){
+    return this.fields[categoryField-1].length > 0
   }
 
   //DONE
   getUnits(categoryField, field){
     var select = document.getElementById("select"+field) as HTMLSelectElement;
     select.disabled =false;
+    var provider = document.getElementById("provider"+field) as HTMLSelectElement;
+    provider.disabled =false;
     var product = document.getElementById("product"+field) as HTMLSelectElement;
     //Limpiar el select
-    while(select.options.length>0){
+    while(select.options.length>1){
       select.options.remove(select.options.length-1)
     }
-    //console.log(this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1])
-    var select = document.getElementById("select"+field) as HTMLSelectElement;
+    //Limpiar el provider
+    while(provider.options.length>1){
+      provider.options.remove(provider.options.length-1)
+    }
     this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1].unit.forEach(unit => {
       select.options.add(new Option(unit.name))
     });
+    //console.log(this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1])
+    this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1].providers.forEach(providerArr => {
+      provider.options.add(new Option(providerArr.name))
+    });
+
     this.chRef.detectChanges();
   }
   //DONE
@@ -99,7 +113,6 @@ export class OrderAddComponent implements OnInit {
     this.fieldsCont++;
     this.fields[this.categoryFields.indexOf(categoryField)].push(this.fieldsCont);
     this.chRef.detectChanges();
-   
   }
   //DONE
   lastItem(categoryField){
@@ -141,9 +154,11 @@ export class OrderAddComponent implements OnInit {
         var select = document.getElementById("select"+field) as HTMLSelectElement;
         var number = document.getElementById("number"+field) as HTMLInputElement;
         var product = document.getElementById("product"+field) as HTMLSelectElement;
+        var provider = document.getElementById("provider"+field) as HTMLSelectElement;
 
         let tempProduct = this.categoryProducts[this.categoryFields.indexOf(category)][product.selectedIndex-1]
-        let tempUnit = tempProduct.unit[select.selectedIndex]
+        let tempUnit = tempProduct.unit[select.selectedIndex-1]
+        let tempProvider =  tempProduct.providers[provider.selectedIndex-1]
 
         let temp = {
           quantity: number.value,
@@ -153,7 +168,8 @@ export class OrderAddComponent implements OnInit {
             category: tempProduct.category,
             description: tempProduct.description
           },
-          unit: tempUnit
+          unit: tempUnit,
+          provider: tempProvider
         }
         arr.push(temp)
       })

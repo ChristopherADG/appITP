@@ -1,11 +1,11 @@
 <div class="container">
-    <div class="card card-register mx-auto mt-5">
+    <div class="card mx-auto mt-5">
       <div class="card-header">Create Order</div>
       <div class="card-body">
         <form action="javascript:void(0); " (submit)="addOrder(dinningRoom,description.value,getFieldsInfo())">
           <div class="form-group">
             <div class="form-row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <label>Dinning Room</label>
                 <div class="form-label-group">
                     <select  class="form-control" #dinningRoom required>
@@ -22,47 +22,50 @@
           <hr>
           <div class="form-group" *ngFor="let categoryField of categoryFields">
             <div class="row">
-              <div class="col-md-4">
-                  <label>Category</label>
-                  <select disabled class="form-control" id="category{{categoryField}}" #category (change)="getProductsByCategory(category.value, categoryField)">
-                  </select>
+              <div class="col-md-3">
+                  <h5 id="category{{categoryField}}">Category</h5>
               </div>
             </div>
             <br>
+            <div class="row" *ngIf="titleShow(categoryField)">
+              <div class="col-md-2"><label>Quantity</label></div>
+              <div class="col-md-2"><label>Product</label></div>
+              <div class="col-md-2"><label>Unit</label></div>
+              <div class="col-md-3"><label>Provider</label></div>
+              <div class="col-md-2"><label style="color: transparent !important">TransparentTransparent</label></div>
+            </div>
             <div class="row" *ngFor="let field of fields[categoryField-1]" style="padding-bottom: 2%">
                 <div class="col-md-2">
-                    <label>Quantity</label>
-                    <input min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 100% !important">
+                    
+                    <input min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 80% !important">
                 </div>
-                <div class="col-md-4">
-                    <label>Product</label>
+                <div class="col-md-2">
                     <select required class="form-control chosen-select" id="product{{field}}" (change)="getUnits(categoryField,field)" #product>
                         <option value="" selected disabled hidden>Select Product</option>
                         <option *ngFor="let product of categoryProducts[categoryField-1]">{{product.name}}</option>
                     </select>
                 </div>
-                <div class="col-md-3">
-                    <label>Unit</label>
+                <div class="col-md-2">
                     <select disabled required class="form-control" id=select{{field}}>
                         <option value="" selected disabled hidden>Select Unit</option>
                     </select>
                 </div>
-                <div *ngIf="lastItem(categoryField)" class="col-md-3">
-                  <label style="color: transparent !important">TransparentTransparent</label>
-                  <button type="button"  class="btn btn-danger action" (click)="removeField(categoryField,field)" > Remove</button>
+                <div class="col-md-3">
+                    <select disabled required class="form-control" id=provider{{field}}>
+                        <option value="" selected disabled hidden>Select Provider</option>
+                    </select>
+                </div>
+                <div *ngIf="lastItem(categoryField)" class="col-md-2">
+                  
+                  <button type="button"  class="btn btn-danger action" (click)="removeField(categoryField,field)" ><i class="far fa-trash-alt"></i></button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <button *ngIf="!greaterThanProductsForCategory(categoryField)" type="button"class="btn btn-success action" (click)="addField(categoryField)" ><i class="far fa-plus-square"></i> Add Product</button>
+                    <button type="button"class="btn btn-success action" (click)="addField(categoryField)" ><i class="far fa-plus-square"></i></button>
                 </div>
               </div>
           <hr>
-          </div>
-          <div class="row">
-            <div class="col-md-12" style="text-align: right">
-                <button *ngIf="!greaterThanCategory()" type="button"class="btn btn-success action" (click)="addGategory()"><i class="fas fa-plus"></i> Add Category</button>
-            </div>
           </div>
           <br>
           <button class="btn btn-primary btn-block" type="submit">Create Order</button>

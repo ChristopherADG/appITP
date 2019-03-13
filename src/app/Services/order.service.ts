@@ -44,12 +44,36 @@ export class OrderService {
     return this.http.post(`${this.uri}/orders/add`, order,{headers: header});
   }
 
+  approveOrder(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.post(`${this.uri}/orders/approve/${id}`,null,{headers: header});
+  }
+
+  denyOrder(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.post(`${this.uri}/orders/deny/${id}`,null,{headers: header});
+  }
+
   getOrderById(id){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
     return this.http.get(`${this.uri}/orders/${id}`,{headers: header});
+  }
+  getOrdersByStatus(status){
+    console.log(status)
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/orders/status/${status}`,{headers: header});
   }
 
   updateDinningRoom(id, dinningRoom,description,products,status){

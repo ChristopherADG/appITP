@@ -42,7 +42,8 @@ routerProtected.route('/add').post((req, res)=>{
         name: req.body.name,
         unit: req.body.unity,
         category: req.body.category,
-        description: req.body.description
+        description: req.body.description,
+        providers: req.body.providers
     });
     product.save()
         .then(product =>{
@@ -63,6 +64,7 @@ routerProtected.route('/update/:id').post((req, res)=>{
             product.unit= req.body.unity,
             product.category= req.body.category,
             product.description= req.body.description
+            product.providers = req.body.providers
 
             product.save()
                 .then(product =>{

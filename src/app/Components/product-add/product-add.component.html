@@ -37,6 +37,26 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description></textarea>
           </div>
           <br>
+          <div class="form-group">
+            <label class="font-weight-bold">Providers</label>
+            <div *ngFor="let field of providerFields" class="row" style="padding-bottom: 2%">
+              <div class="col-md-6">
+                <select class="form-control chosen-select{{field}}" id="provider{{field}}">
+                    <option value="" selected disabled hidden>Select Provider</option>
+                    <option *ngFor="let provider of providers">{{provider.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                  <button *ngIf="lastField(field)" type="button"  class="btn btn-danger action" (click)="removeField(field)" > Remove</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button"class="btn btn-success action" (click)="addProviderField()"><i class="far fa-plus-square"></i> Add Provider</button>
+              </div>
+            </div>
+          </div>
+          <br>
           <button class="btn btn-primary btn-block" type="submit">Create Product</button>
         </form>
         <br>

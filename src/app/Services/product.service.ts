@@ -53,7 +53,7 @@ export class ProductService {
     return this.http.get(`${this.uri}/products`,{headers: header});
   }
 
-  addProduct(name,unit,category, description){
+  addProduct(name,unit,category, description, providers){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
@@ -62,7 +62,8 @@ export class ProductService {
       name: name,
       unity: unit,
       category: category,
-      description: description
+      description: description,
+      providers: providers
     }
     return this.http.post(`${this.uri}/products/add`, product,{headers: header});
   }
@@ -84,7 +85,7 @@ export class ProductService {
   }
 
 
-  updateProduct(id,name,unit,category, description){
+  updateProduct(id,name,unit,category, description,providers){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
@@ -93,7 +94,8 @@ export class ProductService {
       name: name,
       unity: unit,
       category: category,
-      description: description
+      description: description,
+      providers: providers
     }
     return this.http.post(`${this.uri}/products/update/${id}`, product,{headers: header});
   }

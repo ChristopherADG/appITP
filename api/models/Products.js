@@ -17,6 +17,10 @@ let Product = new Schema({
     },
     description: {
         type: String
+    },
+    providers:{
+        type: Array,
+        require: true
     }
 });
 module.exports = mongoose.model('Product', Product);

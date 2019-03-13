@@ -23,6 +23,7 @@ import { CategoriesAddComponent } from "./Components/categories-add/categories-a
 //import {OrderUpdateComponent} from './Components/order-update/order-update.component';
 import { RolGetComponent } from "./Components/rol-get/rol-get.component";
 import { RolAddComponent } from './Components/rol-add/rol-add.component';
+import {PendingOrderGetComponent} from "./Components/pending-order-get/pending-order-get.component"
 import {AuthGuard} from './Guards/auth.guard';
 import {AdminGuard} from './Guards/admin.guard';
 
@@ -49,6 +50,7 @@ const routes: Routes = [
   {path: 'createCategories', component: CategoriesAddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "createRol", component: RolAddComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: "roles", component: RolGetComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: "pendingOrders", component: PendingOrderGetComponent, canActivate:[AuthGuard]},
   {path: '', component: LoginComponent},
   {path: '**', component: LoginComponent}
   
