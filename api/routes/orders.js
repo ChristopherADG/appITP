@@ -28,14 +28,17 @@ routerProtected.route('/:id').get((req, res)=>{
 
 //Add Order
 routerProtected.route('/add').post((req, res)=>{
-    console.log(req.body)
+    var date = new Date();
     let order = new Order({
-      user: req.body.user,
-      dinningRoom: req.body.dinningRoom,
-      description: req.body.description,
-      products: req.body.product,
-      status: req.body.status
+        date: date.toJSON().slice(0,10).replace(/-/g,'/'),
+        time: date.toTimeString().substr(0,8),
+        user: req.body.user,
+        dinningRoom: req.body.dinningRoom,
+        description: req.body.description,
+        products: req.body.products,
+        status: req.body.status
     });
+    console.log(order)
     order.save()
         .then(order =>{
             res.status(200).json({'order': 'Added successfully'});

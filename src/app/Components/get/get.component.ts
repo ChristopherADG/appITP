@@ -44,7 +44,9 @@ export class GetComponent implements OnInit {
     if(confirm('Are you sure to delete this record?')){
       this.userService.deleteUser(id).subscribe(()=>{
         this.fetchUsers();
+        this.router.navigate([`/users`]); 
       })
     }
+    
   }
 }

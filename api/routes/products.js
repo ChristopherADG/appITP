@@ -25,6 +25,16 @@ routerProtected.route('/:id').get((req, res)=>{
     })
 });
 
+routerProtected.route('/category/:name').get((req, res)=>{
+    Product.find({'category': req.params.name},(err, products) =>{
+        if(err){
+            console.log(err);
+        }else{
+            res.json(products);
+        }
+    })
+});
+
 //Add Product
 routerProtected.route('/add').post((req, res)=>{
     console.log(req.body)

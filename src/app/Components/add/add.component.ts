@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 //import {FormGroup, FormBuilder, Validators} from '@angular/forms'
 import {Router} from '@angular/router'
 import {UserService} from '../../user.service';
+import {Rol} from '../../Models/Rol'
 //import User from '../User';
 
 @Component({
@@ -15,6 +16,16 @@ export class AddComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchRoles()
+  }
+
+  roles: Rol[]
+
+  fetchRoles(){
+    this.userService.getRole().subscribe((data: Rol[])=>{
+      this.roles = data;
+      console.log(this.roles)
+    })
   }
 
   addUser(name, last_name, email, password, role){

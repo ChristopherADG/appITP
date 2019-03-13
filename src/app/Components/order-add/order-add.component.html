@@ -8,7 +8,7 @@
               <div class="col-md-6">
                 <label>Dinning Room</label>
                 <div class="form-label-group">
-                    <select class="form-control" #dinningRoom>
+                    <select  class="form-control" #dinningRoom required>
                       <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom.name}}</option>
                     </select>
                 </div>
@@ -16,48 +16,55 @@
             </div>
           </div>
           <div class="form-group">
-              <label for="exampleFormControlTextarea1">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description></textarea>
+              <label for="exampleFormControlTextarea1">Observations</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description required></textarea>
           </div>
-          <div class="form-group">
+          <hr>
+          <div class="form-group" *ngFor="let categoryField of categoryFields">
             <div class="row">
-              <div class="col-md-3"><label>Quantity</label></div>
-              <div class="col-md-4"><label>Product</label></div>
-              <div class="col-md-3"><label>Unit</label></div>
-              
+              <div class="col-md-4">
+                  <label>Category</label>
+                  <select disabled class="form-control" id="category{{categoryField}}" #category (change)="getProductsByCategory(category.value, categoryField)">
+                  </select>
+              </div>
             </div>
-
-
-
-
-            <div class="row" *ngFor="let field of fields" style="padding-bottom: 2%">
-                <div class="col-md-3">
-                    <input type="number" id=number{{field}} style="width: 100% !important">
+            <br>
+            <div class="row" *ngFor="let field of fields[categoryField-1]" style="padding-bottom: 2%">
+                <div class="col-md-2">
+                    <label>Quantity</label>
+                    <input min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 100% !important">
                 </div>
                 <div class="col-md-4">
-                    <div class="form-label-group">
-                        <select class="form-control" id="product{{field}}" (change)="getUnits(field)" #product>
-                            <option value="" selected disabled hidden>Select Product</option>
-                            <option *ngFor="let product of products">{{product.name}}</option>
-                        </select>
-                    </div>
+                    <label>Product</label>
+                    <select required class="form-control chosen-select" id="product{{field}}" (change)="getUnits(categoryField,field)" #product>
+                        <option value="" selected disabled hidden>Select Product</option>
+                        <option *ngFor="let product of categoryProducts[categoryField-1]">{{product.name}}</option>
+                    </select>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-label-group">
-                        <select class="form-control" id=select{{field}}>
-                        </select>
-                    </div>
+                    <label>Unit</label>
+                    <select disabled required class="form-control" id=select{{field}}>
+                        <option value="" selected disabled hidden>Select Unit</option>
+                    </select>
                 </div>
-                <div class="col-md-2">
-                  <button type="button" *ngIf="lastItem()" class="btn btn-danger action" (click)="removeField(field)" ><i class="far fa-minus-square"></i></button>
+                <div *ngIf="lastItem(categoryField)" class="col-md-3">
+                  <label style="color: transparent !important">TransparentTransparent</label>
+                  <button type="button"  class="btn btn-danger action" (click)="removeField(categoryField,field)" > Remove</button>
                 </div>
             </div>
-
-
-
-            <button type="button"class="btn btn-primary action" (click)="addField()" ><i class="far fa-plus-square"></i></button>
+            <div class="row">
+                <div class="col-md-6">
+                    <button *ngIf="!greaterThanProductsForCategory(categoryField)" type="button"class="btn btn-success action" (click)="addField(categoryField)" ><i class="far fa-plus-square"></i> Add Product</button>
+                </div>
+              </div>
+          <hr>
           </div>
-
+          <div class="row">
+            <div class="col-md-12" style="text-align: right">
+                <button *ngIf="!greaterThanCategory()" type="button"class="btn btn-success action" (click)="addGategory()"><i class="fas fa-plus"></i> Add Category</button>
+            </div>
+          </div>
+          <br>
           <button class="btn btn-primary btn-block" type="submit">Create Order</button>
         </form>
         <br>

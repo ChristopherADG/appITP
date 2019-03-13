@@ -43,13 +43,10 @@
           </div>
           <div class="form-group">
             <div class="form-row">
-              <div class="col-md-12">
+              <div class="col-md-6">
                 <div class="form-label-group">
-                  <select id="role" formControlName="role" #role>
-                    <option value="Chef">Chef</option>
-                    <option value="CEDIS">CEDIS</option>
-                    <option value="Finanzas">Finanzas</option>
-                    <option value="Admin">Admin</option>
+                  <select id="role" class="form-control" formControlName="role" #role>
+                    <option *ngFor="let rol of roles">{{rol.name}}</option>
                   </select>
                 </div>
               </div>

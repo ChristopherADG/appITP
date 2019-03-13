@@ -56,13 +56,13 @@ routerProtected.route('/delete/:id').get((req, res)=>{
             res.json(err);
         }else{
             res.json('Removed successfully');
-            Product.find((err, products) =>{
-                if(err){
-                    console.log(err);
-                }else{
-                    console.log(products, unit)
-                }
-            })
+            // Product.find((err, products) =>{
+            //     if(err){
+            //         console.log(err);
+            //     }else{
+            //         console.log(products, unit)
+            //     }
+            // })
         }
     })
 });

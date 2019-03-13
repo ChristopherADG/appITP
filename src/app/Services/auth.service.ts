@@ -18,6 +18,10 @@ export class AuthService {
     
   }
 
+  getRole(){
+    return JSON.parse(this.cookieService.get('user')).role;
+  }
+
   storeUserData(token, user){
     this.cookieService.set('id_token',token,(4/24))
     this.cookieService.set('user', JSON.stringify(user),(4/24))

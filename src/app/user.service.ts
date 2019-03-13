@@ -83,4 +83,33 @@ export class UserService {
     });
     return this.http.get(`${this.uri}/users/delete/${id}`,{headers: header});
   }
+
+
+  //------------- Role ------------------
+  getRole(){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/roles`,{headers: header});
+  }
+  
+  addRole(name){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    const role = {
+      name: name
+    }
+    return this.http.post(`${this.uri}/roles/add`, role,{headers: header});
+  }
+  
+  deleteRole(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/roles/delete/${id}`,{headers: header});
+  }  
 }

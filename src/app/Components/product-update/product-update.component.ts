@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router'
 import {ProductService} from '../../Services/product.service'
 import { Unit} from '../../Models/Unit'
+import { Category} from '../../Models/Category'
 
 @Component({
   selector: 'app-product-update',
@@ -10,14 +11,16 @@ import { Unit} from '../../Models/Unit'
 })
 export class ProductUpdateComponent implements OnInit {
 
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+
   id:String;
   product: any = {};
   units : Unit[];
-
-  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) { }
+  categories : Category[];
 
   ngOnInit() {
     this.getUnits();
+    this.getCategories();
     this.route.params.subscribe(param =>{
       this.id = param.id;
       this.productService.getProductById(this.id).subscribe(res=>{
@@ -34,6 +37,14 @@ export class ProductUpdateComponent implements OnInit {
         }
         
       })
+    })
+  }
+
+  getCategories(){
+    this.productService.getCategory()
+    .subscribe((data: Category[])=>{
+      this.categories = data
+      //console.log(this.categories)
     })
   }
   arrayUnit(){

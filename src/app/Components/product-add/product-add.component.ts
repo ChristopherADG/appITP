@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
 import {Unit} from '../../Models/Unit';
 import {ProductService} from '../../Services/product.service';
+import {Category} from '../../Models/Category'
 
 @Component({
   selector: 'app-product-add',
@@ -14,14 +15,24 @@ export class ProductAddComponent implements OnInit {
 
   ngOnInit() {
     this.getUnits();
+    this.getCategories();
   }
   units : Unit[];
+  categories : Category[];
+
+  getCategories(){
+    this.productService.getCategory()
+    .subscribe((data: Category[])=>{
+      this.categories = data
+      //console.log(this.categories)
+    })
+  }
 
   getUnits(){
     this.productService.getUnits()
     .subscribe((data: Unit[])=>{
       this.units = data;
-      console.log(this.units)
+      //console.log(this.units)
     })
   }
 
@@ -34,7 +45,7 @@ export class ProductAddComponent implements OnInit {
           id: temp.value,
           name: this.units[index].name.toString()
         }
-        console.log(tempUnit)
+        //console.log(tempUnit)
         arr.push(tempUnit)
       }
     }

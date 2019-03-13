@@ -16,12 +16,8 @@
                 <label class="font-weight-bold">Category</label>
                 <div class="form-label-group">
                     <select class="form-control" id="category" #category>
-                      <option>Fruits</option>
-                      <option>Vegetables</option>
-                      <option>Meat and Surrogates</option>
-                      <option>Fats and Oils</option>
-                      <option>Bread and Cereals</option>
-                      <option>Liquids</option> 
+                        <option value="" selected disabled hidden>Select Category</option>
+                        <option *ngFor="let category of categories">{{category.name}}</option>
                     </select>
                 </div>
               </div>

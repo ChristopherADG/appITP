@@ -21,6 +21,8 @@ const providers = require('./routes/providers');
 const dinningRooms = require('./routes/dinningRooms');
 const orders = require('./routes/orders');
 const units = require('./routes/units');
+const roles = require('./routes/roles');
+const categories = require('./routes/categories');
 
 app.use(cors());
 
@@ -38,6 +40,8 @@ app.use('/providers', passport.authenticate('jwt', {session:false}), providers.p
 app.use('/dinningRooms', passport.authenticate('jwt', {session:false}), dinningRooms.protected)
 app.use('/orders', passport.authenticate('jwt', {session:false}), orders.protected)
 app.use('/units', passport.authenticate('jwt', {session:false}), units.protected)
+app.use('/roles', passport.authenticate('jwt', {session:false}), roles.protected)
+app.use('/categories', passport.authenticate('jwt', {session:false}), categories.protected)
 
 
 app.get('/', (req,res)=>{

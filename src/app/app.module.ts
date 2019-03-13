@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { AddComponent } from './Components/add/add.component';
 import { GetComponent } from './Components/get/get.component';
 import { UpdateComponent } from './Components/update/update.component';
-
 import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './user.service';
@@ -23,6 +22,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 
 import {AuthGuard} from './Guards/auth.guard';
+import {AdminGuard} from './Guards/admin.guard';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { ProductGetComponent } from './Components/product-get/product-get.component';
 import { ProductAddComponent } from './Components/product-add/product-add.component';
@@ -39,6 +39,11 @@ import { UnitUpdateComponent } from './Components/unit-update/unit-update.compon
 import { OrderGetComponent } from './Components/order-get/order-get.component';
 import { OrderAddComponent } from './Components/order-add/order-add.component';
 import { OrderUpdateComponent } from './Components/order-update/order-update.component';
+import { CategoriesAddComponent } from './Components/categories-add/categories-add.component';
+import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
+import { CategoriesUpdateComponent } from './Components/categories-update/categories-update.component';
+import { RolGetComponent } from './Components/rol-get/rol-get.component';
+import { RolAddComponent } from './Components/rol-add/rol-add.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +68,12 @@ import { OrderUpdateComponent } from './Components/order-update/order-update.com
     UnitUpdateComponent,
     OrderGetComponent,
     OrderAddComponent,
-    OrderUpdateComponent
+    OrderUpdateComponent,
+    CategoriesAddComponent,
+    CategoriesGetComponent,
+    CategoriesUpdateComponent,
+    RolGetComponent,
+    RolAddComponent
   ],
   imports: [
     CommonModule,
@@ -76,7 +86,7 @@ import { OrderUpdateComponent } from './Components/order-update/order-update.com
     FlashMessagesModule.forRoot()
     
   ],
-  providers: [UserService, AuthGuard,ProductService,CookieService],
+  providers: [UserService, AuthGuard,ProductService,CookieService, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
