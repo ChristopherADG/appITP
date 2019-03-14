@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router, private flashMessage: FlashMessagesService, private cookieService: CookieService) { }
 
   ngOnInit() {
-    if(this.authService.loggedIn){
+    if(this.authService.loggedIn()){
       this.router.navigate(['/users'])
     }
   }

@@ -16,17 +16,6 @@
             <th *ngIf="hasPermition()">Actions</th>
           </tr>
         </thead>
-        <tfoot>
-          <tr>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Dinning Room</th>
-            <th>Chef</th>
-            <th>Observations</th>
-            <th>Status</th>
-            <th *ngIf="hasPermition()">Actions</th>
-          </tr>
-        </tfoot>
         <tbody>
           <tr *ngFor="let order of orders" [ngSwitch]="order.status">
             <td>{{order.date}}</td>
@@ -39,7 +28,8 @@
             <td *ngSwitchCase="-1">Denegado</td>
             <td *ngIf="hasPermition()">
               <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
-              <button type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-info action" (click)="detailOrder(order._id)"><i class="fas fa-search-plus"></i></button>
+              <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
             </td>
           </tr>
         </tbody>
@@ -66,17 +56,6 @@
               <th *ngIf="hasPermition()">Actions</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Dinning Room</th>
-              <th>Chef</th>
-              <th>Observations</th>
-              <th>Status</th>
-              <th *ngIf="hasPermition()">Actions</th>
-            </tr>
-          </tfoot>
           <tbody>
             <tr *ngFor="let order of ordersApprove" [ngSwitch]="order.status">
               <td>{{order.date}}</td>
@@ -89,7 +68,8 @@
               <td *ngSwitchCase="-1">Denegado</td>
               <td *ngIf="hasPermition()">
                 <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
-                <button type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-info action" (click)="detailOrder(order._id)"><i class="fas fa-search-plus"></i></button>
+                <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
           </tbody>
@@ -116,17 +96,6 @@
               <th *ngIf="hasPermition()">Actions</th>
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Dinning Room</th>
-              <th>Chef</th>
-              <th>Observations</th>
-              <th>Status</th>
-              <th *ngIf="hasPermition()">Actions</th>
-            </tr>
-          </tfoot>
           <tbody>
             <tr *ngFor="let order of ordersDeny" [ngSwitch]="order.status">
               <td>{{order.date}}</td>
@@ -139,7 +108,8 @@
               <td *ngSwitchCase="-1">Denegado</td>
               <td *ngIf="hasPermition()">
                 <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
-                <button type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+                <button type="button" class="btn btn-info action" (click)="detailOrder(order._id)"><i class="fas fa-search-plus"></i></button>
+                <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
           </tbody>

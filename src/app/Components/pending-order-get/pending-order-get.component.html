@@ -38,8 +38,7 @@
               </div>
             </td>
             <td *ngIf="hasPermition()">
-              <button type="button" class="btn btn-success action" (click)="approveOrder(order._id)"><i class="fas fa-check"></i></button>
-              <button type="button" class="btn btn-danger action" (click)="denyOrder(order._id)"><i class="fas fa-times"></i></button>
+              <button type="button" class="btn btn-info action" (click)="detailOrder(order._id)"><i class="fas fa-search-plus"></i></button>
             </td>
           </tr>
         </tbody>

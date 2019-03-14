@@ -91,10 +91,10 @@ import { TruckUpdateComponent } from './Components/truck-update/truck-update.com
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     FlashMessagesModule.forRoot()
-    
+
   ],
   providers: [UserService, AuthGuard,ProductService,CookieService, AdminGuard],
   bootstrap: [AppComponent]

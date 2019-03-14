@@ -153,12 +153,8 @@ export class OrderAddComponent implements OnInit {
 
   addOrder(dinningRoom,description,products){
     let selectedDR = this.availableDinningRooms[dinningRoom.selectedIndex]
-    let temp = {
-      id : selectedDR._id,
-      name: selectedDR.name
-    }
     //console.log(products)
-    this.orderService.addOrder(temp,description,products,0).subscribe(()=>{
+    this.orderService.addOrder(selectedDR,description,products,0).subscribe(()=>{
       this.router.navigate(['/orders']);
     })
   }

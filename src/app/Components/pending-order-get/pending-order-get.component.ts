@@ -38,24 +38,8 @@ export class PendingOrderGetComponent implements OnInit {
     return this.authService.getRole() == 'Admin' || this.authService.getRole() == 'CEDIS'
   }
 
-  editOrder(id){
-    this.router.navigate([`/editOrder/${id}`]); 
-  }
-
-  approveOrder(id){
-    if(confirm('Are you sure to approve this order?')){
-      this.orderService.approveOrder(id).subscribe(()=>{
-        this.fetchOrders();
-      })
-    }
-  }
-
-  denyOrder(id){
-    if(confirm('Are you sure to deny this order?')){
-      this.orderService.denyOrder(id).subscribe(()=>{
-        this.fetchOrders();
-      })
-    }
+  detailOrder(id){
+    this.router.navigate([`/detailOrder/${id}`]); 
   }
 
   deleteOrder(id){

@@ -1,5 +1,7 @@
 export interface Order {
-    user: String;
+    date: String;
+    time: String;
+    user: Object;
     dinningRoom: String;
     description: String;
     products: Array<Object>;

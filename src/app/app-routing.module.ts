@@ -24,10 +24,10 @@ import { CategoriesAddComponent } from "./Components/categories-add/categories-a
 import { RolGetComponent } from "./Components/rol-get/rol-get.component";
 import { RolAddComponent } from './Components/rol-add/rol-add.component';
 import {PendingOrderGetComponent} from "./Components/pending-order-get/pending-order-get.component"
-import { TruckGetComponent } from "./Components/truck-get/truck-get.component";
-import { TruckAddComponent } from "./Components/truck-add/truck-add.component";
-import { TruckUpdateComponent } from "./Components/truck-update/truck-update.component";
-
+import {OrderDetailComponent} from "./Components/order-detail/order-detail.component"
+import {TruckAddComponent} from "./Components/truck-add/truck-add.component"
+import {TruckGetComponent} from "./Components/truck-get/truck-get.component"
+import {TruckUpdateComponent} from "./Components/truck-update/truck-update.component"
 import {AuthGuard} from './Guards/auth.guard';
 import {AdminGuard} from './Guards/admin.guard';
 
@@ -55,6 +55,7 @@ const routes: Routes = [
   {path: "createRol", component: RolAddComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: "roles", component: RolGetComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: "pendingOrders", component: PendingOrderGetComponent, canActivate:[AuthGuard]},
+  {path: "detailOrder/:id", component: OrderDetailComponent, canActivate:[AuthGuard]},
   {path: "trucks", component: TruckGetComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "createTruck", component: TruckAddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "editTruck/:id", component: TruckUpdateComponent, canActivate:[AuthGuard, AdminGuard]},

@@ -60,6 +60,10 @@ export class OrderGetComponent implements OnInit {
   editOrder(id){
     this.router.navigate([`/editOrder/${id}`]); 
   }
+  
+  detailOrder(id){
+    this.router.navigate([`/detailOrder/${id}`]); 
+  }
 
   deleteOrder(id){
     if(confirm('Are you sure to delete this record?')){
