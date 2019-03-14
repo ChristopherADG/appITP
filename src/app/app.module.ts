@@ -45,6 +45,7 @@ import { CategoriesUpdateComponent } from './Components/categories-update/catego
 import { RolGetComponent } from './Components/rol-get/rol-get.component';
 import { RolAddComponent } from './Components/rol-add/rol-add.component';
 import { PendingOrderGetComponent } from './Components/pending-order-get/pending-order-get.component';
+import { OrderDetailComponent } from './Components/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { PendingOrderGetComponent } from './Components/pending-order-get/pending
     CategoriesUpdateComponent,
     RolGetComponent,
     RolAddComponent,
-    PendingOrderGetComponent
+    PendingOrderGetComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,

@@ -68,7 +68,7 @@ export class OrderService {
     return this.http.get(`${this.uri}/orders/${id}`,{headers: header});
   }
   getOrdersByStatus(status){
-    console.log(status)
+    //console.log(status)
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken

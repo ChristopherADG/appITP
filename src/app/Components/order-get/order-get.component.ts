@@ -12,7 +12,9 @@ declare var $;
 })
 export class OrderGetComponent implements OnInit {
 
-  orders : Order[];
+  orders = [];
+  ordersApprove = [];
+  ordersDeny = [];
 
   dataTable: any;
 
@@ -27,11 +29,27 @@ export class OrderGetComponent implements OnInit {
   fetchOrders(){
     this.orderService.getOrders()
     .subscribe((data: Order[])=>{
-      this.orders = data;
+      this.orders = [];
+      this.ordersApprove = [];
+      this.ordersDeny = [];
+
+      data.forEach(order => {
+        if(order.status == '0'){
+          this.orders.push(order)
+        }else if(order.status=='1'){
+          this.ordersApprove.push(order);
+        }else if(order.status == '-1'){
+          this.ordersDeny.push(order)
+        }
+      });
       this.chRef.detectChanges();
       
-      const table: any = $('table');
-      this.dataTable = table.DataTable()
+      const table: any = $('#table1');
+      table.DataTable()
+      const table2: any = $('#table2');
+      table2.DataTable()
+      const table3: any = $('#table3');
+      table3.DataTable()
     })
   }
 

@@ -52,7 +52,7 @@ export class ProductUpdateComponent implements OnInit {
           var providerSelect = document.getElementById("provider"+index) as HTMLInputElement;
           providerSelect.value = this.product.providers[index-1].name
           this.chDetector.detectChanges();
-          $(".chosen-select"+this.providersCont).chosen()
+          $(".chosen-select"+this.providersCont).select2()
         }
       })
     })
@@ -113,7 +113,7 @@ export class ProductUpdateComponent implements OnInit {
     this.providersCont++;
     this.providerFields.push(this.providersCont);
     this.chDetector.detectChanges();
-    $(".chosen-select"+this.providersCont).chosen()
+    $(".chosen-select"+this.providersCont).select2()
   }
 
   lastField(field){
