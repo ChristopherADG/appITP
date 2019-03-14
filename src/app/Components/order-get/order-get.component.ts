@@ -12,11 +12,13 @@ declare var $;
 })
 export class OrderGetComponent implements OnInit {
 
-  orders : Order[];
+  orders = [];
+  ordersApprove = [];
+  ordersDeny = [];
 
   dataTable: any;
 
-  constructor(private orderService: OrderService,
+  constructor(private orderService: OrderService, 
     private router: Router, private chRef: ChangeDetectorRef,
     private authService: AuthService) { }
 
@@ -27,11 +29,27 @@ export class OrderGetComponent implements OnInit {
   fetchOrders(){
     this.orderService.getOrders()
     .subscribe((data: Order[])=>{
-      this.orders = data;
-      this.chRef.detectChanges();
+      this.orders = [];
+      this.ordersApprove = [];
+      this.ordersDeny = [];
 
-      const table: any = $('table');
-      this.dataTable = table.DataTable()
+      data.forEach(order => {
+        if(order.status == '0'){
+          this.orders.push(order)
+        }else if(order.status=='1'){
+          this.ordersApprove.push(order);
+        }else if(order.status == '-1'){
+          this.ordersDeny.push(order)
+        }
+      });
+      this.chRef.detectChanges();
+      
+      const table: any = $('#table1');
+      table.DataTable()
+      const table2: any = $('#table2');
+      table2.DataTable()
+      const table3: any = $('#table3');
+      table3.DataTable()
     })
   }
 
@@ -40,7 +58,7 @@ export class OrderGetComponent implements OnInit {
   }
 
   editOrder(id){
-    this.router.navigate([`/editOrder/${id}`]);
+    this.router.navigate([`/editOrder/${id}`]); 
   }
 
   deleteOrder(id){

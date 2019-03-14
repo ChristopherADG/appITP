@@ -5,6 +5,15 @@
         <form action="javascript:void(0); " (submit)="addOrder(dinningRoom,description.value,getFieldsInfo())">
           <div class="form-group">
             <div class="form-row">
+              <div class="col col-md-3">
+                  <label>Date</label>
+                  <p id="date"></p>
+              </div>
+              
+              <div class="col col-md-3">
+                  <label>Time</label>
+                  <p id="time"></p>
+              </div>
               <div class="col-md-3">
                 <label>Dinning Room</label>
                 <div class="form-label-group">
@@ -21,43 +30,48 @@
           </div>
           <hr>
           <div class="form-group" *ngFor="let categoryField of categoryFields">
-            <div class="row">
+            <div class="form-row">
               <div class="col-md-3">
                   <h5 id="category{{categoryField}}">Category</h5>
               </div>
             </div>
             <br>
+            
             <div class="row" *ngIf="titleShow(categoryField)">
-              <div class="col-md-2"><label>Quantity</label></div>
               <div class="col-md-2"><label>Product</label></div>
+              <div class="col-md-2"><label>Quantity</label></div>
               <div class="col-md-2"><label>Unit</label></div>
               <div class="col-md-3"><label>Provider</label></div>
               <div class="col-md-2"><label style="color: transparent !important">TransparentTransparent</label></div>
             </div>
-            <div class="row" *ngFor="let field of fields[categoryField-1]" style="padding-bottom: 2%">
-                <div class="col-md-2">
-                    
-                    <input min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 80% !important">
-                </div>
-                <div class="col-md-2">
-                    <select required class="form-control chosen-select" id="product{{field}}" (change)="getUnits(categoryField,field)" #product>
+            <div class="row fieldRow" *ngFor="let field of fields[categoryField-1]">
+                <div class="col-12 col-md-2 field">
+                    <label *ngIf="isMobile()">Product</label>
+                    <select required class="form-control chosen-select{{field}}" id="product{{field}}" (change)="getUnits(categoryField,field)" style="width: 100%" #product>
                         <option value="" selected disabled hidden>Select Product</option>
                         <option *ngFor="let product of categoryProducts[categoryField-1]">{{product.name}}</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-4 col-md-2 field">
+                    <label *ngIf="isMobile()">Quantity</label>
+                    <input class="form-control" min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 100% !important">
+                </div>
+                <div class="col-8 col-md-2 field">
+                    <label *ngIf="isMobile()">Unit</label>
                     <select disabled required class="form-control" id=select{{field}}>
                         <option value="" selected disabled hidden>Select Unit</option>
                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-9 col-md-3 field">
+                    <label *ngIf="isMobile()">Provider</label>
                     <select disabled required class="form-control" id=provider{{field}}>
                         <option value="" selected disabled hidden>Select Provider</option>
                     </select>
                 </div>
-                <div *ngIf="lastItem(categoryField)" class="col-md-2">
-                  
-                  <button type="button"  class="btn btn-danger action" (click)="removeField(categoryField,field)" ><i class="far fa-trash-alt"></i></button>
+                <div class="col-2 col-md-2 field">
+                  <label *ngIf="isMobile()" style="color: transparent !important">TransparentTransparent</label>
+                  <button type="button"  class="btn btn-danger" (click)="removeField(categoryField,field)" ><i class="far fa-trash-alt"></i></button>
+                  <button hidden type="button" id="helper{{field}}"(click)="getUnits(categoryField,field)"></button>
                 </div>
             </div>
             <div class="row">
@@ -68,7 +82,11 @@
           <hr>
           </div>
           <br>
-          <button class="btn btn-primary btn-block" type="submit">Create Order</button>
+          <div class="row">
+            <div class="col-12 col-sm-12 offset-md-3 col-md-6" style="text-align: center">
+                <button class="btn btn-primary btn-block" type="submit">Create Order</button>
+            </div>
+          </div>
         </form>
         <br>
         <button type="button" class="btn btn-light" routerLink="/orders">Back</button>

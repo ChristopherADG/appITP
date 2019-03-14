@@ -40,15 +40,16 @@ export class ProductAddComponent implements OnInit {
     .subscribe((data: Provider[])=>{
       this.providers = data
       this.chDetector.detectChanges();
-      $(".chosen-select"+this.providersCont).chosen()
+      $(".chosen-select"+this.providersCont).select2()
     })
   }
-
+  
   addProviderField(){
     this.providersCont++;
     this.providerFields.push(this.providersCont);
     this.chDetector.detectChanges();
-    $(".chosen-select"+this.providersCont).chosen()
+    $(".chosen-select"+this.providersCont).select2()
+
   }
 
   lastField(field){

@@ -41,7 +41,7 @@
             <label class="font-weight-bold">Providers</label>
             <div *ngFor="let field of providerFields" class="row" style="padding-bottom: 2%">
               <div class="col-md-6">
-                <select class="form-control chosen-select{{field}}" id="provider{{field}}">
+                <select class="form-control chosen-select{{field}}" id="provider{{field}}" style="width: 100%">
                     <option value="" selected disabled hidden>Select Provider</option>
                     <option *ngFor="let provider of providers">{{provider.name}}</option>
                 </select>

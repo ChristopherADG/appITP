@@ -6,11 +6,8 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                   <label></label>
-                <div class="form-label-group">
-                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
-                  <label for="name">Name</label>
-                </div>
+                <label class="font-weight-bold" for="name">Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
               </div>
               <div class="offset-md-1 col-md-5">
                 <label class="font-weight-bold">Category</label>
@@ -44,7 +41,7 @@
             <label class="font-weight-bold">Providers</label>
             <div *ngFor="let field of providerFields" class="row" style="padding-bottom: 2%">
               <div class="col-md-6">
-                <select class="form-control chosen-select{{field}}" id="provider{{field}}">
+                <select class="form-control chosen-select{{field}}" id="provider{{field}}" style="width: 100%">
                     <option value="" selected disabled hidden>Select Provider</option>
                     <option *ngFor="let provider of providers">{{provider.name}}</option>
                 </select>

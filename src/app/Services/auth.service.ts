@@ -15,7 +15,7 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
 
     return this.http.post('http://localhost:4000/auth/login', user, {headers: headers})
-
+    
   }
 
   getRole(){

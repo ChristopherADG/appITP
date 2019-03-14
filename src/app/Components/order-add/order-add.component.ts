@@ -1,4 +1,4 @@
-import { Component, OnInit ,ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit ,ChangeDetectorRef, ElementRef} from '@angular/core';
 import {ProductService} from '../../Services/product.service';
 import {Product} from '../../Models/Product';
 import {DinningRoomService} from '../../Services/dinning-room.service';
@@ -26,7 +26,7 @@ export class OrderAddComponent implements OnInit {
 
   constructor(private productService: ProductService, private chRef: ChangeDetectorRef
    ,private dinningRoomService: DinningRoomService, private orderService: OrderService,
-   private router: Router, private cookieService: CookieService) {
+   private router: Router, private cookieService: CookieService, private elRef:ElementRef) {
 
   }
   //DONE
@@ -44,11 +44,18 @@ export class OrderAddComponent implements OnInit {
       })
     }
   }
+  isMobile(){
+    return $(window).width() < 767
+  }
 
   //NO SE TOCA
   ngOnInit() {
+    console.log($(window).width())
     this.getDinningRooms()
     this.getCategories();
+    let date = new Date();
+    document.getElementById('date').innerText = date.toJSON().slice(0,10).replace(/-/g,'/')
+    document.getElementById('time').innerText = date.toTimeString().substr(0,8)
   }
   getCategories(){
     this.productService.getCategory().subscribe((data:any[]) =>{
@@ -69,7 +76,7 @@ export class OrderAddComponent implements OnInit {
   }
 
   titleShow(categoryField){
-    return this.fields[categoryField-1].length > 0
+    return this.fields[categoryField-1].length > 0 && $(window).width() > 767
   }
 
   //DONE
@@ -97,6 +104,10 @@ export class OrderAddComponent implements OnInit {
 
     this.chRef.detectChanges();
   }
+
+  test(){
+    console.log("hola")
+  }
   //DONE
   getProductsByCategory(name, categoryField){
     this.categoryProducts[this.categoryFields.indexOf(categoryField)] = []
@@ -112,7 +123,12 @@ export class OrderAddComponent implements OnInit {
   addField(categoryField){
     this.fieldsCont++;
     this.fields[this.categoryFields.indexOf(categoryField)].push(this.fieldsCont);
-    this.chRef.detectChanges();
+    this.chRef.detectChanges(); 
+    let a = $('.chosen-select'+this.fieldsCont)
+    a.select2();
+    a.on('select2:select', function (e) {
+      document.getElementById('helper'+e.target.id.replace("product","")).click()
+    });
   }
   //DONE
   lastItem(categoryField){
@@ -155,7 +171,7 @@ export class OrderAddComponent implements OnInit {
         var number = document.getElementById("number"+field) as HTMLInputElement;
         var product = document.getElementById("product"+field) as HTMLSelectElement;
         var provider = document.getElementById("provider"+field) as HTMLSelectElement;
-
+        
         let tempProduct = this.categoryProducts[this.categoryFields.indexOf(category)][product.selectedIndex-1]
         let tempUnit = tempProduct.unit[select.selectedIndex-1]
         let tempProvider =  tempProduct.providers[provider.selectedIndex-1]

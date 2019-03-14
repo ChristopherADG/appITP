@@ -72,7 +72,7 @@ routerProtected.route('/update/:id').post((req, res)=>{
 });
 //get by status Order
 routerProtected.route('/status/:statusid').get((req, res)=>{
-    console.log(req.params.statusid)
+    //console.log(req.params.statusid)
     Order.find({"status": req.params.statusid},(err, orders) =>{
         if(err){
             console.log(err);
