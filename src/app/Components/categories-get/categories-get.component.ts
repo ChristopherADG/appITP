@@ -2,8 +2,6 @@ import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProductService} from '../../Services/product.service';
 import {Category} from '../../Models/Category';
-import { CookieService } from 'ngx-cookie-service';
-
 declare var $;
 
 @Component({
@@ -17,21 +15,13 @@ export class CategoriesGetComponent implements OnInit {
 
   dataTable: any;
 
-  constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef,  private cookieService: CookieService) { }
+  constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if(this.getRole()!="Admin"){
-      this.router.navigate(['/orders']);
-    };
-    this.fetchUnits()
+    this.fetchCategories()
   }
 
-  getRole(){
-    const role = JSON.parse(this.cookieService.get('user')).role;
-    return role;
-  }
-
-  fetchUnits(){
+  fetchCategories(){
     this.productService.getCategory()
     .subscribe((data: Category[])=>{
       this.category = data;
@@ -45,7 +35,7 @@ export class CategoriesGetComponent implements OnInit {
   deleteCategory(id){
     if(confirm('Are you sure to delete this record?')){
       this.productService.deleteCategory(id).subscribe(()=>{
-        this.fetchUnits();
+        this.fetchCategories();
       })
     }
   }

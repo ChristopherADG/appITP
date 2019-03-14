@@ -20,36 +20,40 @@ import { OrderAddComponent } from "./Components/order-add/order-add.component";
 import { OrderGetComponent} from './Components/order-get/order-get.component';
 import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
 import { CategoriesAddComponent } from "./Components/categories-add/categories-add.component";
-//import {CategoriesUpdateComponent} from './Components/categories-update.component';
 //import {OrderUpdateComponent} from './Components/order-update/order-update.component';
+import { RolGetComponent } from "./Components/rol-get/rol-get.component";
+import { RolAddComponent } from './Components/rol-add/rol-add.component';
+import {PendingOrderGetComponent} from "./Components/pending-order-get/pending-order-get.component"
 import {AuthGuard} from './Guards/auth.guard';
+import {AdminGuard} from './Guards/admin.guard';
 
 const routes: Routes = [
-  {path: 'users', component: GetComponent, canActivate:[AuthGuard]},
-  {path: 'edit/:id', component: UpdateComponent, canActivate:[AuthGuard]},
-  {path: 'create', component: AddComponent, canActivate:[AuthGuard]},
+  {path: 'users', component: GetComponent, canActivate:[AuthGuard, AdminGuard]}, 
+  {path: 'edit/:id', component: UpdateComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'create', component: AddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'createProduct', component: ProductAddComponent, canActivate:[AuthGuard]},
-  {path: 'products', component: ProductGetComponent, canActivate:[AuthGuard]},
-  {path: 'editProduct/:id', component: ProductUpdateComponent, canActivate:[AuthGuard]},
-  {path: 'createProvider', component: ProviderAddComponent, canActivate:[AuthGuard]},
-  {path: 'providers', component: ProviderGetComponent, canActivate:[AuthGuard]},
-  {path: 'editProvider/:id', component: ProviderUpdateComponent, canActivate:[AuthGuard]},
-  {path: 'createDinningRoom', component: DinningRoomAddComponent, canActivate:[AuthGuard]},
-  {path: 'dinningRooms', component: DinningRoomGetComponent, canActivate:[AuthGuard]},
-  {path: 'editDinningRoom/:id', component: DinningRoomUpdateComponent, canActivate:[AuthGuard]},
-  {path: 'createUnit', component: UnitAddComponent, canActivate:[AuthGuard]},
-  {path: 'units', component: UnitGetComponent, canActivate:[AuthGuard]},
-  {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard]},
+  {path: 'createProduct', component: ProductAddComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'products', component: ProductGetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'editProduct/:id', component: ProductUpdateComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'createProvider', component: ProviderAddComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'providers', component: ProviderGetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'editProvider/:id', component: ProviderUpdateComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'createDinningRoom', component: DinningRoomAddComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'dinningRooms', component: DinningRoomGetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'editDinningRoom/:id', component: DinningRoomUpdateComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'createUnit', component: UnitAddComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'units', component: UnitGetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'editUnits/:id', component: UnitUpdateComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'createOrder', component: OrderAddComponent, canActivate:[AuthGuard]},
   {path: 'orders', component: OrderGetComponent, canActivate:[AuthGuard]},
-  {path: 'categories', component:CategoriesGetComponent, canActivate:[AuthGuard]},
-  {path: 'createCategories', component: CategoriesAddComponent, canActivate:[AuthGuard]},
-  //{path: 'editCategories/:id', component: CategoriesUpdateComponent, canActivate:[AuthGuard]},
+  {path: 'categories', component:CategoriesGetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'createCategories', component: CategoriesAddComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: "createRol", component: RolAddComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: "roles", component: RolGetComponent, canActivate: [AuthGuard, AdminGuard]},
+  {path: "pendingOrders", component: PendingOrderGetComponent, canActivate:[AuthGuard]},
   {path: '', component: LoginComponent},
   {path: '**', component: LoginComponent}
-
-
+  
 ];
 
 //{path: 'editOrder/:id', component: OrderUpdateComponent, canActivate:[AuthGuard]}

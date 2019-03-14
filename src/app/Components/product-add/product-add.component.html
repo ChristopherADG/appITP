@@ -6,22 +6,15 @@
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                  <label></label>
-                <div class="form-label-group">
-                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
-                  <label for="name">Name</label> 
-                </div>
+                <label class="font-weight-bold" for="name">Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
               </div>
               <div class="col-md-6">
                 <label class="font-weight-bold">Category</label>
                 <div class="form-label-group">
                     <select class="form-control" #category>
-                        <option>Fruits</option>
-                        <option>Vegetables</option>
-                        <option>Meat and Surrogates</option>
-                        <option>Fats and Oils</option>
-                        <option>Bread and Cereals</option>
-                        <option>Liquids</option> 
+                        <option value="" selected disabled hidden>Select Category</option>
+                        <option *ngFor="let category of categories">{{category.name}}</option>
                     </select>
                 </div>
               </div>
@@ -42,6 +35,26 @@
           <div class="form-group">
               <label for="exampleFormControlTextarea1" class="font-weight-bold">Description</label>
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description></textarea>
+          </div>
+          <br>
+          <div class="form-group">
+            <label class="font-weight-bold">Providers</label>
+            <div *ngFor="let field of providerFields" class="row" style="padding-bottom: 2%">
+              <div class="col-md-6">
+                <select class="form-control chosen-select{{field}}" id="provider{{field}}">
+                    <option value="" selected disabled hidden>Select Provider</option>
+                    <option *ngFor="let provider of providers">{{provider.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                  <button *ngIf="lastField(field)" type="button"  class="btn btn-danger action" (click)="removeField(field)" > Remove</button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                  <button type="button"class="btn btn-success action" (click)="addProviderField()"><i class="far fa-plus-square"></i> Add Provider</button>
+              </div>
+            </div>
           </div>
           <br>
           <button class="btn btn-primary btn-block" type="submit">Create Product</button>

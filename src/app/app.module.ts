@@ -14,7 +14,6 @@ import { AppComponent } from './app.component';
 import { AddComponent } from './Components/add/add.component';
 import { GetComponent } from './Components/get/get.component';
 import { UpdateComponent } from './Components/update/update.component';
-
 import { HttpClientModule } from '@angular/common/http';
 
 import { UserService } from './user.service';
@@ -23,6 +22,7 @@ import { LoginComponent } from './Components/login/login.component';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 
 import {AuthGuard} from './Guards/auth.guard';
+import {AdminGuard} from './Guards/admin.guard';
 import { SidebarComponent } from './Components/sidebar/sidebar.component';
 import { ProductGetComponent } from './Components/product-get/product-get.component';
 import { ProductAddComponent } from './Components/product-add/product-add.component';
@@ -39,10 +39,12 @@ import { UnitUpdateComponent } from './Components/unit-update/unit-update.compon
 import { OrderGetComponent } from './Components/order-get/order-get.component';
 import { OrderAddComponent } from './Components/order-add/order-add.component';
 import { OrderUpdateComponent } from './Components/order-update/order-update.component';
-import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
 import { CategoriesAddComponent } from './Components/categories-add/categories-add.component';
+import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
 import { CategoriesUpdateComponent } from './Components/categories-update/categories-update.component';
-//import { CategoriesUpdateComponent } from './Components/categories-update/categories-update.component';
+import { RolGetComponent } from './Components/rol-get/rol-get.component';
+import { RolAddComponent } from './Components/rol-add/rol-add.component';
+import { PendingOrderGetComponent } from './Components/pending-order-get/pending-order-get.component';
 
 @NgModule({
   declarations: [
@@ -68,11 +70,12 @@ import { CategoriesUpdateComponent } from './Components/categories-update/catego
     OrderGetComponent,
     OrderAddComponent,
     OrderUpdateComponent,
-    CategoriesGetComponent,
-    //CategoriesUpdateComponent,
     CategoriesAddComponent,
-    CategoriesUpdateComponent
-
+    CategoriesGetComponent,
+    CategoriesUpdateComponent,
+    RolGetComponent,
+    RolAddComponent,
+    PendingOrderGetComponent
   ],
   imports: [
     CommonModule,
@@ -80,12 +83,12 @@ import { CategoriesUpdateComponent } from './Components/categories-update/catego
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
     ReactiveFormsModule,
     FlashMessagesModule.forRoot()
-
+    
   ],
-  providers: [UserService, AuthGuard,ProductService,CookieService],
+  providers: [UserService, AuthGuard,ProductService,CookieService, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

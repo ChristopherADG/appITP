@@ -2,7 +2,6 @@ import { Component, OnInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Product} from '../../Models/Product'
 import {ProductService} from '../../Services/product.service';
-import { CookieService } from 'ngx-cookie-service';
 declare var $;
 
 @Component({
@@ -12,22 +11,14 @@ declare var $;
 })
 export class ProductGetComponent implements OnInit {
 
-  constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef,  private cookieService: CookieService) { }
+  constructor(private productService: ProductService, private router: Router, private chRef: ChangeDetectorRef) { }
 
   products : Product[];
 
   dataTable: any;
 
   ngOnInit() {
-    if(this.getRole()!="Admin"){
-      this.router.navigate(['/orders']);
-    };
     this.fetchProducts();
-  }
-
-  getRole(){
-    const role = JSON.parse(this.cookieService.get('user')).role;
-    return role;
   }
 
   fetchProducts(){
@@ -35,16 +26,16 @@ export class ProductGetComponent implements OnInit {
     .subscribe((data: Product[])=>{
       this.products = data;
       this.chRef.detectChanges();
-
+      
       const table: any = $('table');
       this.dataTable = table.DataTable()
     })
-
-
+    
+    
   }
 
   editProduct(id){
-    this.router.navigate([`/editProduct/${id}`]);
+    this.router.navigate([`/editProduct/${id}`]); 
   }
 
   deleteProduct(id){
@@ -53,7 +44,7 @@ export class ProductGetComponent implements OnInit {
         this.fetchProducts();
       })
     }
-
+    
   }
 
 

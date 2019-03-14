@@ -1,0 +1,50 @@
+<br>
+<div class="card mb-3">
+  <div class="card-header">
+    <i class="fas fa-table"></i> Pending Orders Table</div>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id ="table" class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Dinning Room</th>
+            <th>Chef</th>
+            <th>Observations</th>
+            <th>Products</th>
+            <th *ngIf="hasPermition()">Actions</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th>Date</th>
+            <th>Dinning Room</th>
+            <th>Chef</th>
+            <th>Observations</th>
+            <th>Products</th>
+            <th *ngIf="hasPermition()">Actions</th>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr *ngFor="let order of orders" [ngSwitch]="order.status">
+            <td>{{order.date}}</td>
+            <td>{{order.dinningRoom.name}}</td>
+            <td>{{order.user.name}} {{order.user.last_name}}</td>
+            <td>{{order.description}}</td>
+            <td>
+              <div *ngFor="let product of order.products">
+                  <p>{{product.quantity}} | {{product.product.name}} | {{product.unit.name}} || {{product.provider.name}}</p>
+                  <hr>
+              </div>
+            </td>
+            <td *ngIf="hasPermition()">
+              <button type="button" class="btn btn-success action" (click)="approveOrder(order._id)"><i class="fas fa-check"></i></button>
+              <button type="button" class="btn btn-danger action" (click)="denyOrder(order._id)"><i class="fas fa-times"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted"></div>
+</div>

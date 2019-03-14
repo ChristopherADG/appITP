@@ -2,7 +2,7 @@ import { Component, OnInit,ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {Order} from '../../Models/Order'
 import {OrderService} from '../../Services/order.service';
-import { CookieService } from 'ngx-cookie-service';
+import {AuthService} from '../../Services/auth.service'
 declare var $;
 
 @Component({
@@ -16,7 +16,9 @@ export class OrderGetComponent implements OnInit {
 
   dataTable: any;
 
-  constructor(private orderService: OrderService, private router: Router, private chRef: ChangeDetectorRef,  private cookieService: CookieService) { }
+  constructor(private orderService: OrderService,
+    private router: Router, private chRef: ChangeDetectorRef,
+    private authService: AuthService) { }
 
   ngOnInit() {
     this.fetchOrders();
@@ -31,8 +33,10 @@ export class OrderGetComponent implements OnInit {
       const table: any = $('table');
       this.dataTable = table.DataTable()
     })
+  }
 
-
+  hasPermition(){
+    return this.authService.getRole() == 'Admin' || this.authService.getRole() == 'CEDIS'
   }
 
   editOrder(id){

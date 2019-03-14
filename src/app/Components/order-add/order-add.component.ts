@@ -6,6 +6,7 @@ import {DinningRoom} from '../../Models/DinningRoom'
 import {OrderService} from '../../Services/order.service'
 import {Router} from '@angular/router'
 import {CookieService} from 'ngx-cookie-service'
+declare var $;
 
 @Component({
   selector: 'app-order-add',
@@ -14,19 +15,21 @@ import {CookieService} from 'ngx-cookie-service'
 })
 export class OrderAddComponent implements OnInit {
 
-  fields = []
-  cont = 0
-  products: Product[];
+
+  categoryFields = []
+  fields = [[]]
+  categoryCont = 1;
+  fieldsCont= 1;
+  categoryProducts : any = [[]]
   availableDinningRooms : DinningRoom[]
-  availableUnits = []
-  //Todas las unidades de los productos en arreglo
+  categories = []
 
   constructor(private productService: ProductService, private chRef: ChangeDetectorRef
    ,private dinningRoomService: DinningRoomService, private orderService: OrderService,
    private router: Router, private cookieService: CookieService) {
 
   }
-
+  //DONE
   getDinningRooms(){
     let user = JSON.parse(this.cookieService.get('user')) ;
     if(user.role == "Admin"){
@@ -42,46 +45,94 @@ export class OrderAddComponent implements OnInit {
     }
   }
 
-  getAvailableUnits(){
-    for (let index = 0; index < this.products.length; index++) {
-      this.availableUnits.push(this.products[index].unit)
-    }
-  }
-
-  getUnits(id){
-    var select = document.getElementById("select"+id) as HTMLSelectElement;
-    var product = document.getElementById("product"+id) as HTMLSelectElement;
-    //Limpiar el select
-    while(select.options.length>0){
-      select.options.remove(select.options.length-1)
-    }
-    this.availableUnits[product.selectedIndex-1].forEach(unit => {
-      select.options.add(new Option(unit.name,unit.id))
-    });
-    this.chRef.detectChanges();
-  }
-
+  //NO SE TOCA
   ngOnInit() {
-    this.getProducts();
     this.getDinningRooms()
-
+    this.getCategories();
   }
-
-  getProducts(){
-    this.productService.getProducts()
-    .subscribe((data: Product[])=>{
-      this.products = data;
-      this.cont++;
-      this.fields.push(this.cont)
-      this.chRef.detectChanges();
-      this.getAvailableUnits()
+  getCategories(){
+    this.productService.getCategory().subscribe((data:any[]) =>{
+      for (let index = 0; index < data.length; index++) {
+        this.categories.push(data[index].name)
+      }
+      for (let index = 1; index <= this.categories.length; index++) {
+        this.categoryFields.push(index)
+        this.categoryProducts.push([])
+        this.fields.push([])
+        this.chRef.detectChanges();
+        var category = document.getElementById("category"+index) as HTMLHeadElement;
+        category.innerText = this.categories[index-1]
+        // category.options.add(new Option(this.categories[index-1]))
+        this.getProductsByCategory(this.categories[index-1],index)
+      }
     })
   }
 
-  addField(){
-    this.cont++;
-    let temp = Array.of(this.cont)
-    this.fields = this.fields.concat(temp)
+  titleShow(categoryField){
+    return this.fields[categoryField-1].length > 0
+  }
+
+  //DONE
+  getUnits(categoryField, field){
+    var select = document.getElementById("select"+field) as HTMLSelectElement;
+    select.disabled =false;
+    var provider = document.getElementById("provider"+field) as HTMLSelectElement;
+    provider.disabled =false;
+    var product = document.getElementById("product"+field) as HTMLSelectElement;
+    //Limpiar el select
+    while(select.options.length>1){
+      select.options.remove(select.options.length-1)
+    }
+    //Limpiar el provider
+    while(provider.options.length>1){
+      provider.options.remove(provider.options.length-1)
+    }
+    this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1].unit.forEach(unit => {
+      select.options.add(new Option(unit.name))
+    });
+    //console.log(this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1])
+    this.categoryProducts[this.categoryFields.indexOf(categoryField)][product.selectedIndex-1].providers.forEach(providerArr => {
+      provider.options.add(new Option(providerArr.name))
+    });
+
+    this.chRef.detectChanges();
+  }
+  //DONE
+  getProductsByCategory(name, categoryField){
+    this.categoryProducts[this.categoryFields.indexOf(categoryField)] = []
+    this.productService.getProductByCategory(name).subscribe((data:Product[])=>{
+      this.categoryProducts[this.categoryFields.indexOf(categoryField)]= data;
+      //console.log(this.categoryProducts[this.categoryFields.indexOf(categoryField)])
+      this.chRef.detectChanges();
+    })
+  }
+
+  //USER INFERFACE
+  //DONE
+  addField(categoryField){
+    this.fieldsCont++;
+    this.fields[this.categoryFields.indexOf(categoryField)].push(this.fieldsCont);
+    this.chRef.detectChanges();
+  }
+  //DONE
+  lastItem(categoryField){
+    return  this.fields[this.categoryFields.indexOf(categoryField)].length > 0 
+  }
+  //DONE
+  removeField(categoryField, field){
+    let categoryIndex = this.categoryFields.indexOf(categoryField)
+    let fieldIndex = this.fields.indexOf(field)
+    this.fields[categoryIndex].splice(fieldIndex, 1);
+  }
+  //DONE
+  greaterThanProductsForCategory(categoryField){
+    //console.log(this.fields[this.categoryFields.indexOf(categoryField)])
+    return this.fields[this.categoryFields.indexOf(categoryField)].length >= 
+              this.categoryProducts[this.categoryFields.indexOf(categoryField)].length
+  }
+  //DONE
+  greaterThanCategory(){
+    return  this.categoryFields.length >= this.categories.length
   }
 
   addOrder(dinningRoom,description,products){
@@ -90,45 +141,43 @@ export class OrderAddComponent implements OnInit {
       id : selectedDR._id,
       name: selectedDR.name
     }
+    //console.log(products)
     this.orderService.addOrder(temp,description,products,0).subscribe(()=>{
       this.router.navigate(['/orders']);
     })
   }
-
+    
   getFieldsInfo(){
     let arr = []
-    this.fields.forEach(field => {
-      var select = document.getElementById("select"+field) as HTMLSelectElement;
-      var number = document.getElementById("number"+field) as HTMLInputElement;
-      var product = document.getElementById("product"+field) as HTMLSelectElement;
+    this.categoryFields.forEach(category =>{
+      this.fields[this.categoryFields.indexOf(category)].forEach(field=>{
+        var select = document.getElementById("select"+field) as HTMLSelectElement;
+        var number = document.getElementById("number"+field) as HTMLInputElement;
+        var product = document.getElementById("product"+field) as HTMLSelectElement;
+        var provider = document.getElementById("provider"+field) as HTMLSelectElement;
 
+        let tempProduct = this.categoryProducts[this.categoryFields.indexOf(category)][product.selectedIndex-1]
+        let tempUnit = tempProduct.unit[select.selectedIndex-1]
+        let tempProvider =  tempProduct.providers[provider.selectedIndex-1]
 
-      let tempProduct = this.products[product.selectedIndex-1]
-      let tempUnit = tempProduct.unit[select.selectedIndex]
-      let temp = {
-        quantity: number.value,
-        product: {
-          id: tempProduct._id,
-          name: tempProduct.name,
-          category: tempProduct.category,
-          description: tempProduct.description
-        },
-        unit: tempUnit
-      }
-      arr.push(temp)
-    });
-
+        let temp = {
+          quantity: number.value,
+          product: {
+            id: tempProduct._id,
+            name: tempProduct.name,
+            category: tempProduct.category,
+            description: tempProduct.description
+          },
+          unit: tempUnit,
+          provider: tempProvider
+        }
+        arr.push(temp)
+      })
+    })
     return arr
   }
+  
 
-  removeField(id){
-    let index = this.fields.indexOf(id)
-    this.fields.splice(index, 1);
-  }
-
-  lastItem(){
-    return  this.fields.length > 1 ? true : false
-  }
 
 
 }

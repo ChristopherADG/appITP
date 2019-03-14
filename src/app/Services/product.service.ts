@@ -44,6 +44,70 @@ export class ProductService {
     return this.http.get(`${this.uri}/units/delete/${id}`,{headers: header});
   }
 
+
+  getProducts(){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/products`,{headers: header});
+  }
+
+  addProduct(name,unit,category, description, providers){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    const product = {
+      name: name,
+      unity: unit,
+      category: category,
+      description: description,
+      providers: providers
+    }
+    return this.http.post(`${this.uri}/products/add`, product,{headers: header});
+  }
+
+  getProductById(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/products/${id}`,{headers: header});
+  }
+
+  getProductByCategory(category){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/products/category/${category}`,{headers: header});
+  }
+
+
+  updateProduct(id,name,unit,category, description,providers){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    const product = {
+      name: name,
+      unity: unit,
+      category: category,
+      description: description,
+      providers: providers
+    }
+    return this.http.post(`${this.uri}/products/update/${id}`, product,{headers: header});
+  }
+
+  deleteProduct(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/products/delete/${id}`,{headers: header});
+  }
+
   getCategory(){
     this.loadToken();
     let header = new HttpHeaders({
@@ -57,7 +121,7 @@ export class ProductService {
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    const unit = {
+    const unit = {
       name: name
     }
     return this.http.post(`${this.uri}/categories/add`, unit,{headers: header});
@@ -69,59 +133,5 @@ export class ProductService {
       'Authorization': this.authToken
     });
     return this.http.get(`${this.uri}/categories/delete/${id}`,{headers: header});
-  }
-
-
-  getProducts(){
-    this.loadToken();
-    let header = new HttpHeaders({
-      'Authorization': this.authToken
-    });
-    return this.http.get(`${this.uri}/products`,{headers: header});
-  }
-
-  addProduct(name,unit,category, description){
-    this.loadToken();
-    let header = new HttpHeaders({
-      'Authorization': this.authToken
-    });
-    const product = {
-      name: name,
-      unity: unit,
-      category: category,
-      description: description
-    }
-    return this.http.post(`${this.uri}/products/add`, product,{headers: header});
-  }
-
-  getProductById(id){
-    this.loadToken();
-    let header = new HttpHeaders({
-      'Authorization': this.authToken
-    });
-    return this.http.get(`${this.uri}/products/${id}`,{headers: header});
-  }
-
-
-  updateProduct(id,name,unit,category, description){
-    this.loadToken();
-    let header = new HttpHeaders({
-      'Authorization': this.authToken
-    });
-    const product = {
-      name: name,
-      unity: unit,
-      category: category,
-      description: description
-    }
-    return this.http.post(`${this.uri}/products/update/${id}`, product,{headers: header});
-  }
-
-  deleteProduct(id){
-    this.loadToken();
-    let header = new HttpHeaders({
-      'Authorization': this.authToken
-    });
-    return this.http.get(`${this.uri}/products/delete/${id}`,{headers: header});
   }
 }

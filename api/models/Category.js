@@ -1,5 +1,5 @@
 const mongoose = require('mongoose'),
-        config = require('../config/database');
+config = require('../config/database');
 
 const Schema = mongoose.Schema;
 

@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UnitGetComponent } from './categories-get.component';
+import { CategoriesGetComponent } from './categories-get.component';
 
 describe('CategoriesGetComponent', () => {
   let component: CategoriesGetComponent;
-  let fixture: ComponentFixture<UnitGetComponent>;
+  let fixture: ComponentFixture<CategoriesGetComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

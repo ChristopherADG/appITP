@@ -24,7 +24,6 @@ const units = require('./routes/units');
 const roles = require('./routes/roles');
 const categories = require('./routes/categories');
 
-
 app.use(cors());
 
 app.use(bodyParser.json());

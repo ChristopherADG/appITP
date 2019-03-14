@@ -42,7 +42,7 @@ routerProtected.route('/:id').get((req, res)=>{
 
 //Add User
 routerProtected.route('/add').post((req, res)=>{
-
+    
     bcrypt.genSalt(10, (err, salt)=>{
         bcrypt.hash(req.body.password,salt, (err, hash)=>{
             if(err){
@@ -65,7 +65,7 @@ routerProtected.route('/add').post((req, res)=>{
         })
     })
 
-
+    
 });
 
 //Update User
@@ -94,9 +94,9 @@ routerProtected.route('/update/:id').post((req, res)=>{
                         });
                 })
             })
-
-
-
+            
+            
+            
         }
     })
 });
@@ -121,19 +121,19 @@ router.route('/login').post((req, res)=>{
             throw err;
         }
         if(!user){
-
+            
             res.json({success: false, msg: 'Invalid email or password'});
         }else{
             User.comparePassword(password, user.password, (err, isMatch)=>{
                 if(err){
                     throw err;
                 }
-
+    
                 if(isMatch){
                     const token = jwt.sign(user.toJSON(), config.secret, {
                         expiresIn: 14400 //4 hours
                     });
-
+    
                     res.json({
                         success: true,
                         token: 'JWT ' + token,

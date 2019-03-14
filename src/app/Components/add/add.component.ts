@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 //import {FormGroup, FormBuilder, Validators} from '@angular/forms'
 import {Router} from '@angular/router'
 import {UserService} from '../../user.service';
-import { CookieService } from 'ngx-cookie-service';
+import {Rol} from '../../Models/Rol'
 //import User from '../User';
 
 @Component({
@@ -12,20 +12,22 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AddComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router,  private cookieService: CookieService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
-    if(this.getRole()!="Admin"){
-      this.router.navigate(['/orders']);
-    }
+    this.fetchRoles()
   }
 
-  getRole(){
-    const role = JSON.parse(this.cookieService.get('user')).role;
-    return role;
+  roles: Rol[]
+
+  fetchRoles(){
+    this.userService.getRole().subscribe((data: Rol[])=>{
+      this.roles = data;
+      console.log(this.roles)
+    })
   }
-  
+
   addUser(name, last_name, email, password, role){
     this.userService.addUser(name,last_name,email,password ,role)
       .subscribe(()=>{

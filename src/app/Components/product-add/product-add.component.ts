@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router'
 import {Unit} from '../../Models/Unit';
 import {ProductService} from '../../Services/product.service';
-import { CookieService } from 'ngx-cookie-service';
-
+import {Category} from '../../Models/Category';
+import {ProviderService} from '../../Services/provider.service'
+import {Provider} from '../../Models/Provider'
+declare var $;
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
@@ -11,26 +13,58 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ProductAddComponent implements OnInit {
 
-  constructor(private productService: ProductService, private router: Router,  private cookieService: CookieService) { }
+  constructor(private productService: ProductService, private router: Router,
+    private providerService: ProviderService, private chDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
-    if(this.getRole()!="Admin"){
-      this.router.navigate(['/orders']);
-    }
     this.getUnits();
+    this.getCategories();
+    this.getProviders();
   }
+  providersCont=1;
+  providerFields = [1]
   units : Unit[];
+  categories : Category[];
+  providers : Provider[];
 
-  getRole(){
-    const role = JSON.parse(this.cookieService.get('user')).role;
-    return role;
+  getCategories(){
+    this.productService.getCategory()
+    .subscribe((data: Category[])=>{
+      this.categories = data
+      //console.log(this.categories)
+    })
   }
-  
+
+  getProviders(){
+    this.providerService.getProvider()
+    .subscribe((data: Provider[])=>{
+      this.providers = data
+      this.chDetector.detectChanges();
+      $(".chosen-select"+this.providersCont).chosen()
+    })
+  }
+
+  addProviderField(){
+    this.providersCont++;
+    this.providerFields.push(this.providersCont);
+    this.chDetector.detectChanges();
+    $(".chosen-select"+this.providersCont).chosen()
+  }
+
+  lastField(field){
+    return  this.providerFields.length > 1  
+  }
+
+  removeField(field){
+    let fieldIndex = this.providerFields.indexOf(field)
+    this.providerFields.splice(fieldIndex, 1);
+  }
+
   getUnits(){
     this.productService.getUnits()
     .subscribe((data: Unit[])=>{
       this.units = data;
-      console.log(this.units)
+      //console.log(this.units)
     })
   }
 
@@ -43,15 +77,24 @@ export class ProductAddComponent implements OnInit {
           id: temp.value,
           name: this.units[index].name.toString()
         }
-        console.log(tempUnit)
+        //console.log(tempUnit)
         arr.push(tempUnit)
       }
     }
     return arr;
   }
+  getProvidersInfo(){
+    let arr = []
+    this.providerFields.forEach(providerId => {
+      var providerSelect = document.getElementById("provider"+providerId) as HTMLSelectElement;
+      arr.push(this.providers[providerSelect.selectedIndex-1])
+    });
+    return arr;
+  }
 
   addProduct(name, unit, category, description){
-    this.productService.addProduct(name,unit,category, description)
+    let providers = this.getProvidersInfo()
+    this.productService.addProduct(name,unit,category, description, providers)
       .subscribe(()=>{
         this.router.navigate(['/products']);
       })

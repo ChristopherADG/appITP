@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../Services/auth.service'
 import { Router} from '@angular/router'
-import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,13 +9,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router,  private cookieService: CookieService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.getRole();
   }
-  getRole(){
-    const role = JSON.parse(this.cookieService.get('user')).role;
-    return role;
-  }
+  
 }
