@@ -11,10 +11,13 @@ declare var $;
 @Component({
   selector: 'app-order-add',
   templateUrl: './order-add.component.html',
-  styleUrls: ['./order-add.component.css']
+  styleUrls: ['./order-add.component.css'],
+  
 })
 export class OrderAddComponent implements OnInit {
 
+  //HORA
+  now:String;
 
   categoryFields = []
   fields = [[]]
@@ -27,7 +30,6 @@ export class OrderAddComponent implements OnInit {
   constructor(private productService: ProductService, private chRef: ChangeDetectorRef
    ,private dinningRoomService: DinningRoomService, private orderService: OrderService,
    private router: Router, private cookieService: CookieService) {
-
   }
   //DONE
   getDinningRooms(){
@@ -49,7 +51,18 @@ export class OrderAddComponent implements OnInit {
   ngOnInit() {
     this.getDinningRooms()
     this.getCategories();
+    this.getDate();
   }
+
+
+getDate(){
+  this.now=Date();
+  setInterval(() => {
+    this.now = Date();
+  }, 10000);
+  //return this.now;
+}
+
   getCategories(){
     this.productService.getCategory().subscribe((data:any[]) =>{
       for (let index = 0; index < data.length; index++) {
