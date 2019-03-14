@@ -1,0 +1,17 @@
+.espacio{
+    padding-left:10% !important; 
+    padding-right:10% !important;
+}
+.fecha{
+    text-align: right;
+}
+@media only screen and (max-width: 767px) {
+    .espacio{
+        padding-left:0% !important; 
+        padding-right:0% !important;
+    }
+    .fecha{
+        text-align: left;
+        padding-top: 4%;
+    }
+}
