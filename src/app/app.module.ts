@@ -46,6 +46,9 @@ import { RolGetComponent } from './Components/rol-get/rol-get.component';
 import { RolAddComponent } from './Components/rol-add/rol-add.component';
 import { PendingOrderGetComponent } from './Components/pending-order-get/pending-order-get.component';
 import { OrderDetailComponent } from './Components/order-detail/order-detail.component';
+import { TruckAddComponent } from './Components/truck-add/truck-add.component';
+import { TruckGetComponent } from './Components/truck-get/truck-get.component';
+import { TruckUpdateComponent } from './Components/truck-update/truck-update.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +80,10 @@ import { OrderDetailComponent } from './Components/order-detail/order-detail.com
     RolGetComponent,
     RolAddComponent,
     PendingOrderGetComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    TruckAddComponent,
+    TruckGetComponent,
+    TruckUpdateComponent
   ],
   imports: [
     CommonModule,

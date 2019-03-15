@@ -1,3 +1,101 @@
-<p>
-  order-update works!
-</p>
+<div class="container">
+    <div class="card mx-auto mt-5">
+      <div class="card-header">Create Order</div>
+      <div class="card-body">
+        <form action="javascript:void(0); " (submit)="addOrder(dinningRoom,description.value,getFieldsInfo())">
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col col-md-3">
+                  <label>Date</label>
+                  <p id="date"></p>
+              </div>
+              
+              <div class="col col-md-3">
+                  <label>Time</label>
+                  <p id="time"></p>
+              </div>
+              <div class="col-md-3">
+                <label>Dinning Room</label>
+                <p id="dinningRoom"></p>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="observations">Observations</label>
+              <div class="card">
+                <div class="card-body">
+                    <p id="observations"></p>
+                </div>
+              </div>
+          </div>
+          <hr>
+          <div class="form-group" *ngFor="let categoryField of categoryFields">
+            <div class="form-row">
+              <div class="col-md-3">
+                  <h5 id="category{{categoryField}}">Category</h5>
+              </div>
+            </div>
+            <br>
+            
+            <div class="row" *ngIf="titleShow(categoryField)">
+              <div class="col-md-2"><label>Product</label></div>
+              <div class="col-md-2"><label>Unit</label></div>
+              <div class="col-md-2"><label>Quantity</label></div>
+              <div class="col-md-3"><label>Provider</label></div>
+              <div class="col-md-2"><label style="color: transparent !important">TransparentTransparent</label></div>
+            </div>
+            <div class="row fieldRow" *ngFor="let field of fields[categoryField-1]">
+                <div class="col-12 col-md-2 field">
+                    <label *ngIf="isMobile()">Product</label>
+                    <select required class="form-control chosen-select{{field}}" id="product{{field}}" (change)="getUnits(categoryField,field)" style="width: 100%" #product>
+                        <option value="" selected disabled hidden>Select Product</option>
+                        <option *ngFor="let product of categoryProducts[categoryField-1]">{{product.name}}</option>
+                    </select>
+                </div>
+                <div class="col-8 col-md-2 field">
+                    <label *ngIf="isMobile()">Unit</label>
+                    <select disabled required class="form-control" id=select{{field}}>
+                        <option value="" selected disabled hidden>Select Unit</option>
+                    </select>
+                </div>
+                <div class="col-4 col-md-2 field">
+                    <label *ngIf="isMobile()">Quantity</label>
+                    <input class="form-control" min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 100% !important">
+                </div>
+                <div class="col-9 col-md-3 field">
+                    <label *ngIf="isMobile()">Provider</label>
+                    <select disabled required class="form-control" id=provider{{field}}>
+                        <option value="" selected disabled hidden>Select Provider</option>
+                    </select>
+                </div>
+                <div class="col-2 col-md-2 field">
+                  <label *ngIf="isMobile()" style="color: transparent !important">TransparentTransparent</label>
+                  <button type="button"  class="btn btn-danger" (click)="removeField(categoryField,field)" ><i class="far fa-trash-alt"></i></button>
+                  <button hidden type="button" id="helper{{field}}"(click)="getUnits(categoryField,field)"></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button"class="btn btn-success action" (click)="addField(categoryField)" ><i class="far fa-plus-square"></i></button>
+                </div>
+              </div>
+          <hr>
+          </div>
+          <br>
+          <label>Approve / Deny Observations</label>
+          <div class="card">
+            
+            <textarea class="form-control" id="approveObservations" rows="2" required></textarea>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12 col-sm-12 offset-md-4 col-md-4" style="text-align: center">
+                <button type="button" class="btn btn-success" (click)="approveOrder()"><i class="fas fa-check"></i> Approve</button>
+            </div>
+          </div>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" (click)="backDetaild()">Back</button>
+      </div>
+    </div>
+  </div>

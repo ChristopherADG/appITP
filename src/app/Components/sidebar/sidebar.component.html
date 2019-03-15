@@ -26,6 +26,8 @@
         <div class="dropdown-divider"></div>
         <h6 class="dropdown-header">Dinning Rooms:</h6>
         <a class="dropdown-item" routerLink="dinningRooms">Dinning Rooms Table</a>
+        <h6 class="dropdown-header">Trucks:</h6>
+        <a class="dropdown-item" routerLink="trucks">Trucks Table</a>
       </div>
   </li>
   <li *ngIf="authService.getRole() == 'Admin' || authService.getRole() == 'Chef'" class="nav-item">

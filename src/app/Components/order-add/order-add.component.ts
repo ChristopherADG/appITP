@@ -50,7 +50,6 @@ export class OrderAddComponent implements OnInit {
 
   //NO SE TOCA
   ngOnInit() {
-    console.log($(window).width())
     this.getDinningRooms()
     this.getCategories();
     let date = new Date();
@@ -105,9 +104,6 @@ export class OrderAddComponent implements OnInit {
     this.chRef.detectChanges();
   }
 
-  test(){
-    console.log("hola")
-  }
   //DONE
   getProductsByCategory(name, categoryField){
     this.categoryProducts[this.categoryFields.indexOf(categoryField)] = []
@@ -153,8 +149,11 @@ export class OrderAddComponent implements OnInit {
 
   addOrder(dinningRoom,description,products){
     let selectedDR = this.availableDinningRooms[dinningRoom.selectedIndex]
-    //console.log(products)
-    this.orderService.addOrder(selectedDR,description,products,0).subscribe(()=>{
+    let tempDR = {
+      id: selectedDR._id,
+      name: selectedDR.name
+    }
+    this.orderService.addOrder(tempDR,description,products,0).subscribe(()=>{
       this.router.navigate(['/orders']);
     })
   }
@@ -177,11 +176,13 @@ export class OrderAddComponent implements OnInit {
           product: {
             id: tempProduct._id,
             name: tempProduct.name,
-            category: tempProduct.category,
-            description: tempProduct.description
+            category: tempProduct.category
           },
           unit: tempUnit,
-          provider: tempProvider
+          provider: {
+            id: tempProvider._id,
+            name: tempProvider.name
+          }
         }
         arr.push(temp)
       })

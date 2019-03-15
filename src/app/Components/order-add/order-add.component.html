@@ -39,8 +39,8 @@
             
             <div class="row" *ngIf="titleShow(categoryField)">
               <div class="col-md-2"><label>Product</label></div>
-              <div class="col-md-2"><label>Quantity</label></div>
               <div class="col-md-2"><label>Unit</label></div>
+              <div class="col-md-2"><label>Quantity</label></div>
               <div class="col-md-3"><label>Provider</label></div>
               <div class="col-md-2"><label style="color: transparent !important">TransparentTransparent</label></div>
             </div>
@@ -52,15 +52,15 @@
                         <option *ngFor="let product of categoryProducts[categoryField-1]">{{product.name}}</option>
                     </select>
                 </div>
-                <div class="col-4 col-md-2 field">
-                    <label *ngIf="isMobile()">Quantity</label>
-                    <input class="form-control" min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 100% !important">
-                </div>
                 <div class="col-8 col-md-2 field">
                     <label *ngIf="isMobile()">Unit</label>
                     <select disabled required class="form-control" id=select{{field}}>
                         <option value="" selected disabled hidden>Select Unit</option>
                     </select>
+                </div>
+                <div class="col-4 col-md-2 field">
+                    <label *ngIf="isMobile()">Quantity</label>
+                    <input class="form-control" min="0" oninput="this.value = Math.abs(this.value)" required type="number" id=number{{field}} placeholder="0" style="width: 100% !important">
                 </div>
                 <div class="col-9 col-md-3 field">
                     <label *ngIf="isMobile()">Provider</label>

@@ -30,26 +30,28 @@ export class OrderGetComponent implements OnInit {
     this.orderService.getOrders()
     .subscribe((data: Order[])=>{
       this.orders = [];
-      this.ordersApprove = [];
       this.ordersDeny = [];
 
       data.forEach(order => {
         if(order.status == '0'){
           this.orders.push(order)
-        }else if(order.status=='1'){
-          this.ordersApprove.push(order);
-        }else if(order.status == '-1'){
-          this.ordersDeny.push(order)
         }
       });
+      this.orderService.getApprovedOrdersByStaus(1).subscribe((data:[]) =>{
+        this.ordersApprove = data
+        this.chRef.detectChanges();
+        const table2: any = $('#table2');
+        table2.DataTable()
+      })
+      this.orderService.getApprovedOrdersByStaus(-1).subscribe((data:[]) =>{
+        this.ordersDeny = data
+        this.chRef.detectChanges();
+        const table3: any = $('#table3');
+        table3.DataTable()
+      })
       this.chRef.detectChanges();
-      
       const table: any = $('#table1');
       table.DataTable()
-      const table2: any = $('#table2');
-      table2.DataTable()
-      const table3: any = $('#table3');
-      table3.DataTable()
     })
   }
 
@@ -61,8 +63,8 @@ export class OrderGetComponent implements OnInit {
     this.router.navigate([`/editOrder/${id}`]); 
   }
   
-  detailOrder(id){
-    this.router.navigate([`/detailOrder/${id}`]); 
+  detailOrder(id, statusId){
+    this.router.navigate([`/detailOrder/${id}/${statusId}`]); 
   }
 
   deleteOrder(id){
