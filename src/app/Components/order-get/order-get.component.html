@@ -1,7 +1,7 @@
 <br>
 <div class="card mb-3">
   <div class="card-header">
-    <i class="fas fa-table"></i> Pending Orders Table</div>
+      <i class="far fa-clock"></i> Pending Orders Table</div>
   <div class="card-body">
     <div class="table-responsive">
       <table id ="table1" class="table table-bordered" width="100%" cellspacing="0">
@@ -41,7 +41,7 @@
 <br>
 <div class="card mb-3">
     <div class="card-header">
-      <i class="fas fa-table"></i> Accepted Orders Table</div>
+        <i class="fas fa-check"></i> Accepted Orders Table</div>
     <div class="card-body">
       <div class="table-responsive">
         <table id ="table2" class="table table-bordered" width="100%" cellspacing="0">
@@ -67,7 +67,7 @@
               <td >
                 <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
                 <button type="button" class="btn btn-info action" (click)="detailOrder(order._id, order.status)"><i class="fas fa-search-plus"></i></button>
-                <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+                <button *ngIf="authService.getRole() == 'Admin'" disabled type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
           </tbody>
@@ -79,7 +79,7 @@
 <br>
 <div class="card mb-3">
     <div class="card-header">
-      <i class="fas fa-table"></i> Rejected Orders Table</div>
+        <i class="fas fa-times"></i> Rejected Orders Table</div>
     <div class="card-body">
       <div class="table-responsive">
         <table id ="table3" class="table table-bordered" width="100%" cellspacing="0">
@@ -105,7 +105,7 @@
               <td *ngIf="hasPermition()">
                 <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
                 <button type="button" class="btn btn-info action" (click)="detailOrder(order._id, order.status)"><i class="fas fa-search-plus"></i></button>
-                <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+                <button *ngIf="authService.getRole() == 'Admin'" disabled type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
               </td>
             </tr>
           </tbody>

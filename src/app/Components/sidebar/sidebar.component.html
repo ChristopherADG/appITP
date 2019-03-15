@@ -42,10 +42,11 @@
           <span> Orders</span>
       </a>
   </li>
-  <li *ngIf="authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS'" class="nav-item">
+  
+  <!-- <li *ngIf="authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS'" class="nav-item">
       <a class="nav-link" routerLink="pendingOrders">
           <i class="far fa-clock"></i>
           <span> Pending Orders</span>
       </a>
-  </li>
+  </li> -->
 </ul>

@@ -27,7 +27,7 @@ export class OrderGetComponent implements OnInit {
   }
 
   fetchOrders(){
-    this.orderService.getOrders()
+    this.orderService.getOrdersByStatus(0)
     .subscribe((data: Order[])=>{
       this.orders = [];
       this.ordersDeny = [];
