@@ -102,7 +102,7 @@
               <td *ngSwitchCase="0">Creado</td>
               <td *ngSwitchCase="1">Aprobado</td>
               <td *ngSwitchCase="-1">Denegado</td>
-              <td *ngIf="hasPermition()">
+              <td>
                 <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
                 <button type="button" class="btn btn-info action" (click)="detailOrder(order._id, order.status)"><i class="fas fa-search-plus"></i></button>
                 <button *ngIf="authService.getRole() == 'Admin'" disabled type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
