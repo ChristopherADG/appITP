@@ -26,7 +26,8 @@
         <div class="dropdown-divider"></div>
         <h6 class="dropdown-header">Dinning Rooms:</h6>
         <a class="dropdown-item" routerLink="dinningRooms">Dinning Rooms Table</a>
-        <h6 class="dropdown-header">Trucks:</h6>
+        <h6 class="dropdown-header">Shippings:</h6>
+        <a class="dropdown-item" routerLink="shippings">Shippings Table</a>
         <a class="dropdown-item" routerLink="trucks">Trucks Table</a>
       </div>
   </li>
@@ -42,10 +43,11 @@
           <span> Orders</span>
       </a>
   </li>
-  <li *ngIf="authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS'" class="nav-item">
+
+  <!-- <li *ngIf="authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS'" class="nav-item">
       <a class="nav-link" routerLink="pendingOrders">
           <i class="far fa-clock"></i>
           <span> Pending Orders</span>
       </a>
-  </li>
+  </li> -->
 </ul>

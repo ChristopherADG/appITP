@@ -20,14 +20,16 @@ import { OrderAddComponent } from "./Components/order-add/order-add.component";
 import { OrderGetComponent} from './Components/order-get/order-get.component';
 import { CategoriesGetComponent } from './Components/categories-get/categories-get.component';
 import { CategoriesAddComponent } from "./Components/categories-add/categories-add.component";
-//import {OrderUpdateComponent} from './Components/order-update/order-update.component';
+import {OrderUpdateComponent} from './Components/order-update/order-update.component';
 import { RolGetComponent } from "./Components/rol-get/rol-get.component";
 import { RolAddComponent } from './Components/rol-add/rol-add.component';
-import {PendingOrderGetComponent} from "./Components/pending-order-get/pending-order-get.component"
-import {OrderDetailComponent} from "./Components/order-detail/order-detail.component"
+//import {PendingOrderGetComponent} from "./Components/pending-order-get/pending-order-get.component";
+import {OrderDetailComponent} from "./Components/order-detail/order-detail.component";
 import {TruckAddComponent} from "./Components/truck-add/truck-add.component"
 import {TruckGetComponent} from "./Components/truck-get/truck-get.component"
 import {TruckUpdateComponent} from "./Components/truck-update/truck-update.component"
+import {ShippingGetComponent} from "./Components/shipping-get/shipping-get.component"
+import {ShippingAddComponent} from "./Components/shipping-add/shipping-add.component"
 import {AuthGuard} from './Guards/auth.guard';
 import {AdminGuard} from './Guards/admin.guard';
 
@@ -54,17 +56,20 @@ const routes: Routes = [
   {path: 'createCategories', component: CategoriesAddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "createRol", component: RolAddComponent, canActivate: [AuthGuard, AdminGuard]},
   {path: "roles", component: RolGetComponent, canActivate: [AuthGuard, AdminGuard]},
-  {path: "pendingOrders", component: PendingOrderGetComponent, canActivate:[AuthGuard]},
-  {path: "detailOrder/:id", component: OrderDetailComponent, canActivate:[AuthGuard]},
+  {path: "detailOrder/:id/:statusId", component: OrderDetailComponent, canActivate:[AuthGuard]},
   {path: "trucks", component: TruckGetComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "createTruck", component: TruckAddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "editTruck/:id", component: TruckUpdateComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: "editOrder/:id", component: OrderUpdateComponent, canActivate:[AuthGuard]},
+  {path: "shippings", component: ShippingGetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: "createShipping", component: ShippingAddComponent, canActivate:[AuthGuard, AdminGuard]},
+
   {path: '', component: LoginComponent},
   {path: '**', component: LoginComponent}
 
 ];
 
-//{path: 'editOrder/:id', component: OrderUpdateComponent, canActivate:[AuthGuard]}
+//{path: "pendingOrders", component: PendingOrderGetComponent, canActivate:[AuthGuard]},
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

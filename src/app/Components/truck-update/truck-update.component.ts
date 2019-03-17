@@ -36,5 +36,4 @@ export class TruckUpdateComponent implements OnInit {
       this.router.navigate(['/trucks']);
     })
   }
-
 }

@@ -5,7 +5,7 @@ import {CookieService} from 'ngx-cookie-service'
 @Injectable({
   providedIn: 'root'
 })
-export class TruckService {
+export class ShippingService {
 
   uri = 'http://localhost:4000'
   authToken: any;
@@ -17,55 +17,53 @@ export class TruckService {
     this.authToken = token;
   }
 
-  getTruck(){
+  getShippings(){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    return this.http.get(`${this.uri}/trucks`,{headers: header});
+    return this.http.get(`${this.uri}/shippings`,{headers: header});
   }
 
-  addTruck(driverName,phone,licPlate,carrCapacity){
+  addShipping(driverName,products,destiny){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    const truck = {
+    const shipping = {
       driverName : driverName,
-      phone: phone,
-      licPlate: licPlate,
-      carrCapacity: carrCapacity
+      products: products,
+      destiny: destiny
     }
-    return this.http.post(`${this.uri}/trucks/add`, truck,{headers: header});
+    return this.http.post(`${this.uri}/shippings/add`, shipping,{headers: header});
   }
 
-  getTruckById(id){
+  getShippingById(id){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    return this.http.get(`${this.uri}/trucks/${id}`,{headers: header});
+    return this.http.get(`${this.uri}/shippings/${id}`,{headers: header});
   }
 
-  updateTruck(id, driverName,phone,licPlate,carrCapacity){
+  updateShipping(id, driverName,products,destiny){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    const truck = {
+    const shipping = {
       driverName : driverName,
-      phone: phone,
-      licPlate: licPlate,
-      carrCapacity: carrCapacity
+      products: products,
+      destiny: destiny
     }
-    return this.http.post(`${this.uri}/trucks/update/${id}`, truck,{headers: header});
+    return this.http.post(`${this.uri}/shippings/update/${id}`, shipping,{headers: header});
   }
 
-  deleteTruck(id){
+  deleteShipping(id){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    return this.http.get(`${this.uri}/trucks/delete/${id}`,{headers: header});
+    return this.http.get(`${this.uri}/shippings/delete/${id}`,{headers: header});
   }
 }

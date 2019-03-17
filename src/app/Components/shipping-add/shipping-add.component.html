@@ -1,32 +1,31 @@
 <div class="container">
     <div class="card mx-auto mt-5">
-      <div class="card-header">Create Order</div>
+      <div class="card-header">Create Shipping</div>
       <div class="card-body">
-        <form action="javascript:void(0); " (submit)="addOrder(dinningRoom,description.value,getFieldsInfo())">
+        <form action="javascript:void(0); " (submit)="addShipping(dinningRoom,driverName,getFieldsInfo())">
           <div class="form-group">
             <div class="form-row">
-              <div class="col col-md-3">
-                  <label>Date</label>
-                  <p id="date"></p>
-              </div>
-              
-              <div class="col col-md-3">
-                  <label>Time</label>
-                  <p id="time"></p>
+              <div class="col-md-3">
+                <label>Destiny</label>
+                <div class="form-label-group">
+                    <select  class="form-control" #dinningRoom required>
+                      <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom.dinningRoom}}</option>
+                    </select>
+                </div>
               </div>
               <div class="col-md-3">
-                <label>Dinning Room</label>
-                <p id="dinningRoom"></p>
+                <label>Driver</label>
+                <div class="form-label-group">
+                    <select  class="form-control" #dinningRoom required>
+                      <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom.dinningRoom}}</option>
+                    </select>
+                </div>
               </div>
             </div>
           </div>
           <div class="form-group">
-              <label for="observations">Observations</label>
-              <div class="card">
-                <div class="card-body">
-                    <p id="observations"></p>
-                </div>
-              </div>
+              <label for="exampleFormControlTextarea1">Observations</label>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description required></textarea>
           </div>
           <hr>
           <div class="form-group" *ngFor="let categoryField of categoryFields">
@@ -36,7 +35,7 @@
               </div>
             </div>
             <br>
-            
+
             <div class="row" *ngIf="titleShow(categoryField)">
               <div class="col-md-2"><label>Product</label></div>
               <div class="col-md-2"><label>Unit</label></div>
@@ -82,20 +81,14 @@
           <hr>
           </div>
           <br>
-          <label>Approve / Deny Observations</label>
-          <div class="card">
-            
-            <textarea class="form-control" id="approveObservations" rows="2" required></textarea>
-          </div>
-          <br>
           <div class="row">
-            <div class="col-12 col-sm-12 offset-md-4 col-md-4" style="text-align: center">
-                <button type="button" class="btn btn-success" (click)="approveOrder()"><i class="fas fa-check"></i> Approve</button>
+            <div class="col-12 col-sm-12 offset-md-3 col-md-6" style="text-align: center">
+                <button class="btn btn-primary btn-block" type="submit">Create Shipping</button>
             </div>
           </div>
         </form>
         <br>
-        <button type="button" class="btn btn-light" (click)="backDetaild()">Back</button>
+        <button type="button" class="btn btn-light" routerLink="/shippings">Back</button>
       </div>
     </div>
   </div>

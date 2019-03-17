@@ -49,6 +49,8 @@ import { OrderDetailComponent } from './Components/order-detail/order-detail.com
 import { TruckAddComponent } from './Components/truck-add/truck-add.component';
 import { TruckGetComponent } from './Components/truck-get/truck-get.component';
 import { TruckUpdateComponent } from './Components/truck-update/truck-update.component';
+import { ShippingGetComponent } from './Components/shipping-get/shipping-get.component';
+import { ShippingAddComponent } from './Components/shipping-add/shipping-add.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +85,9 @@ import { TruckUpdateComponent } from './Components/truck-update/truck-update.com
     OrderDetailComponent,
     TruckAddComponent,
     TruckGetComponent,
-    TruckUpdateComponent
+    TruckUpdateComponent,
+    ShippingGetComponent,
+    ShippingAddComponent
   ],
   imports: [
     CommonModule,

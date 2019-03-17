@@ -24,6 +24,7 @@ const units = require('./routes/units');
 const roles = require('./routes/roles');
 const categories = require('./routes/categories');
 const trucks = require('./routes/trucks');
+const shippings = require('./routes/shippings');
 
 app.use(cors());
 
@@ -44,6 +45,7 @@ app.use('/units', passport.authenticate('jwt', {session:false}), units.protected
 app.use('/roles', passport.authenticate('jwt', {session:false}), roles.protected)
 app.use('/categories', passport.authenticate('jwt', {session:false}), categories.protected)
 app.use('/trucks', passport.authenticate('jwt', {session:false}), trucks.protected)
+app.use('/shippings', passport.authenticate('jwt', {session:false}), shippings.protected)
 
 
 app.get('/', (req,res)=>{

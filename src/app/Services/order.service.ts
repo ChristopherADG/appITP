@@ -25,6 +25,14 @@ export class OrderService {
     return this.http.get(`${this.uri}/orders`,{headers: header});
   }
 
+  getApprovedOrdersByStaus(statusId){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/orders/approvedOrders/status/${statusId}`,{headers: header});
+  }
+
   getUser(){
     return JSON.parse(this.cookieService.get('user'));
   } 
@@ -44,20 +52,45 @@ export class OrderService {
     return this.http.post(`${this.uri}/orders/add`, order,{headers: header});
   }
 
-  approveOrder(id){
+  approveOrder(orderPre,products,original,approveObservations){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    return this.http.post(`${this.uri}/orders/approve/${id}`,null,{headers: header});
+    const order = {
+      date: orderPre.date,
+      time: orderPre.time,
+      user: orderPre.user,
+      dinningRoom: orderPre.dinningRoom,
+      description: orderPre.description,
+      products: products,
+      status: 1,
+      original: original,
+      approveObservations: approveObservations,
+      approveUser: this.getUser()
+    }
+    return this.http.post(`${this.uri}/orders/approve`,order,{headers: header});
   }
 
-  denyOrder(id){
+  denyOrder(orderPre, original, denyObservations){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    return this.http.post(`${this.uri}/orders/deny/${id}`,null,{headers: header});
+    const order = {
+      date: orderPre.date,
+      time: orderPre.time,
+      user: orderPre.user,
+      dinningRoom: orderPre.dinningRoom,
+      description: orderPre.description,
+      products: orderPre.products,
+      status: -1,
+      original: original,
+      approveObservations: denyObservations,
+      approveUser: this.getUser()
+      
+    }
+    return this.http.post(`${this.uri}/orders/deny`,order,{headers: header});
   }
 
   getOrderById(id){
@@ -67,6 +100,15 @@ export class OrderService {
     });
     return this.http.get(`${this.uri}/orders/${id}`,{headers: header});
   }
+
+  getApproveOrderById(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/orders/approvedOrders/${id}`,{headers: header});
+  }
+
   getOrdersByStatus(status){
     //console.log(status)
     this.loadToken();

@@ -50,7 +50,6 @@ export class OrderAddComponent implements OnInit {
 
   //NO SE TOCA
   ngOnInit() {
-    console.log($(window).width())
     this.getDinningRooms()
     this.getCategories();
     let date = new Date();
@@ -105,9 +104,6 @@ export class OrderAddComponent implements OnInit {
     this.chRef.detectChanges();
   }
 
-  test(){
-    console.log("hola")
-  }
   //DONE
   getProductsByCategory(name, categoryField){
     this.categoryProducts[this.categoryFields.indexOf(categoryField)] = []
@@ -123,7 +119,7 @@ export class OrderAddComponent implements OnInit {
   addField(categoryField){
     this.fieldsCont++;
     this.fields[this.categoryFields.indexOf(categoryField)].push(this.fieldsCont);
-    this.chRef.detectChanges(); 
+    this.chRef.detectChanges();
     let a = $('.chosen-select'+this.fieldsCont)
     a.select2();
     a.on('select2:select', function (e) {
@@ -132,7 +128,7 @@ export class OrderAddComponent implements OnInit {
   }
   //DONE
   lastItem(categoryField){
-    return  this.fields[this.categoryFields.indexOf(categoryField)].length > 0 
+    return  this.fields[this.categoryFields.indexOf(categoryField)].length > 0
   }
   //DONE
   removeField(categoryField, field){
@@ -143,7 +139,7 @@ export class OrderAddComponent implements OnInit {
   //DONE
   greaterThanProductsForCategory(categoryField){
     //console.log(this.fields[this.categoryFields.indexOf(categoryField)])
-    return this.fields[this.categoryFields.indexOf(categoryField)].length >= 
+    return this.fields[this.categoryFields.indexOf(categoryField)].length >=
               this.categoryProducts[this.categoryFields.indexOf(categoryField)].length
   }
   //DONE
@@ -153,12 +149,15 @@ export class OrderAddComponent implements OnInit {
 
   addOrder(dinningRoom,description,products){
     let selectedDR = this.availableDinningRooms[dinningRoom.selectedIndex]
-    //console.log(products)
-    this.orderService.addOrder(selectedDR,description,products,0).subscribe(()=>{
+    let tempDR = {
+      id: selectedDR._id,
+      name: selectedDR.name
+    }
+    this.orderService.addOrder(tempDR,description,products,0).subscribe(()=>{
       this.router.navigate(['/orders']);
     })
   }
-    
+
   getFieldsInfo(){
     let arr = []
     this.categoryFields.forEach(category =>{
@@ -167,7 +166,7 @@ export class OrderAddComponent implements OnInit {
         var number = document.getElementById("number"+field) as HTMLInputElement;
         var product = document.getElementById("product"+field) as HTMLSelectElement;
         var provider = document.getElementById("provider"+field) as HTMLSelectElement;
-        
+
         let tempProduct = this.categoryProducts[this.categoryFields.indexOf(category)][product.selectedIndex-1]
         let tempUnit = tempProduct.unit[select.selectedIndex-1]
         let tempProvider =  tempProduct.providers[provider.selectedIndex-1]
@@ -177,18 +176,20 @@ export class OrderAddComponent implements OnInit {
           product: {
             id: tempProduct._id,
             name: tempProduct.name,
-            category: tempProduct.category,
-            description: tempProduct.description
+            category: tempProduct.category
           },
           unit: tempUnit,
-          provider: tempProvider
+          provider: {
+            id: tempProvider._id,
+            name: tempProvider.name
+          }
         }
         arr.push(temp)
       })
     })
     return arr
   }
-  
+
 
 
 

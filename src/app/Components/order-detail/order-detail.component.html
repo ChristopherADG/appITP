@@ -8,9 +8,9 @@
             <div class="col-12 col-md-4 fecha"  [ngSwitch]="order.status">
                 <h5 style="padding-bottom: 1%">Date: <span class="border" style="padding:1%" id="date">0000/00/00</span></h5>
                 <h5>Time: <span class="border" style="padding:1%" id="time">00:00:00</span></h5>
-                <h5 *ngSwitchCase="0">Status: <span class="border"  style="padding:1%" id="status">Creado</span></h5>
-                <h5 *ngSwitchCase="1">Status: <span class="border"  style="padding:1%" id="status">Aprobado</span></h5>
-                <h5 *ngSwitchCase="-1">Status: <span class="border"  style="padding:1%" id="status">Denegado</span></h5>
+                <h5 *ngSwitchCase="0">Status: <span class="border"  style="padding:1%; color: rgb(46, 46, 222)" id="status">Creado</span></h5>
+                <h5 *ngSwitchCase="1">Status: <span class="border"  style="padding:1%; color: green" id="status">Aprobado</span></h5>
+                <h5 *ngSwitchCase="-1">Status: <span class="border"  style="padding:1%; color: red" id="status">Denegado</span></h5>
             </div>
           </div>
       </div>
@@ -53,8 +53,8 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Product</th>
-                <th scope="col">Quantity</th>
                 <th scope="col">Unit</th>
+                <th scope="col">Quantity</th>
                 <th scope="col">Provider</th>
               </tr>
             </thead>
@@ -62,27 +62,73 @@
               <tr *ngFor="let product of order.products">
                 <th scope="row">{{order.products.indexOf(product)+1}}</th>
                 <td>{{product.product.name}}</td>
-                <td>{{product.quantity}}</td>
                 <td>{{product.unit.name}}</td>
+                <td>{{product.quantity}}</td>
                 <td>{{product.provider.name}}</td>
               </tr>
             </tbody>
           </table>
       </div>
-      <br><hr>
+      <br><hr><br>
+      <div *ngIf="(authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS') ||  order.status == '1' || order.status == '-1'" class="row">
+        <div *ngIf=" order.status == '1'" class="col-12 col-md-4">
+            <div  class="card">
+                <div class="card-header">Approved by</div>
+                <div class="card-body">
+                  <p id="approvedUser"></p>
+                  <p id="approvedUserMail"></p>
+                  <p id="approvedUserRol"></p>
+                </div>
+              </div>
+        </div>
+        <div *ngIf=" order.status == '-1'" class="col-12 col-md-4">
+            <div  class="card">
+                <div class="card-header">Denied by</div>
+                <div class="card-body">
+                  <p id="approvedUser"></p>
+                  <p id="approvedUserMail"></p>
+                  <p id="approvedUserRol"></p>
+                </div>
+              </div>
+        </div>
+        <div *ngIf=" order.status == '1'" class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-header">Approve Observations</div>
+                <div class="card-body">
+                  <p id="approveObservations"></p>
+                </div>
+              </div>
+        </div>
+        <div *ngIf="order.status == '-1'" class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-header">Deny Observations</div>
+                <div class="card-body">
+                  <p id="approveObservations"></p>
+                </div>
+              </div>
+        </div>
+        <div *ngIf=" order.status == '0'" class="col-12 col-md-12">
+            <div class="card">
+                <div class="card-header">Approve / Deny Observations</div>
+                <textarea class="form-control" id="approveObservations" rows="2" required></textarea>
+              </div>
+        </div>
+      </div>
+      <br *ngIf="(authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS')">
+      <hr *ngIf="(authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS')">
       <div *ngIf=" order.status == '0' && (authService.getRole() == 'Admin' || authService.getRole() == 'CEDIS')" class="row" style="text-align: center">
-        <div class="col-3">
-          <button type="button" class="btn btn-primary action" routerLink="/pendingOrders">Back</button>
+        <div class="col-4">
+            <button type="button" class="btn btn-info" (click)="editOrder(order._id)"><i class="far fa-edit"></i> Edit</button>
         </div>
-        <div class="col-3">
-            <button type="button" class="btn btn-info" disabled><i class="far fa-edit"></i> Edit</button>
+        <div class="col-4">
+            <button type="button" class="btn btn-success" (click)="approveOrder()"><i class="fas fa-check"></i> Approve</button>
         </div>
-        <div class="col-3">
-            <button type="button" class="btn btn-success" (click)="approveOrder(order._id)"><i class="fas fa-check"></i> Approve</button>
-        </div>
-        <div class="col-3">
+        <div class="col-4">
             <button type="button" class="btn btn-danger" (click)="denyOrder(order._id)"><i class="fas fa-times"></i> Deny</button>
         </div>
       </div>
+      <br>
+      <br>
+      <button type="button" class="btn btn-light" routerLink="/orders">Back</button>
     </div>
   </div>
