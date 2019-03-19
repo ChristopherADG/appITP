@@ -2,20 +2,23 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Create Category</div>
       <div class="card-body">
-        <form (submit)="addCategory(name.value)" action="javascript:void(0);">
+        <form (submit)="addCategory(name.value)" action="javascript:void(0);" [formGroup]="validatingForm">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">
                   <label></label>
                 <div class="form-label-group">
-                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
+                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name
+                  formControlName="categoryName">
+                  <div class="alert alert-danger" *ngIf="categoryName.invalid && (categoryName.dirty || categoryName.touched)">Category must be at least 3 letters long. Only letters allowed.</div>
                   <label for="name">Name</label>
                 </div>
               </div>
             </div>
           </div>
           <br>
-          <button class="btn btn-primary btn-block" type="submit">Create Category</button>
+          <button class="btn btn-primary btn-block" type="submit"
+          [disabled]= "!validatingForm.valid" >Create Category</button>
         </form>
         <br>
         <button type="button" class="btn btn-light" routerLink="/categories">Back</button>

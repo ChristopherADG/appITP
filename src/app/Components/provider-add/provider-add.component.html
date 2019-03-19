@@ -2,59 +2,76 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Create Provider</div>
       <div class="card-body">
-        <form action="javascript:void(0); " (submit)="addProvider(name.value,contact.value,phone.value,email.value,rfc.value,pc.value,street.value,number.value,ext_number.value,colony.value)">
+        <form action="javascript:void(0); " (submit)="addProvider(name.value,contact.value,phone.value,email.value,rfc.value,pc.value,street.value,number.value,ext_number.value,colony.value)"
+        [formGroup]="validatingForm">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
+                  <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name
+                  formControlName="name">
                   <label for="name">Name</label> 
+                  <div class="alert alert-danger" *ngIf="valid_name.invalid && (valid_name.touched)">Name must be at least 3 letters long</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="contact" class="form-control" placeholder="Contact" required="required" #contact>
+                  <input type="text" id="contact" class="form-control" placeholder="Contact" required="required" #contact
+                  formControlName="contact">
                   <label for="contact">Contact</label>
+                  <div class="alert alert-danger" *ngIf="valid_contact.invalid && (valid_contact.touched)">Contact is required</div>
                 </div>
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="phone" class="form-control" placeholder="+526141234567" required="required" #phone>
+              <input type="text" id="phone" class="form-control" placeholder="+526141234567" required="required" #phone
+              formControlName="phone">
               <label for="phone">Phone</label>
+              <div class="alert alert-danger" *ngIf="valid_phone.invalid && ( valid_phone.touched)">Introduce the 10 phone digits. Include the area code</div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email@example.com" required="required" #email>
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email@example.com" required="required" #email
+              formControlName="email">
               <label for="inputEmail">Email address</label>
+              <div class="alert alert-danger" *ngIf="valid_email.invalid && (valid_email.dirty || valid_email.touched)">Invalid Email</div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="rfc" class="form-control" placeholder="GEC8501014I5" required="required" #rfc>
+              <input type="text" id="rfc" class="form-control" placeholder="GEC8501014I5" required="required" #rfc
+              formControlName="rfc" >
               <label for="rfc">RFC</label>
+              <div class="alert alert-danger" *ngIf="valid_rfc.invalid && (valid_rfc.touched)">Invalid RFC. Example: JUMM420305PA9</div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-label-group">
-              <input type="text" id="street" class="form-control" placeholder="Pimentel" required="required" #street>
+              <input type="text" id="street" class="form-control" placeholder="Pimentel" required="required" #street
+              formControlName="street">
               <label for="street">Street</label>
+              <div class="alert alert-danger" *ngIf="valid_street.invalid && (valid_street.touched)">Invalid Street</div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="number" class="form-control" placeholder="B3" required="required" #number>
+                  <input type="text" id="number" class="form-control" placeholder="B3" required="required" #number
+                  formControlName="number" >
                   <label for="number">Int. Number</label>
+                  <div class="alert alert-danger" *ngIf="valid_number.invalid && (valid_number.touched)">Only numbers allowed</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="ext_number" class="form-control" placeholder="4905" required="required" #ext_number>
+                  <input type="text" id="ext_number" class="form-control" placeholder="4905" required="required" #ext_number
+                  formControlName="ext_number">
                   <label for="ext_number">Ext. Number</label>
+                  <div class="alert alert-danger" *ngIf="valid_ext_number.invalid && (valid_ext_number.touched)">Only numbers allowed</div>
                 </div>
               </div>
             </div>
@@ -63,19 +80,24 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="colony" class="form-control" placeholder="Granjas" required="required" #colony>
+                  <input type="text" id="colony" class="form-control" placeholder="Granjas" required="required" #colony
+                  formControlName="colony">
                   <label for="colony">Colony</label>
+                  <div class="alert alert-danger" *ngIf="valid_colony.invalid && (valid_colony.touched)">Colony must be at least 3 letters long</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="pc" class="form-control" placeholder="31100" required="required" #pc>
+                  <input type="text" id="pc" class="form-control" placeholder="31100" required="required" #pc
+                  formControlName="pc">
                   <label for="pc">Zip Code</label>
+                  <div class="alert alert-danger" *ngIf="valid_pc.invalid && (valid_pc.touched)">ZIP code can only be 5 digits</div>
                 </div>
               </div>
             </div>
           </div>
-          <button class="btn btn-primary btn-block" type="submit">Create Provider</button>
+          <button class="btn btn-primary btn-block" type="submit"
+          [disabled]= "!validatingForm.valid">Create Provider</button>
         </form>
         <br>
         <button type="button" class="btn btn-light" routerLink="/providers">Back</button>

@@ -2,19 +2,24 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Create Truck</div>
       <div class="card-body">
-        <form action="javascript:void(0); " (submit)="addTruck(driverName.value,phone.value,licPlate.value,carrCapacity.value)">
+        <form action="javascript:void(0); " (submit)="addTruck(driverName.value,phone.value,licPlate.value,carrCapacity.value)"
+        [formGroup]="validatingForm">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="driverName" class="form-control" placeholder="B3" autofocus="autofocus" required="required" #driverName>
+                  <input type="text" id="driverName" class="form-control" placeholder="B3" autofocus="autofocus" required="required" #driverName
+                  formControlName="driverName">
                   <label for="driverName">Driver Name</label>
+                  <div class="alert alert-danger" *ngIf="valid_driverName.invalid && (valid_driverName.touched)">Driver´s name must be at least 10 letters long</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="phone" class="form-control" placeholder="4905" required="required" #phone>
+                  <input type="text" id="phone" class="form-control" placeholder="4905" required="required" #phone
+                  formControlName="phone">
                   <label for="phone">Phone</label>
+                  <div class="alert alert-danger" *ngIf="valid_phone.invalid && ( valid_phone.touched)">Introduce the 10 phone digits. Include the area code</div>
                 </div>
               </div>
             </div>
@@ -23,19 +28,24 @@
             <div class="form-row">
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="licPlate" class="form-control" placeholder="Granjas" required="required" #licPlate>
+                  <input type="text" id="licPlate" class="form-control" placeholder="Granjas" required="required" #licPlate
+                  formControlName="licPlate">
                   <label for="licPlate">License Plate</label>
+                  <div class="alert alert-danger" *ngIf="valid_licPlate.invalid && (valid_licPlate.touched)">Invaid License Plate. Example: ABC-01-02</div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-label-group">
-                  <input type="text" id="carrCapacity" class="form-control" placeholder="31100" required="required" #carrCapacity>
+                  <input type="text" id="carrCapacity" class="form-control" placeholder="31100" required="required" #carrCapacity
+                  formControlName="carrCapacity">
                   <label for="carrCapacity">Carrying Capacity</label>
+                  <div class="alert alert-danger" *ngIf="valid_carrCapacity.invalid && (valid_carrCapacity.touched)">Invaid Carrying Capacity. Example: 1000 kg, 900 oz</div>
                 </div>
               </div>
             </div>
           </div>
-          <button class="btn btn-primary btn-block" type="submit">Create Truck</button>
+          <button class="btn btn-primary btn-block" type="submit"
+          [disabled]= "!validatingForm.valid">Create Truck</button>
         </form>
         <br>
         <button type="button" class="btn btn-light" routerLink="/trucks">Back</button>

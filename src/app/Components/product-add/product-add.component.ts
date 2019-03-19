@@ -5,6 +5,7 @@ import {ProductService} from '../../Services/product.service';
 import {Category} from '../../Models/Category';
 import {ProviderService} from '../../Services/provider.service'
 import {Provider} from '../../Models/Provider'
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms'
 declare var $;
 @Component({
   selector: 'app-product-add',
@@ -16,11 +17,21 @@ export class ProductAddComponent implements OnInit {
   constructor(private productService: ProductService, private router: Router,
     private providerService: ProviderService, private chDetector: ChangeDetectorRef) { }
 
+    validatingForm: FormGroup;
+
   ngOnInit() {
     this.getUnits();
     this.getCategories();
     this.getProviders();
+    //------------------VALIDATIONS----------------------//
+    this.validatingForm = new FormGroup({
+      valid_name: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern(/^[a-zA-Z]+$/)]),
+    });
   }
+
+  get v_name() { return this.validatingForm.get('valid_name'); }
+
+//------------------VALIDATIONS----------------------//
   providersCont=1;
   providerFields = [1]
   units : Unit[];

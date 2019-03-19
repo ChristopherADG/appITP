@@ -2,12 +2,15 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Create Product</div>
       <div class="card-body">
-        <form (submit)="addProduct(name.value,arrayUnit(),category.value, description.value)" action="javascript:void(0);">
+        <form (submit)="addProduct(name.value,arrayUnit(),category.value, description.value)" action="javascript:void(0);"
+        [formGroup]="validatingForm">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
                 <label class="font-weight-bold" for="name">Name</label>
-                <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name>
+                <input type="text" id="name" class="form-control" placeholder="Name" autofocus="autofocus" #name
+                formControlName="valid_name">
+                <div class="alert alert-danger" *ngIf="v_name.invalid && ( v_name.touched)">Name must be at least 3 letters long</div>
               </div>
               <div class="col-md-6">
                 <label class="font-weight-bold">Category</label>
@@ -57,7 +60,8 @@
             </div>
           </div>
           <br>
-          <button class="btn btn-primary btn-block" type="submit">Create Product</button>
+          <button class="btn btn-primary btn-block" type="submit"
+          [disabled]= "!validatingForm.valid" >Create Product</button>
         </form>
         <br>
         <button type="button" class="btn btn-light" routerLink="/products">Back</button>
