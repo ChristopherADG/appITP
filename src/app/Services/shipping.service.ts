@@ -66,4 +66,12 @@ export class ShippingService {
     });
     return this.http.get(`${this.uri}/shippings/delete/${id}`,{headers: header});
   }
+
+  approveOrder(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.post(`${this.uri}/shippings/approve/${id}`,null,{headers: header});
+  }
 }

@@ -22,6 +22,10 @@ let Shipping = new Schema({
   destiny: {
     type: Array,
     require: true
+  },
+  status: {
+    type: String,
+    require:true
   }
 
 });

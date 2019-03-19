@@ -8,26 +8,29 @@
         <thead>
           <tr>
             <th>Date</th>
-            <th>Time</th>
             <th>Truck</th>
             <th>Destinations</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let shipping of shippings">
+          <tr *ngFor="let shipping of shippings" [ngSwitch]="shipping.status">
             <td>{{shipping.date}}</td>
-            <td>{{shipping.time}}</td>
             <td>{{shipping.driverName}}</td>
             <td>
               <ul>
                 <li *ngFor="let destiny of shipping.destiny">{{destiny}}</li>
               </ul>
             </td>
-            <!-- <td>
-              <button type="button" class="btn btn-primary action" (click)="editShipping(shipping._id)"><i class="fas fa-edit"></i></button>
-              <button type="button" class="btn btn-danger action" (click)="deleteShipping(shipping._id)"><i class="far fa-trash-alt"></i></button>
-            </td> -->
+            <td *ngSwitchCase="0" style="color: blue">Creado</td>
+            <td *ngSwitchCase="1" style="color: orange">En camino</td>
+            <td>
+              <button type="button" class="btn btn-info action" (click)="detailShipping(shipping._id)"><i class="fas fa-search-plus"></i></button>
+              <!-- <button type="button" class="btn btn-primary action" (click)="editShipping(shipping._id)"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-danger action" (click)="deleteShipping(shipping._id)"><i class="far fa-trash-alt"></i></button> -->
+            </td>
           </tr>
         </tbody>
       </table>

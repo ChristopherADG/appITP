@@ -47,5 +47,9 @@ export class ShippingGetComponent implements OnInit {
 
   }
 
+  detailShipping(id){
+    this.router.navigate([`/detailShipping/${id}`]); 
+  }
+
 
 }
