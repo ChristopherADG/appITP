@@ -9,7 +9,7 @@
                 <label>Destiny</label>
                 <div class="form-label-group">
                     <select  class="form-control" #dinningRoom required>
-                      <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom.dinningRoom}}</option>
+                      <option *ngFor="let dinningRoom of availableDinningRooms">{{dinningRoom.dinningRoom.name}}</option>
                     </select>
                 </div>
               </div>
@@ -17,7 +17,7 @@
                 <label>Driver</label>
                 <div class="form-label-group">
                     <select  class="form-control" #dinningRoom required>
-                      <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom.dinningRoom}}</option>
+                      <option *ngFor="let truck of availableDrivers">{{truck.driverName}}</option>
                     </select>
                 </div>
               </div>

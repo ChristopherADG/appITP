@@ -17,49 +17,36 @@ declare var $;
 })
 export class ShippingAddComponent implements OnInit {
 
+  availableDinningRooms : ApprovedOrders[];
+  availableDrivers : Truck[];
+
   constructor(private truckService: TruckService, private chRef: ChangeDetectorRef
    ,private dinningRoomService: DinningRoomService, private orderService: OrderService,
    private router: Router, private cookieService: CookieService, private elRef:ElementRef) {
 
   }
   ngOnInit() {
-
+    this.getDinningRooms();
+    this.getDrivers();
   }
 
-  /*addShipping(dinningRoom,driverName,product){
-    let selectedDR = this.availableDinningRooms[dinningRoom.selectedIndex]
-    let tempDR = {
-      id: selectedDR._id,
-      name: selectedDR.name
-    }
-    this.orderService.addOrder(tempDR,description,products,0).subscribe(()=>{
-      this.router.navigate(['/orders']);
-    })
-  }
-
-  getFieldsInfo(){
-    let arr = []
-    this.categoryFields.forEach(category =>{
-      this.fields[this.categoryFields.indexOf(category)].forEach(field=>{
-        var dinningRoom = document.getElementById("dinningRoom"+field) as HTMLInputElement;
-        var driverName = document.getElementById("driverName"+field) as HTMLSelectElement;
-        var product = document.getElementById("product"+field) as HTMLSelectElement;
-
-        let tempProduct = tempProduct.approvedOrders[product.selectedIndex-1]
-        let tempDinningRoom = tempDinningRoom.approvedOrders[dinningRoom.selectedIndex-1]
-        let tempDriverName =  tempDriverName.trucks[driverName.selectedIndex-1]
-
-        let temp = {
-          dinningRoom: tempDinningRoom,
-          driverName: tempDriverName,
-          product: {
-            id: tempProduct._id,
-            name: tempProduct.name
-          }
-        }
-        arr.push(temp)
+  getDinningRooms(){
+    let user = JSON.parse(this.cookieService.get('user')) ;
+    if(user.role == "Admin"){
+      this.orderService.getApprovedOrdersByStaus(1).subscribe((data: ApprovedOrders[])=>{
+        this.availableDinningRooms = data;
+        this.chRef.detectChanges();
       })
-    })
-    return arr
-  }*/
+    }
+  }
+
+  getDrivers(){
+    let user = JSON.parse(this.cookieService.get('user')) ;
+    if(user.role == "Admin"){
+      this.truckService.getTruck().subscribe((data: Truck[])=>{
+        this.availableDrivers = data;
+        this.chRef.detectChanges();
+      })
+    }
+  }
 }

@@ -17,6 +17,14 @@ export class ShippingService {
     this.authToken = token;
   }
 
+  getApprovedOrdersByStaus(statusId){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.get(`${this.uri}/orders/approvedOrders/status/${statusId}`,{headers: header});
+  }
+  
   getShippings(){
     this.loadToken();
     let header = new HttpHeaders({
