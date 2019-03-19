@@ -98,7 +98,7 @@ export class ShippingAddComponent implements OnInit {
           });
           this.orderService.updateProduct(order._id, productSub).subscribe()
       });
-      productsFinal.push({dinningRoom: dinningRoom, products: products}) 
+      productsFinal.push({dinningRoom: dinningRoom, products: products, status: 0}) 
     });
     return productsFinal;
   }

@@ -1,35 +1,31 @@
 <br>
-<div class="card mb-3">
+<div class="card mb-3" *ngFor="let comedor of comedores">
   <div class="card-header">
-      <i class="far fa-clock"></i> Pending Orders Table</div>
-  <div class="card-body">
+      <i class="fas fa-utensils"></i> {{comedor}} Shippings Table</div>
+  <div class="card-body" >
     <div class="table-responsive">
       <table id ="table1" class="table table-bordered" width="100%" cellspacing="0">
         <thead>
           <tr>
             <th>Date</th>
             <th>Time</th>
-            <th>Dinning Room</th>
-            <th>Created by</th>
-            <th>Observations</th>
+            <th>Truck</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let order of orders" [ngSwitch]="order.status">
-            <td>{{order.date}}</td>
-            <td>{{order.time}}</td>
-            <td>{{order.dinningRoom.name}}</td>
-            <td>{{order.user.name}} {{order.user.last_name}}</td>
-            <td>{{order.description}}</td>
+          <tr *ngFor="let shipping of ordersByShipping[comedores.indexOf(comedor)]" [ngSwitch]="shipping.status">
+            <td>{{shipping.date}}</td>
+            <td>{{shipping.time}}</td>
+            <td>{{shipping.truck}}</td>
             <td *ngSwitchCase="0">Creado</td>
-            <td *ngSwitchCase="1">Aprobado</td>
+            <td *ngSwitchCase="1" style="color: orange">En Camino</td>
             <td *ngSwitchCase="-1">Denegado</td>
             <td>
-              <!--<button type="button" class="btn btn-primary action" (click)="editOrder(order._id)"><i class="fas fa-edit"></i></button>-->
-              <button type="button" class="btn btn-info action" (click)="detailOrder(order._id, order.status)"><i class="fas fa-search-plus"></i></button>
-              <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-info action"><i class="fas fa-search-plus"></i></button>
+              <!-- <button type="button" class="btn btn-info action" (click)="detailOrder(order._id, order.status)"><i class="fas fa-search-plus"></i></button>
+              <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button> -->
             </td>
           </tr>
         </tbody>
