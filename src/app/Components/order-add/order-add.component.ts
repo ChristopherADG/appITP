@@ -182,7 +182,8 @@ export class OrderAddComponent implements OnInit {
           provider: {
             id: tempProvider._id,
             name: tempProvider.name
-          }
+          },
+          status: 0
         }
         arr.push(temp)
       })

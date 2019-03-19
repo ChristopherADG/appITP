@@ -118,19 +118,13 @@ export class OrderService {
     return this.http.get(`${this.uri}/orders/status/${status}`,{headers: header});
   }
 
-  updateDinningRoom(id, dinningRoom,description,products,status){
+  updateProduct(id, products){
     this.loadToken();
     let header = new HttpHeaders({
       'Authorization': this.authToken
     });
-    const order = {
-      user: this.getUser(),
-      dinningRoom: dinningRoom,
-      description: description,
-      products: products,
-      status: status
-    }
-    return this.http.post(`${this.uri}/orders/update/${id}`, order,{headers: header});
+    //console.log("hola")
+    return this.http.post(`${this.uri}/orders/approvedOrders/update/${id}`, products,{headers: header});
   }
 
   deleteDinningRoom(id){

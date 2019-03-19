@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="card mx-auto mt-5">
+    <div class="card-header">Create Shipping</div>
+    <div class="card-body">
+      <form action="javascript:void(0); " (submit)="addShipping()">
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col-md-3">
+              <label>Destinations</label>
+              <div class="form-label-group">
+                  <select id="dinningRoomSelect"  class="form-control select-multi" multiple="multiple" #dinningRooms required>
+                    <option *ngFor="let dinniningRoom of availableDinningRooms">{{dinniningRoom}}</option>
+                  </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label>Truck</label>
+              <div class="form-label-group">
+                  <select  class="form-control" id="truck" #truck required>
+                    <option *ngFor="let truck of trucks">{{truck.licPlate}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Observations</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" #description required></textarea>
+        </div>
+        <hr>
+        <div class="form-group" *ngFor="let destination of destinations">
+          <h3>{{destination}}</h3>
+          <br>
+          <div *ngFor="let order of productsByDinningRoom[destinations.indexOf(destination)]">
+            <div class="row" style="background-color: rgb(165, 163, 163)">
+              <div class="col-4 col-md-12" >
+                  <h6>{{order.date}}</h6>
+              </div>
+            </div>
+            <div class="row" style="text-align: center;background-color: rgb(205, 201, 201)">
+                <div class="col-md-1"></div>
+                <div class="col-12 col-md-3" >Product</div>
+                <div class="col-8 col-md-2">Unit</div>
+                <div class="col-4 col-md-2" >Quantity</div>
+              </div>
+            <div *ngFor="let product of order.products">
+              <div class="row" *ngIf="product.status == 0" style="text-align: center">
+                <div class="col-md-1"></div>
+                <div class="col-12 col-md-3"><p id="product_{{destinations.indexOf(destination)}}_{{productsByDinningRoom[destinations.indexOf(destination)].indexOf(order)}}_{{order.products.indexOf(product)}}">{{product.product.name}}</p></div>
+                <div class="col-8 col-md-2">{{product.unit.name}}</div>
+                <div class="col-4 col-md-2">{{product.quantity}}</div>
+                <div class="col-md-2">
+                  <input type="checkbox" id="checkbox_{{destinations.indexOf(destination)}}_{{productsByDinningRoom[destinations.indexOf(destination)].indexOf(order)}}_{{order.products.indexOf(product)}}">
+                </div>
+              </div>
+            </div>
+            <hr>
+          </div>
+        </div>
+        <hr>
+        <button type="button" id="helper" hidden (click)="setDestinations()"></button>
+        <br>
+        <div class="row">
+          <div class="col-12 col-sm-12 offset-md-3 col-md-6" style="text-align: center">
+              <button class="btn btn-primary btn-block" type="submit">Create Shipping</button>
+          </div>
+        </div>
+      </form>
+      <br>
+      <button type="button" class="btn btn-light" routerLink="/shippings">Back</button>
+    </div>
+  </div>
+</div>

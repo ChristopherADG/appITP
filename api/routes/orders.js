@@ -70,16 +70,26 @@ routerProtected.route('/add').post((req, res)=>{
 });
 
 //Update Order
-routerProtected.route('/update/:id').post((req, res)=>{
-    Order.findById(req.params.id,(err, order) =>{
+routerProtected.route('/approvedOrders/update/:id').post((req, res)=>{
+    ApprovedOrder.findById(req.params.id,(err, order) =>{
         if(!order){
             return next(new Error('Could not load document'));
         }else{
-            order.products=req.body.product
+            order.products = req.body
+
+            cont = 0
+            order.products.forEach(product => {
+                if(product.status == 1){
+                    cont++;
+                }
+            });
+            if(cont == order.products.length){
+                order.status = 2
+            }
 
             order.save()
                 .then(order =>{
-                    res.json('Update done');
+                    res.json(order);
                 })
                 .catch(err =>{
                     res.status(400).send('Update failed');
@@ -87,6 +97,7 @@ routerProtected.route('/update/:id').post((req, res)=>{
         }
     })
 });
+
 //get by status Order
 routerProtected.route('/status/:statusid').get((req, res)=>{
     //console.log(req.params.statusid)
