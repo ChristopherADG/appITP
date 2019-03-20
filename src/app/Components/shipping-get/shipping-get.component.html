@@ -3,30 +3,34 @@
   <div class="card-header">
     <i class="fas fa-table"></i> Shippings Table</div>
   <div class="card-body">
-    <button type="button" class="btn btn-primary" routerLink="/createShipping">Create New Shipping</button>
-    <br><br>
     <div class="table-responsive">
       <table id ="table" class="table table-bordered" width="100%" cellspacing="0">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Destiny</th>
-            <th>Products</th>
+            <th>Date</th>
+            <th>Truck</th>
+            <th>Destinations</th>
+            <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let shipping of shippings">
+          <tr *ngFor="let shipping of shippings" [ngSwitch]="shipping.status">
+            <td>{{shipping.date}}</td>
             <td>{{shipping.driverName}}</td>
-            <td>{{shipping.destiny}}</td>
             <td>
               <ul>
-                <li *ngFor="let products of shipping.products">{{products.name}}</li>
+                <li *ngFor="let destiny of shipping.destiny">{{destiny}}</li>
               </ul>
             </td>
+            <td *ngSwitchCase="0" style="color: blue">Creado</td>
+            <td *ngSwitchCase="1" style="color: orange">En camino</td>
+            <td *ngSwitchCase="2" style="color: green">Entregado</td>
             <td>
-              <button type="button" class="btn btn-primary action" (click)="editShipping(shipping._id)"><i class="fas fa-edit"></i></button>
-              <button type="button" class="btn btn-danger action" (click)="deleteShipping(shipping._id)"><i class="far fa-trash-alt"></i></button>
+              <button type="button" class="btn btn-info action" (click)="detailShipping(shipping._id)"><i class="fas fa-search-plus"></i></button>
+              <!-- <button type="button" class="btn btn-primary action" (click)="editShipping(shipping._id)"><i class="fas fa-edit"></i></button>
+              <button type="button" class="btn btn-danger action" (click)="deleteShipping(shipping._id)"><i class="far fa-trash-alt"></i></button> -->
             </td>
           </tr>
         </tbody>

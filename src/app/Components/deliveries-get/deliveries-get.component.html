@@ -1,0 +1,37 @@
+<br>
+<div class="card mb-3" *ngFor="let comedor of comedores">
+  <div class="card-header">
+      <i class="fas fa-utensils"></i> {{comedor}} Shippings Table</div>
+  <div class="card-body" >
+    <div class="table-responsive">
+      <table id ="table1" class="table table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Truck</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let shipping of ordersByShipping[comedores.indexOf(comedor)]" [ngSwitch]="shipping.status">
+            <td>{{shipping.date}}</td>
+            <td>{{shipping.time}}</td>
+            <td>{{shipping.truck}}</td>
+            <td *ngSwitchCase="0">Creado</td>
+            <td *ngSwitchCase="1" style="color: orange">En Camino</td>
+            <td *ngSwitchCase="2" style="color: green">Entregado</td>
+            <td *ngSwitchCase="-1">Denegado</td>
+            <td>
+              <button type="button" class="btn btn-info action" (click)="detailShipping(shipping._id)"><i class="fas fa-search-plus"></i></button>
+              <!-- <button type="button" class="btn btn-info action" (click)="detailOrder(order._id, order.status)"><i class="fas fa-search-plus"></i></button>
+              <button *ngIf="authService.getRole() == 'Admin'" type="button" class="btn btn-danger action" (click)="deleteOrder(order._id)"><i class="far fa-trash-alt"></i></button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card-footer small text-muted"></div>
+</div>

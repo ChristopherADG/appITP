@@ -30,11 +30,14 @@ import {TruckGetComponent} from "./Components/truck-get/truck-get.component"
 import {TruckUpdateComponent} from "./Components/truck-update/truck-update.component"
 import {ShippingGetComponent} from "./Components/shipping-get/shipping-get.component"
 import {ShippingAddComponent} from "./Components/shipping-add/shipping-add.component"
+import {ShippingDetailsComponent} from "./Components/shipping-details/shipping-details.component"
+import {DeliveriesGetComponent} from './Components/deliveries-get/deliveries-get.component'
+import {DeliveriesDetailComponent} from './Components/deliveries-detail/deliveries-detail.component'
 import {AuthGuard} from './Guards/auth.guard';
 import {AdminGuard} from './Guards/admin.guard';
 
 const routes: Routes = [
-  {path: 'users', component: GetComponent, canActivate:[AuthGuard, AdminGuard]},
+  {path: 'users', component: GetComponent, canActivate:[AuthGuard, AdminGuard]}, 
   {path: 'edit/:id', component: UpdateComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'create', component: AddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: 'login', component: LoginComponent},
@@ -61,12 +64,15 @@ const routes: Routes = [
   {path: "createTruck", component: TruckAddComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "editTruck/:id", component: TruckUpdateComponent, canActivate:[AuthGuard, AdminGuard]},
   {path: "editOrder/:id", component: OrderUpdateComponent, canActivate:[AuthGuard]},
-  {path: "shippings", component: ShippingGetComponent, canActivate:[AuthGuard, AdminGuard]},
-  {path: "createShipping", component: ShippingAddComponent, canActivate:[AuthGuard, AdminGuard]},
-
+  {path: "shippings", component: ShippingGetComponent, canActivate:[AuthGuard]},
+  {path: "createShipping", component: ShippingAddComponent, canActivate:[AuthGuard]},
+  {path: "detailShipping/:id", component: ShippingDetailsComponent, canActivate:[AuthGuard]},
+  {path: "deliveries", component: DeliveriesGetComponent, canActivate:[AuthGuard]},
+  {path: "detailDeliverie/:id", component: DeliveriesDetailComponent, canActivate:[AuthGuard]},
+  
   {path: '', component: LoginComponent},
   {path: '**', component: LoginComponent}
-
+  
 ];
 
 //{path: "pendingOrders", component: PendingOrderGetComponent, canActivate:[AuthGuard]},

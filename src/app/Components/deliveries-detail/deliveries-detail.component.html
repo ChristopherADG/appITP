@@ -1,0 +1,70 @@
+<div class="container espacio">
+    <div class="card mx-auto mt-5">
+      <div class="card-header">
+          <div class="row">
+            <div class="col-12 col-md-8">
+                <h1>Delivery Detail</h1>
+            </div>
+            <div class="col-12 col-md-4 fecha" [ngSwitch]="order.status">
+                <!--<h5 style="padding-bottom: 1%">Date: <span class="border" style="padding:1%" id="date">{{order.date}}</span></h5>
+                <h5>Time: <span class="border" style="padding:1%" id="time">{{order.time}}</span></h5>-->
+                <h5 *ngSwitchCase="0">Status: <span class="border"  style="padding:1%; color: rgb(46, 46, 222)" id="status">Creado</span></h5>
+                <h5 *ngSwitchCase="1">Status: <span class="border"  style="padding:1%; color: orange" id="status">En camino</span></h5>
+            </div>
+          </div>
+      </div>
+      <div class="card-body" >
+        <br>
+        <div *ngFor="let dinningRoomProducts of order.products">
+          <div class="row">
+            <div class="col-12 col-md-5">
+              <div class="card">
+                <div class="card-header">Dinning Room Information</div>
+                <div class="card-body">
+                  <div class="row">
+                  </div>
+                  <p id="dinningRoomName">{{dinningRoomProducts.dinningRoom}}</p>
+                  <!-- <p><span id="dinningRoomStreet">Street</span>  <span id='dinningRoomExt' style="padding-left: 10%">Ext.Num</span></p>
+                  <p ><span id="dinningRoomColony">Colony</span> <span id="dinningRoomZip" style="padding-left: 10%">ZipCode</span></p>
+                  <p id="dinningRoomPhone">Phone</p> -->
+                </div>
+              </div>
+            </div>
+            </div>
+            <br>
+            <div class="table-responsive">
+              <table class="table table-bordered" width="100%">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Product</th>
+                      <th scope="col">Unit</th>
+                      <th scope="col">Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let product of dinningRoomProducts.products">
+                      <th scope="row">{{dinningRoomProducts.products.indexOf(product)+1}}</th>
+                      <td>{{product.product.name}}</td>
+                      <td>{{product.unit.name}}</td>
+                      <td>{{product.quantity}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+        <br><hr><br>
+        <div *ngIf=" order.status == '0' && (authService.getRole() == 'Admin' || authService.getRole() == 'Camionero')" class="row" style="text-align: center">
+            <div class="offset-4 col-4">
+                <button type="button" class="btn btn-success" (click)="approveShipping(order._id)"><i class="fas fa-check"></i> Confirm Products</button>
+            </div>
+          </div>
+        <div *ngIf=" order.status == '1' && (authService.getRole() == 'Admin' || authService.getRole() == 'Chef')" class="row" style="text-align: center">
+            <div class="offset-4 col-4">
+                <button type="button" class="btn btn-success" (click)="approveDeliverie(dinningRoom._id)"><i class="fas fa-check"></i>Products Received</button>
+            </div>
+          </div>
+          <br>
+      <button type="button" class="btn btn-light" routerLink="/deliveries">Back</button>
+    </div>
+  </div>

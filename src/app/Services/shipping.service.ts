@@ -17,14 +17,6 @@ export class ShippingService {
     this.authToken = token;
   }
 
-  getApprovedOrdersByStaus(statusId){
-    this.loadToken();
-    let header = new HttpHeaders({
-      'Authorization': this.authToken
-    });
-    return this.http.get(`${this.uri}/orders/approvedOrders/status/${statusId}`,{headers: header});
-  }
-  
   getShippings(){
     this.loadToken();
     let header = new HttpHeaders({
@@ -73,5 +65,21 @@ export class ShippingService {
       'Authorization': this.authToken
     });
     return this.http.get(`${this.uri}/shippings/delete/${id}`,{headers: header});
+  }
+
+  approveOrder(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.post(`${this.uri}/shippings/approve/${id}`,null,{headers: header});
+  }
+
+  approveDeliverie(id){
+    this.loadToken();
+    let header = new HttpHeaders({
+      'Authorization': this.authToken
+    });
+    return this.http.post(`${this.uri}/shippings/received/${id}`,null,{headers: header});
   }
 }

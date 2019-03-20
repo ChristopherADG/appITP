@@ -51,6 +51,9 @@ import { TruckGetComponent } from './Components/truck-get/truck-get.component';
 import { TruckUpdateComponent } from './Components/truck-update/truck-update.component';
 import { ShippingGetComponent } from './Components/shipping-get/shipping-get.component';
 import { ShippingAddComponent } from './Components/shipping-add/shipping-add.component';
+import { ShippingDetailsComponent } from './Components/shipping-details/shipping-details.component';
+import { DeliveriesGetComponent } from './Components/deliveries-get/deliveries-get.component';
+import { DeliveriesDetailComponent } from './Components/deliveries-detail/deliveries-detail.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +90,10 @@ import { ShippingAddComponent } from './Components/shipping-add/shipping-add.com
     TruckGetComponent,
     TruckUpdateComponent,
     ShippingGetComponent,
-    ShippingAddComponent
+    ShippingAddComponent,
+    ShippingDetailsComponent,
+    DeliveriesGetComponent,
+    DeliveriesDetailComponent
   ],
   imports: [
     CommonModule,
@@ -95,10 +101,10 @@ import { ShippingAddComponent } from './Components/shipping-add/shipping-add.com
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule, 
     ReactiveFormsModule,
     FlashMessagesModule.forRoot()
-
+    
   ],
   providers: [UserService, AuthGuard,ProductService,CookieService, AdminGuard],
   bootstrap: [AppComponent]
