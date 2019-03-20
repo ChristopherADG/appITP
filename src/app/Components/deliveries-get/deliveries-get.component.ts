@@ -50,7 +50,6 @@ export class DeliveriesGetComponent implements OnInit {
       this.chDet.detectChanges();
       const table: any = $('table');
       this.dataTable = table.DataTable()
-
     })
   }
 
