@@ -1,62 +1,77 @@
 <div class="container">
-  <div class="card card-register mx-auto mt-5">
-    <div class="card-header">Create User</div>
-    <div class="card-body">
-      <form action="javascript:void(0);">
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="text" id="firstName" class="form-control" placeholder="First name" required="required" autofocus="autofocus" #name>
-                <label for="firstName">First name</label> 
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Create User</div>
+      <div class="card-body">
+        <form action="javascript:void(0);" [formGroup]="validatingForm" >
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                
+                <div class="form-label-group">
+                  <input type="text" id="firstName" class="form-control" placeholder="First name" 
+                  required="required" autofocus="autofocus" #name 
+                  formControlName="firstName">
+                  <label for="firstName">First name</label> 
+                  <div class="alert alert-danger" *ngIf="i_firstName.invalid && ( i_firstName.touched)">Name must be at least 3 letters long</div>
+                </div>
+                
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="text" id="lastName" class="form-control" placeholder="Last name" required="required" #lastName>
-                <label for="lastName">Last name</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email@example.com" required="required" #email>
-            <label for="inputEmail">Email address</label>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" #password>
-                <label for="inputPassword">Password</label>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required" >
-                <label for="confirmPassword">Confirm password</label>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="text" id="lastName" class="form-control" placeholder="Last name" 
+                  required="required" #lastName formControlName="lastName">
+                  <label for="lastName">Last name</label>
+                  <div class="alert alert-danger" *ngIf="i_lastName.invalid && (i_lastName.touched)">Last Name must be at least 3 letters long</div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <div class="form-row">
-            <div class="col-md-6">
-              <div class="form-label-group">
-                <select id="role" class="form-control" #role>
-                  <option selected disabled hidden>Select Role</option>
-                  <option *ngFor="let rol of roles">{{rol.name}}</option>
-                </select>
+          <div class="form-group">
+            <div class="form-label-group">
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email@example.com" required="required" #email
+              formControlName="email">
+              <label for="Email">Email address</label>
+              <div class="alert alert-danger" *ngIf="i_email.invalid && (i_email.dirty || i_email.touched)">Invalid Email</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" #password
+                  formControlName="password">
+                  <label for="inputPassword">Password</label>
+                  <div class="alert alert-danger" *ngIf="i_password.invalid && (i_password.dirty || i_password.touched)">Password must be at least 4 characters long</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm password" required="required" 
+                  >
+                  <label for="confirmPassword">Confirm password</label>
+                  <!--<div class="alert alert-danger" *ngIf="password.value != confirmPassword.value">Passwords do not match</div>-->
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <button class="btn btn-primary btn-block" type="submit" (click)="addUser(name.value, lastName.value, email.value, password.value, role.value)">Create User</button>
-      </form>
-      <br>
-      <button type="button" class="btn btn-light" routerLink="/users">Back</button>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <div class="form-label-group">
+                  <select id="role" class="form-control" #role>
+                    <option selected disabled hidden>Select Role</option>
+                    <option *ngFor="let rol of roles">{{rol.name}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit" 
+          (click)="addUser(name.value, lastName.value, email.value, password.value, role.value)"
+         [disabled]= "!validatingForm.valid" >Create User</button>
+        </form>
+        <br>
+        <button type="button" class="btn btn-light" routerLink="/users">Back</button>
+      </div>
     </div>
   </div>
-</div>
